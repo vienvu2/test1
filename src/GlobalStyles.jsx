@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyles = createGlobalStyle`
 html,
@@ -14,8 +14,22 @@ a {
 
 * {
     box-sizing: border-box;
-    color: ${({ theme }) => theme?.main};
 }
 
 
+`
+
+export const Button = styled.button`
+  padding: 12px 24px;
+
+  height: 48px;
+  background: ${({ theme }) => theme.main};
+  border: 0;
+  color: ${({ theme }) => theme.mainDark2};
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+
+  cursor: pointer;
 `

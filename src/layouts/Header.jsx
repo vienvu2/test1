@@ -1,9 +1,46 @@
 import Head from 'next/head'
 
 import Link from 'next/link'
+import styled from 'styled-components'
+import { Button } from '../GlobalStyles'
+
+const HeaderStyled = styled.div`
+  display: flex;
+  gap: 16px;
+  align-items: center;
+
+  max-width: 1024px;
+  margin-left: auto;
+  height: 100px;
+  margin-right: auto;
+`
+HeaderStyled.Menu = styled.div`
+  flex: 1;
+  display: flex;
+  gap: 16px;
+`
+
+HeaderStyled.MenuItem = styled.div``
+
+HeaderStyled.Logo = styled.div`
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+
+  margin-right: 48px;
+
+  color: ${({ theme }) => theme.mainDark2};
+  span {
+    font-weight: 700;
+    color: ${({ theme }) => theme.main};
+  }
+`
+HeaderStyled.Right = styled.div`
+  display: flex;
+  gap: 16px;
+`
 
 const Header = () => {
-  const styles = {}
   return (
     <>
       <Head>
@@ -12,13 +49,25 @@ const Header = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header className={styles.header}>
-        <div className={styles.logo}> </div>
-        <div className={styles.menu}>
-          <Link href="/">Hackathon</Link>
-          <Link href="/news">News</Link>
-        </div>
-      </header>
+      <HeaderStyled>
+        <HeaderStyled.Logo>
+          FPT.
+          <span>Marketplace </span>
+        </HeaderStyled.Logo>
+        <HeaderStyled.Menu>
+          <Link href="/">
+            <HeaderStyled.MenuItem>Hackathon</HeaderStyled.MenuItem>
+          </Link>
+          <Link href="/news">
+            <HeaderStyled.MenuItem>News</HeaderStyled.MenuItem>
+          </Link>
+        </HeaderStyled.Menu>
+
+        <HeaderStyled.Right>
+          <Button>Sign in</Button>
+          <Button>Register</Button>
+        </HeaderStyled.Right>
+      </HeaderStyled>
     </>
   )
 }
