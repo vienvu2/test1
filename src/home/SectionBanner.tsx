@@ -33,8 +33,8 @@ const SectionBanner = () => {
 export default SectionBanner
 
 const WrapStyled = styled(Container)`
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding-top: 100px;
+  padding-bottom: 100px;
 
   h2 {
     font-weight: 700;

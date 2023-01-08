@@ -2,18 +2,22 @@ import Head from 'next/head'
 
 import Link from 'next/link'
 import styled from 'styled-components'
-import { Button } from '../GlobalStyles'
+import { Button, Container } from '../GlobalStyles'
 
 const HeaderStyled = styled.div`
+  height: 100px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: white;
+`
+HeaderStyled.Inner = styled.div`
   display: flex;
   gap: 16px;
   align-items: center;
-
-  max-width: 1224px;
-  margin-left: auto;
   height: 100px;
-  margin-right: auto;
 `
+
 HeaderStyled.Menu = styled.div`
   flex: 1;
   display: flex;
@@ -50,23 +54,27 @@ const Header = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <HeaderStyled>
-        <HeaderStyled.Logo>
-          FPT.
-          <span>Marketplace </span>
-        </HeaderStyled.Logo>
-        <HeaderStyled.Menu>
-          <Link href="/">
-            <HeaderStyled.MenuItem>Hackathon</HeaderStyled.MenuItem>
-          </Link>
-          <Link href="/news">
-            <HeaderStyled.MenuItem>News</HeaderStyled.MenuItem>
-          </Link>
-        </HeaderStyled.Menu>
+        <Container>
+          <HeaderStyled.Inner>
+            <HeaderStyled.Logo>
+              FPT.
+              <span>Marketplace </span>
+            </HeaderStyled.Logo>
+            <HeaderStyled.Menu>
+              <Link href="/">
+                <HeaderStyled.MenuItem>Hackathon</HeaderStyled.MenuItem>
+              </Link>
+              <Link href="/news">
+                <HeaderStyled.MenuItem>News</HeaderStyled.MenuItem>
+              </Link>
+            </HeaderStyled.Menu>
 
-        <HeaderStyled.Right>
-          <Button>Sign in</Button>
-          <Button>Register</Button>
-        </HeaderStyled.Right>
+            <HeaderStyled.Right>
+              <Button>Sign in</Button>
+              <Button>Register</Button>
+            </HeaderStyled.Right>
+          </HeaderStyled.Inner>
+        </Container>
       </HeaderStyled>
     </>
   )

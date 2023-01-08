@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 export const useTextAnimation = (text: string) => {
-  const [str, setStr] = useState('')
+  const [str, setStr] = useState(text)
   useEffect(() => {
     var timer = setInterval(() => {
       setStr(text)

@@ -46,19 +46,19 @@ export const Button = styled.button`
 export const Row = styled.div<{ align?: string; justify?: string }>`
   display: flex;
   flex-wrap: wrap;
-  margin-left: -12px;
-  margin-right: -12px;
+  margin-left: -24px;
+  margin-right: -24px;
 
   align-items: ${({ align = 'flex-start' }) => align};
 `
 
-export const Col = styled.div<{ md: number }>`
+export const Col = styled.div<{ md?: number }>`
   width: ${({ md = 24 }) => md * (100 / 24)}%;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding-left: 24px;
+  padding-right: 24px;
 `
 
-export const Flex = styled.div<{ align: string; justify: string }>`
+export const Flex = styled.div<{ align?: string; justify?: string }>`
   display: flex;
   align-items: ${({ align = 'flex-start' }) => align};
   justify-content: ${({ justify = 'flex-start' }) => justify};
