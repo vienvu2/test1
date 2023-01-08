@@ -21,15 +21,15 @@ const theme = {
   gray20: '#2C2C2C',
   gray10: '#161616',
 
-  blue90: '#D9F1FF',
-  blue80: '#B3E4FF',
-  blue70: '#8ED6FF',
-  blue60: '#68C9FF',
+  blue10: '#D9F1FF',
+  blue20: '#B3E4FF',
+  blue30: '#8ED6FF',
+  blue40: '#68C9FF',
   blue50: '#42BBFF',
-  blue40: '#3584CC',
-  blue30: '#285599',
-  blue20: '#1A2F66',
-  blue10: '#0D1833',
+  blue60: '#3584CC',
+  blue70: '#285599',
+  blue80: '#1A2F66',
+  blue90: '#0D1833',
 }
 
 export default function App({ Component, pageProps }: AppProps) {

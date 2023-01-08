@@ -83,8 +83,8 @@ const PostItemStyled = styled.div`
 `
 
 const WrapStyled = styled(Container)`
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding-top: 60px;
+  padding-bottom: 60px;
 `
 
 const WrapStyledTop = styled.div`

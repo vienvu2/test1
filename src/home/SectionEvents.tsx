@@ -1,19 +1,168 @@
-import React from 'react'
-import { Button } from '../GlobalStyles'
+import React, { useState } from 'react'
+import { Button, Col, Container, Row } from '../GlobalStyles'
 
 import styled from 'styled-components'
+import Link from 'next/link'
+import { useTextAnimation } from '../hooks/textAnimation'
+import { roboto } from '../layouts/Wrap'
 
-const SectionEvents = () => {
+const SectionEvent = () => {
+  const [text] = useTextAnimation('hackathons')
+  const [tabActive, setTabActive] = useState('Hottest')
   return (
-    <BannerStyled>
-      <h2>Learn to code: From zero to hero</h2>
-      <p>Easier to get started with coding on FPT Marketplace</p>
+    <WrapStyled>
+      <WrapStyledTop>
+        <p>Events</p>
+        <h2>
+          Outstanding{' '}
+          <span className={roboto.className}>{'<' + text + '>_'}</span>
+        </h2>
+      </WrapStyledTop>
+      <ContentStyled>
+        <ContentStyled.Header>
+          {['Hottest', 'Opening', 'Upcoming', 'Past'].map((a) => (
+            <ContentStyled.HeaderItem
+              key={a}
+              active={a === tabActive}
+              onClick={() => setTabActive(a)}
+            >
+              {a}
+            </ContentStyled.HeaderItem>
+          ))}
+        </ContentStyled.Header>
 
-      <Button>Get started</Button>
-    </BannerStyled>
+        {['2022', '2023'].map((a, idx) => (
+          <HackathonStyled key={a} reverse={idx % 2 === 0}>
+            <HackathonStyled.Intro>
+              <Row align="flex-end">
+                <Col md={12}>
+                  <p>Introducing</p>
+                  <h3>Hackatron {a}</h3>
+                  <p>
+                    The best way to learn is to get your hands dirty! Build on
+                    riveting problem statements, while following curated
+                    coursework and brainstorming exercises with industry experts
+                    who know that what it’s like to be new and make mistakes.
+                  </p>
+                </Col>
+                <Col md={12}>
+                  <img src="/images/events/coding.svg" />
+                </Col>
+              </Row>
+            </HackathonStyled.Intro>
+            <HackathonStyled.Detail>
+              <h3>Hackatron 2023</h3>
+              <p>
+                Join the next wave of Hackatron where Web3 devs build to learn.
+              </p>
+              <Button>Apply now</Button>
+            </HackathonStyled.Detail>
+          </HackathonStyled>
+        ))}
+      </ContentStyled>
+    </WrapStyled>
   )
 }
 
-export default SectionEvents
+export default SectionEvent
 
-const BannerStyled = styled.div``
+const HackathonStyled: any = styled.div<{ reverse?: boolean }>`
+  margin-bottom: 32px;
+  display: flex;
+  gap: 24px;
+  flex-direction: ${({ reverse }) => (reverse ? 'row-reverse' : 'row')};
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`
+HackathonStyled.Intro = styled.div`
+  background: ${({ theme }) => theme.mainDark2};
+  flex: 1;
+  height: 430px;
+  padding: 24px;
+  p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    color: ${({ theme }) => theme.white};
+    margin: 0;
+  }
+  h3 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 50px;
+    color: ${({ theme }) => theme.blue10};
+  }
+`
+HackathonStyled.Detail = styled.div`
+  background: ${({ theme }) => theme.white};
+  width: 360px;
+  padding: 16px;
+  h3 {
+    font-weight: 700;
+    font-size: 32px;
+    margin: 0;
+    line-height: 40px;
+    color: ${({ theme }) => theme.mainDark};
+  }
+  p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    color: ${({ theme }) => theme.gray60};
+  }
+`
+
+const ContentStyled: any = styled.div`
+  padding: 32px;
+  background: ${({ theme }) => theme.blue10};
+`
+ContentStyled.Header = styled.div`
+  display: flex;
+  gap: 32px;
+  margin-bottom: 32px;
+`
+ContentStyled.HeaderItem = styled.div<{ active?: boolean }>`
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+  color: ${({ theme }) => theme.mainDark2};
+  opacity: ${({ active }) => (active ? 1 : 0.4)};
+  cursor: pointer;
+  border-bottom: 3px solid
+    ${({ theme, active }) => (active ? theme.mainDark2 : 'transparent')};
+  padding: 4px;
+`
+
+const WrapStyled = styled(Container)`
+  padding-top: 60px;
+  padding-bottom: 60px;
+`
+
+const WrapStyledTop = styled.div`
+  h2 {
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 50px;
+    margin-top: 0;
+    margin-bottom: 48px;
+    color: ${({ theme }) => theme.mainDark2};
+
+    span {
+      color: ${({ theme }) => theme.white};
+
+      font-size: 38px;
+      line-height: 50px;
+      background: ${({ theme }) => theme.mainDark2};
+    }
+  }
+  p {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 26px;
+    color: ${({ theme }) => theme.gray50};
+    margin-bottom: 0;
+  }
+`
