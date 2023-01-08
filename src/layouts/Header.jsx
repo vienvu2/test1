@@ -9,7 +9,7 @@ const HeaderStyled = styled.div`
   gap: 16px;
   align-items: center;
 
-  max-width: 1024px;
+  max-width: 1224px;
   margin-left: auto;
   height: 100px;
   margin-right: auto;
