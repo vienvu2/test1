@@ -4,6 +4,7 @@ import { Button, Col, Container, Row } from '../GlobalStyles'
 import styled from 'styled-components'
 import { useTextAnimation } from '../hooks/textAnimation'
 import { roboto } from '../layouts/Wrap'
+import Link from 'next/link'
 
 const SectionLeaderBoard = () => {
   const [text] = useTextAnimation('builders of the year')
@@ -31,7 +32,7 @@ export default SectionLeaderBoard
 const Board = () => {
   return (
     <BoardStyled>
-      <BoardStyled.Top>
+      <BoardStyled.Top className="mb-3">
         <img src="/images/process/monitor.svg" />
         <h3>Most hackathons won</h3>
         <p>
@@ -39,27 +40,39 @@ const Board = () => {
           this year
         </p>
       </BoardStyled.Top>
-      {[1, 2, 3, 4, 5, 6].map((a) => (
-        <BoardStyled.Item key={a}>
-          <BoardStyled.Index>
-            <span>top</span> 01
-          </BoardStyled.Index>
+      <div className="mb-4">
+        {[1, 2, 3, 4, 5, 6].map((a) => (
+          <BoardStyled.Item key={a}>
+            <BoardStyled.Index>
+              <span>top</span>
+              01
+            </BoardStyled.Index>
 
-          <BoardStyled.Avatar>
-            <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
-          </BoardStyled.Avatar>
+            <BoardStyled.Avatar>
+              <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
+            </BoardStyled.Avatar>
 
-          <BoardStyled.Content>
-            <span>top</span> 01
-          </BoardStyled.Content>
-        </BoardStyled.Item>
-      ))}
+            <BoardStyled.Content>
+              <p className="name">Hoang Nguyen</p>
+              <p className="prize">13 prizes</p>
+            </BoardStyled.Content>
+
+            <Link href="/leader-board/1">View profile {'->'}</Link>
+          </BoardStyled.Item>
+        ))}
+      </div>
+      <BoardStyled.Bottom>
+        <Link href="/leader-board">View all participant {'->'}</Link>
+      </BoardStyled.Bottom>
     </BoardStyled>
   )
 }
 
 const BoardStyled: any = styled.div`
   flex: 1;
+`
+BoardStyled.Bottom = styled.div`
+  text-align: center;
 `
 BoardStyled.Top = styled.div`
   text-align: center;
@@ -70,6 +83,7 @@ BoardStyled.Top = styled.div`
     font-weight: 700;
     font-size: 32px;
     line-height: 40px;
+    margin-bottom: 8px;
     color: ${({ theme }) => theme.mainDark};
   }
   p {
@@ -80,8 +94,21 @@ BoardStyled.Top = styled.div`
   }
 `
 
-BoardStyled.Item = styled.div``
-BoardStyled.Avatar = styled.div``
+BoardStyled.Item = styled.div`
+  display: flex;
+  background: ${({ theme }) => theme.white};
+  margin-bottom: 8px;
+  gap: 16px;
+  align-items: center;
+  padding: 13px 16px;
+`
+BoardStyled.Avatar = styled.div`
+  img {
+    height: 48px;
+    width: 48px;
+    border-radius: 24px;
+  }
+`
 BoardStyled.Line = styled.div`
   width: 1px;
   margin: 0 30px;
@@ -92,8 +119,37 @@ BoardStyled.Wrap = styled.div`
   padding: 40px;
   display: flex;
 `
-BoardStyled.Index = styled.div``
-BoardStyled.Content = styled.div``
+BoardStyled.Index = styled.div`
+  span {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+    display: block;
+    color: ${({ theme }) => theme.black};
+  }
+
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+  color: #fec411;
+`
+BoardStyled.Content = styled.div`
+  flex: 1;
+  .name {
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 4px;
+    line-height: 26px;
+    color: ${({ theme }) => theme.mainDark};
+  }
+  .prize {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: ${({ theme }) => theme.mainDark2};
+  }
+`
+
 const WrapStyled = styled(Container)`
   padding-top: 60px;
   padding-bottom: 60px;
