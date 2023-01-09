@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import styled from 'styled-components'
 import { Button, Container } from '../GlobalStyles'
+import { IconArrowLeft } from '../icons'
 
 const HeaderStyled = styled.div`
   height: 100px;
@@ -71,7 +72,10 @@ const Header = () => {
 
             <HeaderStyled.Right>
               <Button>Sign in</Button>
-              <Button>Register</Button>
+              <Button>
+                Register
+                <IconArrowLeft />
+              </Button>
             </HeaderStyled.Right>
           </HeaderStyled.Inner>
         </Container>

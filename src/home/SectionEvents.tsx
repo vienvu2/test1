@@ -1,10 +1,19 @@
 import React, { useState } from 'react'
-import { Button, Col, Container, Row } from '../GlobalStyles'
+import {
+  Button,
+  ButtonIcon,
+  Col,
+  Container,
+  Flex,
+  Row,
+  Tag,
+} from '../GlobalStyles'
 
 import styled from 'styled-components'
 import Link from 'next/link'
 import { useTextAnimation } from '../hooks/textAnimation'
 import { roboto } from '../layouts/Wrap'
+import { IconArrowLeft, IconCalendar, IconLink, IconTwitter } from '../icons'
 
 const SectionEvent = () => {
   const [text] = useTextAnimation('hackathons')
@@ -52,10 +61,39 @@ const SectionEvent = () => {
             </HackathonStyled.Intro>
             <HackathonStyled.Detail>
               <h3>Hackatron 2023</h3>
-              <p>
+              <p className="desc">
                 Join the next wave of Hackatron where Web3 devs build to learn.
               </p>
-              <Button>Apply now</Button>
+
+              <Flex className="mb-2">
+                <ButtonIcon>
+                  <IconLink />
+                </ButtonIcon>
+
+                <ButtonIcon>
+                  <IconTwitter />
+                </ButtonIcon>
+              </Flex>
+
+              <Flex>
+
+                
+                <p>+100 participating</p>
+              </Flex>
+
+              <Flex className="mb-3">
+                <Tag>Blockchain</Tag>
+                <Tag>AI/ML</Tag>
+                <Tag>Healthtech</Tag>
+              </Flex>
+              <HackathonStyled.Date className="mb-2">
+                <IconCalendar />
+                <p>Jan 1 - Feb 1, 2023</p>
+              </HackathonStyled.Date>
+              <Button block>
+                Apply now
+                <IconArrowLeft />
+              </Button>
             </HackathonStyled.Detail>
           </HackathonStyled>
         ))}
@@ -76,6 +114,23 @@ const HackathonStyled: any = styled.div<{ reverse?: boolean }>`
     margin-bottom: 0;
   }
 `
+
+HackathonStyled.Date = styled.div`
+  padding: 12px;
+  height: 48px;
+  background: #d9f1ff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  p {
+    margin: 0;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    color: ${({ theme }) => theme.mainDark2};
+  }
+`
+
 HackathonStyled.Intro = styled.div`
   background: ${({ theme }) => theme.mainDark2};
   flex: 1;
@@ -107,7 +162,7 @@ HackathonStyled.Detail = styled.div`
     line-height: 40px;
     color: ${({ theme }) => theme.mainDark};
   }
-  p {
+  p.desc {
     font-weight: 400;
     font-size: 16px;
     line-height: 22px;

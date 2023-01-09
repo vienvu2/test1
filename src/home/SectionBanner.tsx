@@ -4,6 +4,7 @@ import { Button, Col, Container, Row } from '../GlobalStyles'
 import styled from 'styled-components'
 import { roboto } from '../layouts/Wrap'
 import { useTextAnimation } from '../hooks/textAnimation'
+import { IconArrowLeft } from '../icons'
 
 const SectionBanner = () => {
   const [text] = useTextAnimation('zero to hero')
@@ -17,9 +18,12 @@ const SectionBanner = () => {
           </h2>
           <p>Easier to get started with coding on FPT Marketplace</p>
 
-          <Button>Get started</Button>
+          <Button>
+            Get started
+            <IconArrowLeft />
+          </Button>
           <div>
-            <a>Scroll down</a>
+            {/* <a>Scroll down</a> */}
           </div>
         </Col>
         <Col md={12}>
