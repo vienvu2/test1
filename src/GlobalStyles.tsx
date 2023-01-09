@@ -117,3 +117,26 @@ export const Tag = styled.span`
   font-size: 12px;
   line-height: 18px;
 `
+
+export const AvatarGroup = styled.div`
+  display: flex;
+  align-items: center;
+  img {
+    height: 24px;
+    width: 24px;
+    border: 1px solid ${({ theme }) => theme.white};
+    margin-left: -12px;
+    border-radius: 12px;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+  p {
+    margin: 0;
+    margin-left: 4px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    color: ${({ theme }) => theme.gray60};
+  }
+`

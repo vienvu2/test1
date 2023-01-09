@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {
+  AvatarGroup,
   Button,
   ButtonIcon,
   Col,
@@ -75,10 +76,13 @@ const SectionEvent = () => {
                 </ButtonIcon>
               </Flex>
 
-              <Flex>
-
-                
-                <p>+100 participating</p>
+              <Flex className="mb-2">
+                <AvatarGroup>
+                  <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
+                  <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
+                  <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
+                  <p>+100 participating</p>
+                </AvatarGroup>
               </Flex>
 
               <Flex className="mb-3">
