@@ -15,3 +15,11 @@ export const IconCalendar = ({ size = 24 }: { size?: number }) => (
 export const IconArrowLeft = ({ size = 24 }: { size?: number }) => (
   <img src="/icons/arrow-left.svg" height={size} width={size} />
 )
+
+export const IconChevronUp = ({ size = 24 }: { size?: number }) => (
+  <img src="/icons/chevron-up.svg" height={size} width={size} />
+)
+
+export const IconChevronDown = ({ size = 24 }: { size?: number }) => (
+  <img src="/icons/chevron-down.svg" height={size} width={size} />
+)

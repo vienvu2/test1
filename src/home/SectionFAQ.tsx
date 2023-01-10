@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Col, Container, Row } from '../GlobalStyles'
 
 import styled from 'styled-components'
 import { useTextAnimation } from '../hooks/textAnimation'
 import { roboto } from '../layouts/Wrap'
 import Link from 'next/link'
+import { IconChevronDown, IconChevronUp } from '../icons'
 
 const SectionFAQ = () => {
   const [text] = useTextAnimation('questions')
@@ -17,25 +18,26 @@ const SectionFAQ = () => {
     },
     {
       index: '02',
-      question: 'What is hackathon?',
+      question: 'How can I join in hackathon? ',
       answer:
         'Hackathon is an event in which a large number of people meet to engage in collaborative computer programming. Here at FPT Marketplace, Hackathon is open for everyone who love coding.',
     },
     {
       index: '03',
-      question: 'What is hackathon?',
+      question:
+        'What criteria does a participant need to follow while joining in hackathons?',
       answer:
         'Hackathon is an event in which a large number of people meet to engage in collaborative computer programming. Here at FPT Marketplace, Hackathon is open for everyone who love coding.',
     },
     {
       index: '04',
-      question: 'What is hackathon?',
+      question: 'What is the prize for winning a hackathon?',
       answer:
         'Hackathon is an event in which a large number of people meet to engage in collaborative computer programming. Here at FPT Marketplace, Hackathon is open for everyone who love coding.',
     },
     {
       index: '05',
-      question: 'What is hackathon?',
+      question: 'Why can’t I invite my friends to form a group?',
       answer:
         'Hackathon is an event in which a large number of people meet to engage in collaborative computer programming. Here at FPT Marketplace, Hackathon is open for everyone who love coding.',
     },
@@ -47,29 +49,32 @@ const SectionFAQ = () => {
     },
     {
       index: '07',
-      question: 'What is hackathon?',
-      answer:
-        'Hackathon is an event in which a large number of people meet to engage in collaborative computer programming. Here at FPT Marketplace, Hackathon is open for everyone who love coding.',
-    },
-    {
-      index: '01',
-      question: 'What is hackathon?',
+      question: 'How can I join in hackathon? ',
       answer:
         'Hackathon is an event in which a large number of people meet to engage in collaborative computer programming. Here at FPT Marketplace, Hackathon is open for everyone who love coding.',
     },
     {
       index: '08',
-      question: 'What is hackathon?',
+      question:
+        'What criteria does a participant need to follow while joining in hackathons?',
       answer:
         'Hackathon is an event in which a large number of people meet to engage in collaborative computer programming. Here at FPT Marketplace, Hackathon is open for everyone who love coding.',
     },
     {
       index: '09',
-      question: 'What is hackathon?',
+      question: 'What is the prize for winning a hackathon?',
+      answer:
+        'Hackathon is an event in which a large number of people meet to engage in collaborative computer programming. Here at FPT Marketplace, Hackathon is open for everyone who love coding.',
+    },
+    {
+      index: '10',
+      question: 'Why can’t I invite my friends to form a group?',
       answer:
         'Hackathon is an event in which a large number of people meet to engage in collaborative computer programming. Here at FPT Marketplace, Hackathon is open for everyone who love coding.',
     },
   ]
+
+  const [active, setActive] = useState('')
   return (
     <WrapStyled>
       <Container>
@@ -81,15 +86,26 @@ const SectionFAQ = () => {
           </h2>
         </WrapStyledTop>
         <Row>
-          {questions.map((a) => (
-            <Col md={12} key={a.index}>
-              <QuestionStyled className="mb-3">
-                {a.index}
-                <p className="name">{a.question}</p>
-                <p className="title">{a.answer}</p>
-              </QuestionStyled>
-            </Col>
-          ))}
+          <Col md={12}>
+            {questions.slice(0, 5).map((item) => (
+              <Item
+                item={item}
+                setActive={setActive}
+                active={active}
+                key={item.index}
+              />
+            ))}
+          </Col>
+          <Col md={12}>
+            {questions.slice(5, 10).map((item) => (
+              <Item
+                item={item}
+                setActive={setActive}
+                active={active}
+                key={item.index}
+              />
+            ))}
+          </Col>
         </Row>
       </Container>
     </WrapStyled>
@@ -98,26 +114,69 @@ const SectionFAQ = () => {
 
 export default SectionFAQ
 
-const QuestionStyled = styled.div`
-  img {
-    width: 288px;
-    height: 260px;
-    object-fit: cover;
-    margin-bottom: 8px;
-  }
+interface ItemProps {
+  item: any
+  setActive: Function
+  active: string
+}
+
+const Item = ({ item, active, setActive }: ItemProps) => {
+  return (
+    <QuestionStyled className="mb-3">
+      <QuestionStyled.Index> {item.index} </QuestionStyled.Index>
+      <QuestionStyled.Content>
+        <p
+          className="name"
+          onClick={() => setActive(active === item.index ? '' : item.index)}
+        >
+          {item.question}
+        </p>
+        <QuestionStyled.Answer active={active === item.index}>
+          {item.answer}
+        </QuestionStyled.Answer>
+      </QuestionStyled.Content>
+      {active === item.index ? (
+        <IconChevronUp size={40} />
+      ) : (
+        <IconChevronDown size={40} />
+      )}
+    </QuestionStyled>
+  )
+}
+
+const QuestionStyled: any = styled.div`
+  display: flex;
+`
+QuestionStyled.Content = styled.div`
+  flex: 1;
   p.name {
     font-weight: 700;
     font-size: 24px;
     line-height: 30px;
     color: ${({ theme }) => theme.main};
     margin-bottom: 8px;
+    cursor: pointer;
   }
-  p.title {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 22px;
-    color: ${({ theme }) => theme.white};
-  }
+`
+QuestionStyled.Answer = styled.p<{ active?: boolean }>`
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: ${({ theme }) => theme.white};
+
+  max-height: ${({ active }) => (active ? 80 : 0)}px;
+  overflow: hidden;
+  transition: all 0.6s ease-in-out;
+`
+
+QuestionStyled.Index = styled.div`
+  width: 56px;
+  margin: 0;
+
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  color: ${({ theme }) => theme.white};
 `
 
 const WrapStyled = styled.div`

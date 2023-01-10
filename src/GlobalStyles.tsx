@@ -21,7 +21,7 @@ img{
 }
 
 .mb-2{
-  margin-bottom: 12px;
+  margin-bottom: 24px;
 }
 .mb-3{
   margin-bottom: 36px;
@@ -38,6 +38,13 @@ p, h1, h2, h3, h4,h5,h6{
   margin: 0;
 }
 
+.text-center{
+  text-align: center;
+}
+
+.text-right{
+  text-align: right;
+}
 
 `
 
@@ -102,19 +109,26 @@ export const ButtonIcon = styled.button`
   border-radius: 24px;
 `
 
-export const Row = styled.div<{ align?: string; justify?: string }>`
+export const Row = styled.div<{
+  align?: string
+  justify?: string
+  gap?: number
+}>`
   display: flex;
   flex-wrap: wrap;
-  margin-left: -24px;
-  margin-right: -24px;
+  margin-left: -${({ gap }) => gap || 24}px;
+  margin-right: -${({ gap }) => gap || 24}px;
 
   align-items: ${({ align = 'flex-start' }) => align};
+
+  & > * {
+    padding-left: ${({ gap }) => gap || 24}px;
+    padding-right: ${({ gap }) => gap || 24}px;
+  }
 `
 
 export const Col = styled.div<{ md?: number }>`
   width: ${({ md = 24 }) => md * (100 / 24)}%;
-  padding-left: 24px;
-  padding-right: 24px;
 `
 
 export const Flex = styled.div<{
