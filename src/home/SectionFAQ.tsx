@@ -74,7 +74,7 @@ const SectionFAQ = () => {
     },
   ]
 
-  const [active, setActive] = useState('')
+  const [active, setActive] = useState('01')
   return (
     <WrapStyled>
       <Container>

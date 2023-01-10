@@ -68,6 +68,7 @@ const Header = () => {
           <HeaderStyled.Inner>
             <HeaderStyled.Logo>
               <span>AI4VN </span>
+              <img src="/images/logo.svg" />
             </HeaderStyled.Logo>
             <HeaderStyled.Menu>
               <Link href="/">

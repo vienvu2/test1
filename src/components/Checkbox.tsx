@@ -13,9 +13,9 @@ const Checkbox = ({ title, value, onChange }: CheckboxProps) => {
   return (
     <CheckboxStyled onClick={() => onChange(!value)}>
       {value ? (
-        <img src="/images/checked.svg" />
+        <img src="/icons/checked.svg" />
       ) : (
-        <img src="/images/un-checked.svg" />
+        <img src="/icons/un-checked.svg" />
       )}
 
       <span>{title}</span>
