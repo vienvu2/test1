@@ -1,16 +1,17 @@
 import Head from 'next/head'
 
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import styled from 'styled-components'
-import { Button, Container } from '../GlobalStyles'
+import { Button, ButtonLink, Container } from '../GlobalStyles'
 import { IconArrowLeft } from '../icons'
 
-const HeaderStyled = styled.div`
+const HeaderStyled: any = styled.div`
   height: 100px;
   position: sticky;
   top: 0;
   z-index: 20;
-  background: white;
+  background: ${({ theme }) => theme.mainDark};
 `
 HeaderStyled.Inner = styled.div`
   display: flex;
@@ -22,10 +23,17 @@ HeaderStyled.Inner = styled.div`
 HeaderStyled.Menu = styled.div`
   flex: 1;
   display: flex;
-  gap: 16px;
+  gap: 32px;
 `
 
-HeaderStyled.MenuItem = styled.div``
+HeaderStyled.MenuItem = styled.div<{ active?: boolean }>`
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  color: ${({ theme, active }) => (active ? theme.main : theme.white)};
+  border-bottom: 2px solid
+    ${({ theme, active }) => (active ? theme.main : 'transparent')};
+`
 
 HeaderStyled.Logo = styled.div`
   font-weight: 700;
@@ -34,7 +42,7 @@ HeaderStyled.Logo = styled.div`
 
   margin-right: 48px;
 
-  color: ${({ theme }) => theme.mainDark2};
+  color: ${({ theme }) => theme.main};
   span {
     font-weight: 700;
     color: ${({ theme }) => theme.main};
@@ -46,6 +54,7 @@ HeaderStyled.Right = styled.div`
 `
 
 const Header = () => {
+  const router = useRouter()
   return (
     <>
       <Head>
@@ -58,20 +67,23 @@ const Header = () => {
         <Container>
           <HeaderStyled.Inner>
             <HeaderStyled.Logo>
-              FPT.
-              <span>Marketplace </span>
+              <span>AI4VN </span>
             </HeaderStyled.Logo>
             <HeaderStyled.Menu>
               <Link href="/">
-                <HeaderStyled.MenuItem>Hackathon</HeaderStyled.MenuItem>
+                <HeaderStyled.MenuItem active={router.pathname == '/'}>
+                  Hackathon
+                </HeaderStyled.MenuItem>
               </Link>
               <Link href="/news">
-                <HeaderStyled.MenuItem>News</HeaderStyled.MenuItem>
+                <HeaderStyled.MenuItem active={router.pathname == '/news'}>
+                  News
+                </HeaderStyled.MenuItem>
               </Link>
             </HeaderStyled.Menu>
 
             <HeaderStyled.Right>
-              <Button>Sign in</Button>
+              <ButtonLink>Sign in</ButtonLink>
               <Button>
                 Register
                 <IconArrowLeft />

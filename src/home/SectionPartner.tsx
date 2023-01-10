@@ -7,17 +7,23 @@ import Image from 'next/image'
 const SectionPartner = () => {
   return (
     <PartnerStyled>
-      <Flex align="center" justify="space-between">
-        <img src="/images/partners/fpt.png" height={66} />
-        <img src="/images/partners/fpt.png" height={66} />
-        <img src="/images/partners/fpt.png" height={66} />
-        <img src="/images/partners/fpt.png" height={66} />
-        <img src="/images/partners/fpt.png" height={66} />
-      </Flex>
+      <Container>
+        <Flex align="center" justify="space-between">
+          <img src="/images/partners/partner-1.png" height={66} />
+          <img src="/images/partners/partner-2.png" height={66} />
+          <img src="/images/partners/partner-3.png" height={66} />
+          <img src="/images/partners/partner-5.png" height={66} />
+          <img src="/images/partners/partner-4.png" height={66} />
+        </Flex>
+      </Container>
     </PartnerStyled>
   )
 }
 
 export default SectionPartner
 
-const PartnerStyled = styled(Container)``
+const PartnerStyled = styled.div`
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background: ${({ theme }) => theme.mainDark};
+`

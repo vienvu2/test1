@@ -72,23 +72,26 @@ const SectionFAQ = () => {
   ]
   return (
     <WrapStyled>
-      <WrapStyledTop>
-        <p>FAQ</p>
-        <h2>
-          Frequently asked{' '}
-          <span className={roboto.className}>{'<' + text + '>'}</span>
-        </h2>
-      </WrapStyledTop>
-      <Row>
-        {questions.map((a) => (
-          <Col md={12} key={a.index}>
-            <QuestionStyled className="mb-3">
-              <p>{a.question}</p>
-              <p>{a.answer}</p>
-            </QuestionStyled>
-          </Col>
-        ))}
-      </Row>
+      <Container>
+        <WrapStyledTop>
+          <p>FAQ</p>
+          <h2>
+            Frequently asked{' '}
+            <span className={roboto.className}>{'<' + text + '>'}</span>
+          </h2>
+        </WrapStyledTop>
+        <Row>
+          {questions.map((a) => (
+            <Col md={12} key={a.index}>
+              <QuestionStyled className="mb-3">
+                {a.index}
+                <p className="name">{a.question}</p>
+                <p className="title">{a.answer}</p>
+              </QuestionStyled>
+            </Col>
+          ))}
+        </Row>
+      </Container>
     </WrapStyled>
   )
 }
@@ -106,19 +109,20 @@ const QuestionStyled = styled.div`
     font-weight: 700;
     font-size: 24px;
     line-height: 30px;
-    color: ${({ theme }) => theme.mainDark};
+    color: ${({ theme }) => theme.main};
     margin-bottom: 8px;
   }
   p.title {
     font-weight: 400;
     font-size: 16px;
     line-height: 22px;
-    color: #1d1d1f;
+    color: ${({ theme }) => theme.white};
   }
 `
 
-const WrapStyled = styled(Container)`
+const WrapStyled = styled.div`
   padding-top: 60px;
+  background: ${({ theme }) => theme.mainDark};
   padding-bottom: 60px;
 `
 
@@ -129,21 +133,21 @@ const WrapStyledTop = styled.div`
     line-height: 50px;
     margin-top: 0;
     margin-bottom: 48px;
-    color: ${({ theme }) => theme.mainDark2};
+    color: ${({ theme }) => theme.white};
 
     span {
-      color: ${({ theme }) => theme.white};
+      color: ${({ theme }) => theme.mainDark2};
 
       font-size: 38px;
       line-height: 50px;
-      background: ${({ theme }) => theme.mainDark2};
+      background: ${({ theme }) => theme.main};
     }
   }
   p {
     font-weight: 500;
     font-size: 18px;
     line-height: 26px;
-    color: ${({ theme }) => theme.gray50};
+    color: ${({ theme }) => theme.main};
     margin-bottom: 0;
   }
 `

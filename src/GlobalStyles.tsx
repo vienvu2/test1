@@ -47,6 +47,25 @@ export const Container = styled.div`
   margin-right: auto;
 `
 
+export const ButtonLink = styled.button<{ block?: boolean }>`
+  padding: 12px 24px;
+
+  height: 48px;
+  background: transparent;
+  border: 0;
+  color: ${({ theme }) => theme.main};
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+
+  cursor: pointer;
+  img {
+    vertical-align: middle;
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+`
 export const Button = styled.button<{ block?: boolean }>`
   padding: 12px 24px;
 
@@ -55,7 +74,7 @@ export const Button = styled.button<{ block?: boolean }>`
   border: 0;
   color: ${({ theme }) => theme.mainDark2};
 
-  font-weight: 500;
+  font-weight: 600;
   font-size: 16px;
   line-height: 22px;
 
