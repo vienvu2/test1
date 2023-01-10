@@ -3,8 +3,9 @@ import { Button, Col, Container, Row } from '../GlobalStyles'
 
 import styled from 'styled-components'
 import Checkbox from '../components/CheckBox'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import Input from '../components/Input'
+import { IconArrowLeft } from '../icons'
 const SectionEnroll = () => {
   return (
     <WrapStyled>
@@ -22,152 +23,177 @@ const SectionEnroll = () => {
   )
 }
 
+interface IFormInput {
+  name?: string
+}
+
 const EnrollForm = () => {
   const {
     register,
     handleSubmit,
     watch,
     setValue,
+    getValues,
     formState: { errors },
   } = useForm()
-  const onSubmit = (data: any) => console.log(data)
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    console.log('data', data)
+  }
 
   const [memberList, setMemberList] = useState<any[]>([])
+
   return (
     <EnrollStyled>
       <h3> {watch('isTeam') ? 'Enroll with your team now' : 'Start now'}</h3>
 
-      <Row gap={12}>
-        <Col md={24} className="mb-2">
-          <Checkbox
-            title="I want to start with a team"
-            value={watch('isTeam')}
-            onChange={(e: boolean) => setValue('isTeam', e)}
-          />
-        </Col>
-        {!watch('isTeam') && (
-          <>
-            <Col md={12} className="mb-2">
-              <Input label="Your name *" {...register('name')} />
-            </Col>
-            <Col md={12} className="mb-2">
-              <Input label="Your name *" {...register('name')} />
-            </Col>
-            <Col md={12} className="mb-2">
-              <Input label="Your phone number *" {...register('name')} />
-            </Col>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Row gap={12}>
+          <Col md={24} className="mb-2">
+            <Checkbox
+              title="I want to start with a team"
+              value={watch('isTeam')}
+              onChange={(e: boolean) => setValue('isTeam', e)}
+            />
+          </Col>
+          {watch('phone')}
+          {!watch('isTeam') && (
+            <>
+              <Col md={12} className="mb-2">
+                <Input
+                  label="Your name *"
+                  {...register('name', { required: true })}
+                />
+              </Col>
+              <Col md={12} className="mb-2">
+                <Input label="Your name *" {...register('name')} />
+              </Col>
+              <Col md={12} className="mb-2">
+                <Input label="Your phone number *" {...register('phone')} />
+              </Col>
 
-            <Col md={12} className="mb-2">
-              <Input label="You are a/an *" {...register('name')} />
-            </Col>
+              <Col md={12} className="mb-2">
+                <Input label="You are a/an *" {...register('job')} />
+              </Col>
 
-            <Col md={12} className="mb-2">
-              <Input label="Your school/company *" {...register('name')} />
-            </Col>
+              <Col md={12} className="mb-2">
+                <Input label="Your school/company *" {...register('org')} />
+              </Col>
 
-            <Col md={12} className="mb-2">
-              <Input label="Your major/profession *" {...register('name')} />
-            </Col>
+              <Col md={12} className="mb-2">
+                <Input
+                  label="Your major/profession *"
+                  {...register('position')}
+                />
+              </Col>
 
-            <Col md={24} className="mb-2">
-              <Input label="What you are interested" {...register('name')} />
-            </Col>
+              <Col md={24} className="mb-2">
+                <Input
+                  label="What you are interested"
+                  {...register('interested')}
+                />
+              </Col>
 
-            <Col md={24} className="mb-2">
-              <Checkbox
-                title={'I agree to the Terms & Conditions of AI4VN'}
-                value={watch('isAgree')}
-                onChange={(e: boolean) => setValue('isAgree', e)}
-              />
-            </Col>
-          </>
-        )}
+              <Col md={24} className="mb-2">
+                <Checkbox
+                  title={'I agree to the Terms & Conditions of AI4VN'}
+                  value={watch('isAgree')}
+                  onChange={(e: boolean) => setValue('isAgree', e)}
+                />
+              </Col>
+            </>
+          )}
 
-        {watch('isTeam') && (
-          <>
-            <Col md={12} className="mb-2">
-              <Input label="Your team name *" {...register('name')} />
-            </Col>
-            <Col md={12} className="mb-2">
-              <Input label="Your team email *" {...register('name')} />
-            </Col>
-            <Col md={12} className="mb-2">
-              <Input label="Your team phone number *" {...register('name')} />
-            </Col>
+          {watch('isTeam') && (
+            <>
+              <Col md={12} className="mb-2">
+                <Input label="Your team name *" {...register('name')} />
+              </Col>
+              <Col md={12} className="mb-2">
+                <Input label="Your team email *" {...register('name')} />
+              </Col>
+              <Col md={12} className="mb-2">
+                <Input label="Your team phone number *" {...register('name')} />
+              </Col>
 
-            <Col md={12} className="mb-2">
-              <Input
-                label="What your team is interested"
-                {...register('name')}
-              />
-            </Col>
-            <Col md={24} className="mb-2">
-              <h4>Team leader</h4>
-            </Col>
+              <Col md={12} className="mb-2">
+                <Input
+                  label="What your team is interested"
+                  {...register('name')}
+                />
+              </Col>
+              <Col md={24} className="mb-2">
+                <h4>Team leader</h4>
+              </Col>
 
-            <Col md={12} className="mb-2">
-              <Input label="Leader’s name *" {...register('name')} />
-            </Col>
+              <Col md={12} className="mb-2">
+                <Input label="Leader’s name *" {...register('name')} />
+              </Col>
 
-            <Col md={12} className="mb-2">
-              <Input label="Leader’s email *" {...register('name')} />
-            </Col>
+              <Col md={12} className="mb-2">
+                <Input label="Leader’s email *" {...register('name')} />
+              </Col>
 
-            <Col md={24} className="mb-2 text-center">
-              <Button>Upload CV</Button>
-            </Col>
+              <Col md={24} className="mb-2 text-center">
+                <Button>Upload CV</Button>
+              </Col>
+              <Col md={24} className="mb-2">
+                <div className="hr" />
+              </Col>
 
-            {memberList.map((member, idx) => {
-              return (
-                <>
-                  <Col md={24} className="mb-2">
-                    <h4>Team member {idx + 1}</h4>
-                  </Col>
+              {memberList.map((member, idx) => {
+                return (
+                  <>
+                    <Col md={24} className="mb-2">
+                      <h4>Team member {idx + 1}</h4>
+                    </Col>
 
-                  <Col md={12} className="mb-2">
-                    <Input
-                      label={`Member ${idx + 1}'s name *`}
-                      {...register('name')}
-                    />
-                  </Col>
+                    <Col md={12} className="mb-2">
+                      <Input
+                        label={`Member ${idx + 1}'s name *`}
+                        {...register('name')}
+                      />
+                    </Col>
 
-                  <Col md={12} className="mb-2">
-                    <Input
-                      label={`Member ${idx + 1}'s email *`}
-                      {...register('name')}
-                    />
-                  </Col>
+                    <Col md={12} className="mb-2">
+                      <Input
+                        label={`Member ${idx + 1}'s email *`}
+                        {...register('name')}
+                      />
+                    </Col>
 
-                  <Col md={24} className="mb-2 text-center">
-                    <Button>Upload CV</Button>
-                  </Col>
+                    <Col md={24} className="mb-2 text-center">
+                      <Button>Upload CV</Button>
+                    </Col>
 
-                  <Col md={24} className="mb-2">
-                    <div className="hr" />
-                  </Col>
-                </>
-              )
-            })}
+                    <Col md={24} className="mb-2">
+                      <div className="hr" />
+                    </Col>
+                  </>
+                )
+              })}
 
-            <Col md={24} className="mb-2 text-center">
-              <Button onClick={() => setMemberList([...memberList, {}])}>
-                Add team member +{' '}
-              </Button>
-            </Col>
+              <Col md={24} className="mb-2 text-center">
+                <Button onClick={() => setMemberList([...memberList, {}])}>
+                  Add team member +{' '}
+                </Button>
+              </Col>
 
-            <Col md={24} className="mb-2">
-              <Checkbox
-                title={'I agree to the Terms & Conditions of AI4VN'}
-                value={watch('isAgree')}
-                onChange={(e: boolean) => setValue('isAgree', e)}
-              />
-            </Col>
-          </>
-        )}
-        <Col md={24} className="mb-2">
-          <Button block>Apply now {'->'} </Button>
-        </Col>
-      </Row>
+              <Col md={24} className="mb-2">
+                <Checkbox
+                  title={'I agree to the Terms & Conditions of AI4VN'}
+                  value={watch('isAgree')}
+                  onChange={(e: boolean) => setValue('isAgree', e)}
+                />
+              </Col>
+            </>
+          )}
+          <Col md={24}>
+            <Button type="submit" block>
+              Apply now <IconArrowLeft />
+            </Button>
+          </Col>
+        </Row>
+      </form>
     </EnrollStyled>
   )
 }
