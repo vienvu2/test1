@@ -7,56 +7,50 @@ import { useTextAnimation } from '../hooks/textAnimation'
 import { roboto } from '../layouts/Wrap'
 
 const SectionBenefit = () => {
-  const [text] = useTextAnimation('in-demand skill')
+  const [text] = useTextAnimation('AI knowledges')
   return (
     <WrapStyled>
       <Container>
         <WrapStyledTop>
-          <p>Benefits</p>
           <h2>
-            Programming is the <br />{' '}
-            <span className={roboto.className}>{'<' + text + '>'}</span> for the
-            future
+            AI4VN Hackathon brings to you <br />
+            <span className={roboto.className}>{'<' + text + '>'}</span>
           </h2>
         </WrapStyledTop>
 
         <Row>
-          <Col md={8}>
+          <Col md={12}>
             <PostItemStyled>
-              <img src="/images/benefits/image-1.png" />
-              <h3>Develop creative thinking</h3>
+              <img src="/images/benefits/img-1.png" />
+              <h3>Searching</h3>
               <p>
-                Learning to code helps you improve logical thinking and take you
-                to a new level in solving problems.
+                To search for the most talented young professionals and provide
+                them opportunity to exchange and learn
               </p>
-              <Link href="/">View details {'->'}</Link>
             </PostItemStyled>
           </Col>
-          <Col md={8}>
+          <Col md={12}>
             <PostItemStyled>
-              <img src="/images/benefits/image-1.png" />
-              <h3>Get to know the technology world</h3>
+              <img src="/images/benefits/img-2.png" />
+              <h3>Connecting</h3>
               <p>
-                Learning to code to step into the world of Information
-                Technology and adapt to the Industry 4.0.
+                To become a platform for AI talents to gain international
+                exposure and put Vietnam in the global map of AI.
               </p>
-              <Link href="/">View details {'->'}</Link>
-            </PostItemStyled>
-          </Col>
-          <Col md={8}>
-            <PostItemStyled>
-              <img src="/images/benefits/image-1.png" />
-              <h3>Get more job opportunities</h3>
-              <p>
-                Programming jobs are growing 50% faster than the overall job
-                market with an average salary of 30% higher than that of other
-                jobs.
-              </p>
-              <Link href="/">View details {'->'}</Link>
             </PostItemStyled>
           </Col>
         </Row>
       </Container>
+      <img
+        src="/images/benefits/bg.svg"
+        style={{
+          position: 'absolute',
+          left: 0,
+          bottom: -600,
+          opacity: 0.4,
+          pointerEvents: 'none',
+        }}
+      />
     </WrapStyled>
   )
 }
@@ -70,28 +64,23 @@ const PostItemStyled = styled.div`
   }
   h3 {
     font-weight: 700;
-    font-size: 24px;
-    line-height: 30px;
-    letter-spacing: -0.03em;
-    color: ${({ theme }) => theme.white};
+    font-size: 36px;
+    line-height: 45px;
+    color: ${({ theme }) => theme.main};
     margin-bottom: 16px;
   }
   p {
     font-weight: 400;
     font-size: 16px;
     line-height: 22px;
+
     color: ${({ theme }) => theme.white};
     margin-bottom: 16px;
-  }
-  a {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 22px;
-    color: ${({ theme }) => theme.main};
   }
 `
 
 const WrapStyled = styled.div`
+  position: relative;
   padding-top: 60px;
   padding-bottom: 60px;
   background: ${({ theme }) => theme.mainDark};
@@ -113,12 +102,5 @@ const WrapStyledTop = styled.div`
       line-height: 50px;
       background: ${({ theme }) => theme.main};
     }
-  }
-  p {
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 26px;
-    color: ${({ theme }) => theme.main};
-    margin-bottom: 0;
   }
 `

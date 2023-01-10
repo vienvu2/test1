@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Col, Container, Row } from '../GlobalStyles'
 
 import styled from 'styled-components'
@@ -7,61 +7,62 @@ import { useTextAnimation } from '../hooks/textAnimation'
 import { roboto } from '../layouts/Wrap'
 
 const SectionProcess = () => {
-  const [text] = useTextAnimation('programmer')
+  const [text] = useTextAnimation('ARTIFICIAL-INTELLIGENCE')
+  const [active, setActive] = useState('01')
   return (
     <WrapStyled>
       <Container>
-        <WrapStyledTop>
-          <p>Process</p>
-          <h2>
-            Roadmap to become
-            <br /> a{' '}
-            <span className={roboto.className}>{'<' + text + '>_'}</span>
-          </h2>
-        </WrapStyledTop>
-        <Row>
-          <Col md={10}>
-            <ItemStyled active>
+        <Row align="center">
+          <Col md={16}>
+            <WrapStyledTop>
+              <h2>
+                Register an Event <br /> about{' '}
+                <span className={roboto.className}>{text}</span>
+              </h2>
+            </WrapStyledTop>
+            <ItemStyled active={active == '01'} onClick={() => setActive('01')}>
               <ItemStyled.Index>01</ItemStyled.Index>
               <ItemStyled.Content>
-                <h3>Learn to code</h3>
-                <p>
-                  Start learning with a wide range of basic to advanced courses
-                  created by top experts.
-                </p>
+                <h3>Prepare the documents including CV and IDs</h3>
               </ItemStyled.Content>
             </ItemStyled>
 
-            <ItemStyled>
+            <ItemStyled active={active == '02'} onClick={() => setActive('02')}>
               <ItemStyled.Index>02</ItemStyled.Index>
               <ItemStyled.Content>
-                <h3>Practice coding</h3>
-                <p>
-                  Level up your programming skills every day with our library of
-                  1000+ challenges.
-                </p>
+                <h3>
+                  Fill in registration form and get the confirmation email.
+                </h3>
               </ItemStyled.Content>
             </ItemStyled>
 
-            <ItemStyled>
+            <ItemStyled active={active == '03'} onClick={() => setActive('03')}>
               <ItemStyled.Index>03</ItemStyled.Index>
               <ItemStyled.Content>
-                <h3>Join coding contest</h3>
-                <p>
-                  Participate in contests to test the geek in you and improve
-                  your coding skills.
-                </p>
+                <h3>Follow instruction to receive data and join challenges.</h3>
               </ItemStyled.Content>
             </ItemStyled>
           </Col>
-          <Col md={14}>
+          <Col md={8}>
             <ImageStyled>
-              <img src="/images/process/monitor.svg" />
+              {active === '01' && <img src="/images/process/monitor.svg" />}
+              {active === '02' && <img src="/images/process/mail.svg" />}
+              {active === '03' && <img src="/images/process/laptop.svg" />}
             </ImageStyled>
-            s
           </Col>
         </Row>
       </Container>
+      <img
+        src="/images/process/bg.svg"
+        style={{
+          position: 'absolute',
+          opacity: 0.4,
+          pointerEvents: 'none',
+          bottom: 0,
+          width: '50%',
+          right: 0,
+        }}
+      />
     </WrapStyled>
   )
 }
@@ -69,14 +70,19 @@ const SectionProcess = () => {
 export default SectionProcess
 
 const ImageStyled = styled.div`
-  text-align: center;
+  // text-align: center;
+  img {
+    height: 420px;
+  }
 `
 
 const ItemStyled: any = styled.div<{ active?: boolean }>`
   border-top: 1px solid ${({ theme }) => theme.blue60};
   padding: 24px 0;
   display: flex;
+  cursor: pointer;
   opacity: ${({ active }) => (active ? 1 : 0.5)};
+  max-width: 460px;
   &:hover {
     opacity: 1;
   }
@@ -97,6 +103,7 @@ ItemStyled.Content = styled.div`
   flex: 1;
   h3 {
     margin: 0;
+    padding-right: 100px;
 
     font-weight: 700;
     font-size: 32px;
@@ -104,18 +111,13 @@ ItemStyled.Content = styled.div`
     color: ${({ theme }) => theme.main};
     margin-bottom: 8px;
   }
-  p {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 22px;
-    color: ${({ theme }) => theme.white};
-  }
 `
 
 const WrapStyled = styled.div`
   padding-top: 60px;
   padding-bottom: 60px;
   background: ${({ theme }) => theme.mainDark};
+  position: relative;
 `
 
 const WrapStyledTop = styled.div`

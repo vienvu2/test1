@@ -7,29 +7,58 @@ import { useTextAnimation } from '../hooks/textAnimation'
 import { IconArrowDown, IconArrowLeft, IconChevronDown } from '../icons'
 
 const SectionBanner = () => {
-  const [text] = useTextAnimation('zero to hero')
-
   const [active, setActive] = useState(1)
+
+  const items = [
+    {
+      title: 'AI4VN Hackathon',
+      desc:
+        'The AI Hackathon Platform for all AI engineers, organized by FPT AI in collaboration with the Ministry of Science and Technology.',
+      link: '/',
+      image: (
+        <img
+          src="/images/banner/banner-1.png"
+          style={{ width: '120%', maxWidth: '120%', marginTop: -100 }}
+        />
+      ),
+    },
+    {
+      title: 'Hackatron 2023',
+      desc:
+        'The best way to learn is to get your hands dirty! Build on riveting problem statements, while following curated coursework and brainstorming exercises with industry experts who know that what it’s like to be new and make mistakes.',
+      link: '/',
+      image: <img src="/images/banner/banner-2.svg" />,
+    },
+    {
+      title: 'HackZon 2.0',
+      desc:
+        'The best way to learn is to get your hands dirty! Build on riveting problem statements, while following curated coursework and brainstorming exercises with industry experts who know that what it’s like to be new and make mistakes.',
+      link: '/',
+      image: <img src="/images/banner/banner-3.svg" />,
+    },
+  ]
+
+  const item = items[active - 1]
 
   useEffect(() => {
     const ref = setInterval(() => {
-      setActive((r) => (r > 3 ? 1 : r + 1))
-    }, 2000)
-    return clearInterval(ref)
-  }, [active])
+      console.log(active)
+      setActive((r) => (r > 2 ? 1 : r + 1))
+    }, 3000)
+    return () => clearInterval(ref)
+  }, [])
+
   return (
     <WrapStyled>
+      <img
+        src="/images/banner/bg.svg"
+        style={{ position: 'absolute', right: 100, top: 0, opacity: 0.2 }}
+      />
       <Container>
-        <Row align="center">
-          <Col md={12}>
-            <h2>
-              Learn to code: <br />
-              From <span className={roboto.className}>{'<' + text + '>'}</span>
-            </h2>
-            <p>
-              The AI Hackathon Platform for all AI engineers, organized by FPT
-              AI in collaboration with the Ministry of Science and Technology.
-            </p>
+        <Row>
+          <Col md={12} style={{ paddingTop: 100 }}>
+            <h2>{item.title}</h2>
+            <p>{item.desc}</p>
 
             <Button>
               Let’s Start
@@ -51,7 +80,7 @@ const SectionBanner = () => {
             </BannerStyled.ScrollBtn>
           </Col>
           <Col md={12}>
-            <img src="/images/banner.png" />
+            <BannerStyled.Image>{item.image}</BannerStyled.Image>
           </Col>
         </Row>
       </Container>
@@ -62,6 +91,15 @@ const SectionBanner = () => {
 export default SectionBanner
 
 const BannerStyled: any = styled.div``
+
+BannerStyled.Image = styled.div`
+  height: 500px;
+  position: relative;
+  img {
+    position: absolute;
+    top: 0;
+  }
+`
 
 BannerStyled.Nav = styled.div`
   display: flex;
@@ -74,6 +112,8 @@ BannerStyled.Nav = styled.div`
     background: ${({ theme }) => theme.blue70};
 
     cursor: pointer;
+
+    transition: all 0.3s linear;
 
     &.active {
       background: ${({ theme }) => theme.blue50};
@@ -115,5 +155,6 @@ const WrapStyled = styled.div`
     font-size: 20px;
     line-height: 28px;
     color: ${({ theme }) => theme.white};
+    min-height: 160px;
   }
 `
