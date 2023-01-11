@@ -16,7 +16,9 @@ const SectionEnroll = () => {
             <img src="/images/enroll.png" />
           </Col>
           <Col md={12}>
-            <EnrollForm />
+            <FormStyled>
+              <EnrollForm />
+            </FormStyled>
           </Col>
         </Row>
       </Container>
@@ -28,7 +30,12 @@ interface IFormInput {
   name?: string
 }
 
-const EnrollForm = () => {
+const FormStyled = styled.div`
+  padding: 32px;
+  background: ${({ theme }) => theme.blue10};
+`
+
+export const EnrollForm = ({ mode }: { mode?: 'column' | 'row' }) => {
   const {
     register,
     handleSubmit,
@@ -49,6 +56,9 @@ const EnrollForm = () => {
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <Row gap={12}>
+          <Col md={12}></Col>
+        </Row>
+        <Row gap={12}>
           <Col md={24} className="mb-2">
             <Checkbox
               title="I want to start with a team"
@@ -56,7 +66,6 @@ const EnrollForm = () => {
               onChange={(e: boolean) => setValue('isTeam', e)}
             />
           </Col>
-          {watch('phone')}
           {!watch('isTeam') && (
             <>
               <Col md={12} className="mb-2">
@@ -183,11 +192,6 @@ const EnrollForm = () => {
                     </Col>
 
                     <Col md={24} className="mb-2 text-center">
-                      {/* <Input
-                        type="file"
-                        label={`Member ${idx + 1}'s email *`}
-                        {...register('name')}
-                      /> */}
                       <Button>
                         Upload CV
                         <IconArrowUp />
@@ -253,9 +257,6 @@ const WrapStyled = styled.div`
   padding-bottom: 60px;
 `
 const EnrollStyled = styled.div`
-  padding: 32px;
-  background: ${({ theme }) => theme.blue20};
-
   h3 {
     font-weight: 700;
     font-size: 32px;

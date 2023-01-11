@@ -24,7 +24,7 @@ const InputStyled = styled.div`
     display: block;
     width: 100%;
     padding: 15px 15px 13px;
-    background: ${({ theme }) => theme.blue20};
+    background: ${({ theme }) => theme.blue10};
     border: 1px solid ${({ theme }) => theme.blue60};
 
     font-weight: 600;
@@ -49,7 +49,7 @@ const InputStyled = styled.div`
     &.active {
       top: -8px;
       font-size: 14px;
-      background: ${({ theme }) => theme.blue20};
+      background: ${({ theme }) => theme.blue10};
       color: ${({ theme }) => theme.mainDark2};
     }
   }

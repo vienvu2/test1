@@ -9,6 +9,8 @@ html,
 body {
     padding: 0;
     margin: 0;
+  color: ${({ theme }: any) => theme.black};
+
 }
 
 a {
@@ -113,6 +115,21 @@ p, h1, h2, h3, h4,h5,h6{
   text-align: right;
 }
 
+.bold{
+  font-weight: bold!important;
+}
+
+.text-main{
+  color: ${({ theme }) => theme.main}!important;
+}
+.text-dark{
+  color: ${({ theme }) => theme.mainDark}!important;
+}
+
+.text-dark2{
+  color: ${({ theme }) => theme.mainDark2}!important;
+}
+
 `
 
 export const Container = styled.div`
@@ -168,11 +185,11 @@ export const Button = styled.button<{ block?: boolean }>`
       : ''}
 `
 
-export const ButtonIcon = styled.button`
+export const ButtonIcon = styled.button<{ dark?: boolean }>`
   width: 48px;
   height: 48px;
   border: 0;
-  background: ${({ theme }) => theme.blue10};
+  background: ${({ theme, dark }) => (dark ? theme.mainDark2 : theme.blue10)};
   border-radius: 24px;
 `
 
@@ -238,7 +255,6 @@ export const AvatarGroup = styled.div`
   p {
     margin: 0;
     margin-left: 4px;
-    font-weight: 400;
     font-size: 16px;
     line-height: 22px;
     color: ${({ theme }) => theme.gray60};

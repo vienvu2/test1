@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from 'react'
 import {
   AvatarGroup,
@@ -10,7 +11,7 @@ import {
   Tag,
 } from '../GlobalStyles'
 
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import Link from 'next/link'
 import { useTextAnimation } from '../hooks/textAnimation'
 import { roboto } from '../layouts/Wrap'
@@ -21,74 +22,188 @@ import {
   IconLogoTwitter,
   IconTwitter,
 } from '../icons'
+import Modal from '../components/Modal'
+import Checkbox from '../components/Checkbox'
+import { EnrollForm } from './SectionEnroll'
 
 const SectionEvent = () => {
   const [text] = useTextAnimation('hackathons')
   const [tabActive, setTabActive] = useState('Hottest')
+  const [detail, showDetail] = useState(false)
 
-  const list = [1, 2, 3, 4, 5, 6]
   return (
-    <WrapStyled>
-      <WrapStyledTop>
-        <p>Events</p>
-        <h2>
-          Outstanding <span className={roboto.className}>{text}</span>
-        </h2>
-      </WrapStyledTop>
-      <ContentStyled>
-        <ContentStyled.Header>
-          {['Hottest', 'Opening', 'Upcoming', 'Past'].map((a) => (
-            <ContentStyled.HeaderItem
-              key={a}
-              active={a === tabActive}
-              onClick={() => setTabActive(a)}
-            >
-              {a}
-            </ContentStyled.HeaderItem>
-          ))}
-        </ContentStyled.Header>
-        {tabActive === 'Hottest' &&
-          ['2022', '2023'].map((a, idx) => (
-            <HackathonStyled key={a} reverse={idx % 2 === 0}>
-              <HackathonStyled.Intro>
-                <Row align="flex-end">
-                  <Col md={12}>
-                    <p>Introducing</p>
-                    <h3>Hackatron {a}</h3>
-                    <p>
-                      The best way to learn is to get your hands dirty! Build on
-                      riveting problem statements, while following curated
-                      coursework and brainstorming exercises with industry
-                      experts who know that what it’s like to be new and make
-                      mistakes.
-                    </p>
-                  </Col>
-                  <Col md={12}>
-                    <img src="/images/events/coding.svg" />
-                  </Col>
-                </Row>
-              </HackathonStyled.Intro>
-              <HackathonItem />
-            </HackathonStyled>
-          ))}
-
-        {tabActive !== 'Hottest' && (
-          <Row gap={12}>
-            {[1, 2, 3, 4, 5, 6].map((a, idx) => (
-              <Col md={12} key={a}>
-                <HackathonItemLong />
-              </Col>
+    <>
+      <WrapStyled>
+        <WrapStyledTop>
+          <p>Events</p>
+          <h2>
+            Outstanding <span className={roboto.className}>{text}</span>
+          </h2>
+        </WrapStyledTop>
+        <ContentStyled>
+          <ContentStyled.Header>
+            {['Hottest', 'Opening', 'Upcoming', 'Past'].map((a) => (
+              <ContentStyled.HeaderItem
+                key={a}
+                active={a === tabActive}
+                onClick={() => setTabActive(a)}
+              >
+                {a}
+              </ContentStyled.HeaderItem>
             ))}
-          </Row>
-        )}
-      </ContentStyled>
-    </WrapStyled>
+          </ContentStyled.Header>
+          {tabActive === 'Hottest' &&
+            ['2022', '2023'].map((a, idx) => (
+              <HackathonStyled key={a} reverse={idx % 2 === 0}>
+                <HackathonStyled.Intro>
+                  <Row align="flex-end">
+                    <Col md={12}>
+                      <p>Introducing</p>
+                      <h3>Hackatron {a}</h3>
+                      <p>
+                        The best way to learn is to get your hands dirty! Build
+                        on riveting problem statements, while following curated
+                        coursework and brainstorming exercises with industry
+                        experts who know that what it’s like to be new and make
+                        mistakes.
+                      </p>
+                    </Col>
+                    <Col md={12}>
+                      <img src="/images/events/coding.svg" />
+                    </Col>
+                  </Row>
+                </HackathonStyled.Intro>
+                <HackathonItem onApply={() => showDetail(true)} />
+              </HackathonStyled>
+            ))}
+
+          {tabActive !== 'Hottest' && (
+            <Row gap={12}>
+              {[1, 2, 3, 4, 5, 6].map((a, idx) => (
+                <Col md={12} key={a}>
+                  <HackathonItemLong onApply={() => showDetail(true)} />
+                </Col>
+              ))}
+            </Row>
+          )}
+        </ContentStyled>
+      </WrapStyled>
+      <Modal size="md" show={detail} onClose={() => showDetail(false)}>
+        <HackathonPopup onClose={() => showDetail(false)} />
+      </Modal>
+    </>
   )
 }
 
 export default SectionEvent
 
-const HackathonItem = () => {
+const HackathonPopup = ({ onClose }: { onClose: Function }) => {
+  const [step, setStep] = useState(1)
+  return (
+    <PopupStyled>
+      <PopupStyled.Header>
+        <img
+          src="/images/close.svg"
+          onClick={() => {
+            onClose()
+          }}
+          alt=""
+        />
+      </PopupStyled.Header>
+
+      {step == 1 && (
+        <Row align="stretch">
+          <Col md={12}>
+            <PopupStyled.Image>
+              <img src="/images/events/coding.svg" />
+            </PopupStyled.Image>
+          </Col>
+          <Col md={12}>
+            <Flex className="mb-2">
+              <div style={{ flex: 1 }}>
+                <h3>Hackatron 2023</h3>
+                <p>
+                  Join the next wave of Hackatron where Web3 devs build to
+                  learn.
+                </p>
+              </div>
+              <ButtonIcon dark>
+                <IconLink color="white" />
+              </ButtonIcon>
+
+              <ButtonIcon dark>
+                <IconLogoTwitter color="white" />
+              </ButtonIcon>
+            </Flex>
+
+            <Row className="mb-1">
+              <Col md={12}>
+                <PopupStyled.Date className="mb-1">
+                  <IconCalendar />
+                  <p>Jan 1 - Feb 1, 2023</p>
+                </PopupStyled.Date>
+              </Col>
+              <Col md={12}>
+                <AvatarGroup>
+                  <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
+                  <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
+                  <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
+                  <p className="bold text-dark2">+100 participating</p>
+                </AvatarGroup>
+              </Col>
+            </Row>
+            <h4>Description</h4>
+            <p className="mb-2">
+              The best way to learn is to get your hands dirty! Build on
+              riveting problem statements, while following curated coursework
+              and brainstorming exercises with industry experts who know that
+              what it’s like to be new and make mistakes.
+            </p>
+            <h4>About topic</h4>
+            <p className="mb-2">
+              The best way to learn is to get your hands dirty! Build on
+              riveting problem statements, while following curated coursework
+              and brainstorming exercises with industry experts who know that
+              what it’s like to be new and make mistakes.
+            </p>
+            <h4>Prizes</h4>
+
+            <PrizesStyled>
+              <div className="img">
+                <img src="/images/medal-gold.svg" />
+              </div>
+              <p className="name">Gold Medal</p>
+              <p className="price">15.000.000 VND</p>
+            </PrizesStyled>
+            <PrizesStyled>
+              <div className="img">
+                <img src="/images/medal-sliver.svg" />
+              </div>
+              <p className="name">Gold sliver</p>
+              <p className="price">15.000.000 VND</p>
+            </PrizesStyled>
+            <PrizesStyled>
+              <div className="img">
+                <img src="/images/medal-bronze.svg" />
+              </div>
+              <p className="name">Gold Bronze</p>
+              <p className="price">15.000.000 VND</p>
+            </PrizesStyled>
+
+            <Button block onClick={() => setStep(2)}>
+              Apply this hackathon
+              <IconArrowLeft />
+            </Button>
+          </Col>
+        </Row>
+      )}
+
+      {step === 2 && <EnrollForm />}
+    </PopupStyled>
+  )
+}
+
+const HackathonItem = ({ onApply }: { onApply: Function }) => {
   return (
     <HackathonStyled.Detail>
       <h3>Hackatron 2023</h3>
@@ -124,7 +239,7 @@ const HackathonItem = () => {
         <IconCalendar />
         <p>Jan 1 - Feb 1, 2023</p>
       </HackathonStyled.Date>
-      <Button block>
+      <Button block onClick={() => onApply()}>
         Apply now
         <IconArrowLeft />
       </Button>
@@ -132,10 +247,10 @@ const HackathonItem = () => {
   )
 }
 
-const HackathonItemLong = () => {
+const HackathonItemLong = ({ onApply }: { onApply: Function }) => {
   return (
     <HackathonStyled.Detail long className="mb-2">
-      <Flex className="mb-1" align="center">
+      <Flex className="mb-2" align="center">
         <h3 style={{ flex: 1 }}>Hackatron 2023</h3>
         <ButtonIcon>
           <IconLink />
@@ -172,7 +287,7 @@ const HackathonItemLong = () => {
           </HackathonStyled.Date>
         </Col>
         <Col md={12}>
-          <Button block>
+          <Button block onClick={() => onApply()}>
             Apply now
             <IconArrowLeft />
           </Button>
@@ -181,6 +296,73 @@ const HackathonItemLong = () => {
     </HackathonStyled.Detail>
   )
 }
+
+const PrizesStyled = styled.div`
+  display: flex;
+  margin-bottom: 16px;
+  gap: 16px;
+  align-items: center;
+  .img {
+    width: 50px;
+    text-align: center;
+  }
+  .price,
+  .name {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 26px;
+    color: ${({ theme }) => theme.black};
+  }
+  .name {
+    flex: 1;
+  }
+`
+
+const PopupStyled: any = styled.div`
+  padding: 32px;
+  background: ${({ theme }) => theme.blue10};
+
+  h3 {
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 45px;
+    color: ${({ theme }) => theme.mainDark2};
+    margin-bottom: 10px;
+  }
+  h4 {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 26px;
+    color: ${({ theme }) => theme.mainDark2};
+    margin-bottom: 8px;
+  }
+`
+
+PopupStyled.Header = styled.div`
+  text-align: right;
+  margin-bottom: 12px;
+  img {
+    cursor: pointer;
+  }
+`
+PopupStyled.Date = styled.div`
+  display: flex;
+  gap: 8px;
+
+  font-weight: 600;
+  font-size: 16px;
+  color: ${({ theme }) => theme.mainDark2};
+  line-height: 22px;
+  align-items: center;
+`
+
+PopupStyled.Image = styled.div`
+  background: ${({ theme }) => theme.mainDark2};
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
 
 const HackathonStyled: any = styled.div<{ reverse?: boolean }>`
   margin-bottom: 32px;
@@ -215,7 +397,6 @@ HackathonStyled.Intro = styled.div`
   height: 400px;
   padding: 24px;
   p {
-    font-weight: 400;
     font-size: 16px;
     line-height: 22px;
     color: ${({ theme }) => theme.white};
@@ -241,7 +422,6 @@ HackathonStyled.Detail = styled.div<{ long?: boolean }>`
     color: ${({ theme }) => theme.mainDark};
   }
   p.desc {
-    font-weight: 400;
     font-size: 16px;
     line-height: 22px;
     color: ${({ theme }) => theme.gray60};
