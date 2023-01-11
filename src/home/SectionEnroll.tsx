@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { Button, Col, Container, Row } from '../GlobalStyles'
 
 import styled from 'styled-components'
-import Checkbox from '../components/CheckBox'
+import Checkbox from '../components/Checkbox'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Input from '../components/Input'
-import { IconArrowLeft } from '../icons'
+import { IconArrowLeft, IconArrowUp, IconPlus } from '../icons'
+import Link from 'next/link'
 const SectionEnroll = () => {
   return (
     <WrapStyled>
@@ -72,16 +73,25 @@ const EnrollForm = () => {
               </Col>
 
               <Col md={12} className="mb-2">
-                <Input label="You are a/an *" {...register('job')} />
+                <Input
+                  label="You are a/an *"
+                  {...register('job')}
+                  type="select"
+                />
               </Col>
 
               <Col md={12} className="mb-2">
-                <Input label="Your school/company *" {...register('org')} />
+                <Input
+                  label="Your school/company *"
+                  {...register('org')}
+                  type="select"
+                />
               </Col>
 
               <Col md={12} className="mb-2">
                 <Input
                   label="Your major/profession *"
+                  type="select"
                   {...register('position')}
                 />
               </Col>
@@ -95,7 +105,15 @@ const EnrollForm = () => {
 
               <Col md={24} className="mb-2">
                 <Checkbox
-                  title={'I agree to the Terms & Conditions of AI4VN'}
+                  title={
+                    <TermLink>
+                      I agree to the{' '}
+                      <a target="_blank" href="/terms">
+                        Terms & Conditions
+                      </a>{' '}
+                      of AI4VN
+                    </TermLink>
+                  }
                   value={watch('isAgree')}
                   onChange={(e: boolean) => setValue('isAgree', e)}
                 />
@@ -134,7 +152,10 @@ const EnrollForm = () => {
               </Col>
 
               <Col md={24} className="mb-2 text-center">
-                <Button>Upload CV</Button>
+                <Button>
+                  Upload CV
+                  <IconArrowUp />
+                </Button>
               </Col>
               <Col md={24} className="mb-2">
                 <div className="hr" />
@@ -162,7 +183,15 @@ const EnrollForm = () => {
                     </Col>
 
                     <Col md={24} className="mb-2 text-center">
-                      <Button>Upload CV</Button>
+                      {/* <Input
+                        type="file"
+                        label={`Member ${idx + 1}'s email *`}
+                        {...register('name')}
+                      /> */}
+                      <Button>
+                        Upload CV
+                        <IconArrowUp />
+                      </Button>
                     </Col>
 
                     <Col md={24} className="mb-2">
@@ -174,13 +203,21 @@ const EnrollForm = () => {
 
               <Col md={24} className="mb-2 text-center">
                 <Button onClick={() => setMemberList([...memberList, {}])}>
-                  Add team member +{' '}
+                  Add team member <IconPlus />
                 </Button>
               </Col>
 
               <Col md={24} className="mb-2">
                 <Checkbox
-                  title={'I agree to the Terms & Conditions of AI4VN'}
+                  title={
+                    <TermLink>
+                      I agree to the{' '}
+                      <a target="_blank" href="/terms">
+                        Terms & Conditions
+                      </a>{' '}
+                      of AI4VN
+                    </TermLink>
+                  }
                   value={watch('isAgree')}
                   onChange={(e: boolean) => setValue('isAgree', e)}
                 />
@@ -199,6 +236,17 @@ const EnrollForm = () => {
 }
 
 export default SectionEnroll
+
+const TermLink = styled.span`
+  a {
+    font-size: 16px;
+    line-height: 22px;
+
+    font-weight: 500;
+    color: ${({ theme }) => theme.mainDark2};
+    text-decoration: underline;
+  }
+`
 
 const WrapStyled = styled.div`
   padding-top: 60px;

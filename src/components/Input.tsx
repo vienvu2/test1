@@ -1,9 +1,17 @@
 import styled from 'styled-components'
 
-const Input = ({ label, ...props }: any) => {
+const Input = ({ label, type, ...props }: any) => {
   return (
     <InputStyled>
-      <input {...props} />
+      {type === 'select' ? (
+        <select {...props}>
+          <option>2132</option>
+          <option>2132</option>
+        </select>
+      ) : (
+        <input {...props} type={type} />
+      )}
+
       <label className="active">{label}</label>
     </InputStyled>
   )
@@ -11,6 +19,7 @@ const Input = ({ label, ...props }: any) => {
 
 const InputStyled = styled.div`
   position: relative;
+  select,
   input {
     display: block;
     width: 100%;

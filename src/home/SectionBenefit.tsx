@@ -10,7 +10,7 @@ const SectionBenefit = () => {
   const [text] = useTextAnimation('AI knowledges')
   return (
     <WrapStyled>
-      <Container>
+      <Container style={{zIndex: 2}}>
         <WrapStyledTop>
           <h2>
             AI4VN Hackathon brings to you <br />
@@ -49,6 +49,7 @@ const SectionBenefit = () => {
           bottom: -600,
           opacity: 0.4,
           pointerEvents: 'none',
+          zIndex: 1,
         }}
       />
     </WrapStyled>

@@ -74,7 +74,7 @@ const SectionFAQ = () => {
     },
   ]
 
-  const [active, setActive] = useState('01')
+  const [active, setActive] = useState<any>({ '01': true })
   return (
     <WrapStyled>
       <Container>
@@ -90,8 +90,10 @@ const SectionFAQ = () => {
             {questions.slice(0, 5).map((item) => (
               <Item
                 item={item}
-                setActive={setActive}
-                active={active}
+                setActive={() =>
+                  setActive({ ...active, [item.index]: !active[item.index] })
+                }
+                active={active[item.index]}
                 key={item.index}
               />
             ))}
@@ -100,8 +102,10 @@ const SectionFAQ = () => {
             {questions.slice(5, 10).map((item) => (
               <Item
                 item={item}
-                setActive={setActive}
-                active={active}
+                setActive={() =>
+                  setActive({ ...active, [item.index]: !active[item.index] })
+                }
+                active={active[item.index]}
                 key={item.index}
               />
             ))}
@@ -125,21 +129,14 @@ const Item = ({ item, active, setActive }: ItemProps) => {
     <QuestionStyled className="mb-3">
       <QuestionStyled.Index> {item.index} </QuestionStyled.Index>
       <QuestionStyled.Content>
-        <p
-          className="name"
-          onClick={() => setActive(active === item.index ? '' : item.index)}
-        >
+        <p className="name" onClick={() => setActive()}>
           {item.question}
         </p>
-        <QuestionStyled.Answer active={active === item.index}>
+        <QuestionStyled.Answer active={active}>
           {item.answer}
         </QuestionStyled.Answer>
       </QuestionStyled.Content>
-      {active === item.index ? (
-        <IconChevronUp size={40} />
-      ) : (
-        <IconChevronDown size={40} />
-      )}
+      {active ? <IconChevronUp size={40} /> : <IconChevronDown size={40} />}
     </QuestionStyled>
   )
 }

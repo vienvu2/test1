@@ -19,6 +19,9 @@ a {
 img{
   max-width: 100%;
 }
+a img{
+  vertical-align: bottom;
+}
 
 .mb-2{
   margin-bottom: 24px;
@@ -68,7 +71,7 @@ export const ButtonLink = styled.button<{ block?: boolean }>`
 
   cursor: pointer;
   img {
-    vertical-align: middle;
+    vertical-align: bottom;
     margin-left: 4px;
     margin-right: 4px;
   }
@@ -87,7 +90,7 @@ export const Button = styled.button<{ block?: boolean }>`
 
   cursor: pointer;
   img {
-    vertical-align: middle;
+    vertical-align: bottom;
     margin-left: 4px;
     margin-right: 4px;
   }

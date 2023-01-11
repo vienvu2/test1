@@ -52,7 +52,7 @@ const SectionBanner = () => {
     <WrapStyled>
       <img
         src="/images/banner/bg.svg"
-        style={{ position: 'absolute', right: 100, top: 0, opacity: 0.2 }}
+        style={{ position: 'absolute', right: 100, top: 0, opacity: 0.4 }}
       />
       <Container>
         <Row>

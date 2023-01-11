@@ -18,7 +18,7 @@ const Checkbox = ({ title, value, onChange }: CheckboxProps) => {
         <img src="/icons/un-checked.svg" />
       )}
 
-      <span>{title}</span>
+      {typeof title == 'string' ? <span>{title} </span> : title}
     </CheckboxStyled>
   )
 }
