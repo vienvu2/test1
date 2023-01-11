@@ -25,7 +25,7 @@ const SectionEvent = () => {
         <p>Events</p>
         <h2>
           Outstanding{' '}
-          <span className={roboto.className}>{'<' + text + '>_'}</span>
+          <span className={roboto.className}>{text}</span>
         </h2>
       </WrapStyledTop>
       <ContentStyled>

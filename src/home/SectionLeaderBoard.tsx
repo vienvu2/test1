@@ -65,7 +65,7 @@ const SectionLeaderBoard = () => {
         <p>Leaderboard</p>
         <h2>
           Astonishing{' '}
-          <span className={roboto.className}>{'<' + text + '>'}</span>
+          <span className={roboto.className}>{text}</span>
         </h2>
       </WrapStyledTop>
 

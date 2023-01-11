@@ -14,7 +14,7 @@ const SectionBenefit = () => {
         <WrapStyledTop>
           <h2>
             AI4VN Hackathon brings to you <br />
-            <span className={roboto.className}>{'<' + text + '>'}</span>
+            <span className={roboto.className}>{text}</span>
           </h2>
         </WrapStyledTop>
 

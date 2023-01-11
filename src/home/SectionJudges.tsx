@@ -14,7 +14,8 @@ const SectionJudges = () => {
         <WrapStyledTop>
           <p>Judges</p>
           <h2>
-            Amazing <span className={roboto.className}>{'<' + text + '>'}</span>
+            Amazing {' '}
+            <span className={roboto.className}>{text}</span>
           </h2>
         </WrapStyledTop>
         <Row>

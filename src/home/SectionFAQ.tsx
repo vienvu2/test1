@@ -82,7 +82,7 @@ const SectionFAQ = () => {
           <p>FAQ</p>
           <h2>
             Frequently asked{' '}
-            <span className={roboto.className}>{'<' + text + '>'}</span>
+          <span className={roboto.className}>{text}</span>
           </h2>
         </WrapStyledTop>
         <Row>
