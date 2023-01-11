@@ -61,7 +61,7 @@ const Footer = () => {
           </Row>
           <Row align="center">
             <Col md={24}>
-              <div style={{ height: 100 }} />
+              <div style={{ height: 60 }} />
             </Col>
 
             <Col md={12}>
