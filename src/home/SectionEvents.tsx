@@ -14,18 +14,25 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import { useTextAnimation } from '../hooks/textAnimation'
 import { roboto } from '../layouts/Wrap'
-import { IconArrowLeft, IconCalendar, IconLink, IconTwitter } from '../icons'
+import {
+  IconArrowLeft,
+  IconCalendar,
+  IconLink,
+  IconLogoTwitter,
+  IconTwitter,
+} from '../icons'
 
 const SectionEvent = () => {
   const [text] = useTextAnimation('hackathons')
   const [tabActive, setTabActive] = useState('Hottest')
+
+  const list = [1, 2, 3, 4, 5, 6]
   return (
     <WrapStyled>
       <WrapStyledTop>
         <p>Events</p>
         <h2>
-          Outstanding{' '}
-          <span className={roboto.className}>{text}</span>
+          Outstanding <span className={roboto.className}>{text}</span>
         </h2>
       </WrapStyledTop>
       <ContentStyled>
@@ -40,73 +47,140 @@ const SectionEvent = () => {
             </ContentStyled.HeaderItem>
           ))}
         </ContentStyled.Header>
+        {tabActive === 'Hottest' &&
+          ['2022', '2023'].map((a, idx) => (
+            <HackathonStyled key={a} reverse={idx % 2 === 0}>
+              <HackathonStyled.Intro>
+                <Row align="flex-end">
+                  <Col md={12}>
+                    <p>Introducing</p>
+                    <h3>Hackatron {a}</h3>
+                    <p>
+                      The best way to learn is to get your hands dirty! Build on
+                      riveting problem statements, while following curated
+                      coursework and brainstorming exercises with industry
+                      experts who know that what it’s like to be new and make
+                      mistakes.
+                    </p>
+                  </Col>
+                  <Col md={12}>
+                    <img src="/images/events/coding.svg" />
+                  </Col>
+                </Row>
+              </HackathonStyled.Intro>
+              <HackathonItem />
+            </HackathonStyled>
+          ))}
 
-        {['2022', '2023'].map((a, idx) => (
-          <HackathonStyled key={a} reverse={idx % 2 === 0}>
-            <HackathonStyled.Intro>
-              <Row align="flex-end">
-                <Col md={12}>
-                  <p>Introducing</p>
-                  <h3>Hackatron {a}</h3>
-                  <p>
-                    The best way to learn is to get your hands dirty! Build on
-                    riveting problem statements, while following curated
-                    coursework and brainstorming exercises with industry experts
-                    who know that what it’s like to be new and make mistakes.
-                  </p>
-                </Col>
-                <Col md={12}>
-                  <img src="/images/events/coding.svg" />
-                </Col>
-              </Row>
-            </HackathonStyled.Intro>
-            <HackathonStyled.Detail>
-              <h3>Hackatron 2023</h3>
-              <p className="desc">
-                Join the next wave of Hackatron where Web3 devs build to learn.
-              </p>
-
-              <Flex className="mb-2">
-                <ButtonIcon>
-                  <IconLink />
-                </ButtonIcon>
-
-                <ButtonIcon>
-                  <IconTwitter />
-                </ButtonIcon>
-              </Flex>
-
-              <Flex className="mb-2">
-                <AvatarGroup>
-                  <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
-                  <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
-                  <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
-                  <p>+100 participating</p>
-                </AvatarGroup>
-              </Flex>
-
-              <Flex className="mb-3">
-                <Tag>Blockchain</Tag>
-                <Tag>AI/ML</Tag>
-                <Tag>Healthtech</Tag>
-              </Flex>
-              <HackathonStyled.Date className="mb-2">
-                <IconCalendar />
-                <p>Jan 1 - Feb 1, 2023</p>
-              </HackathonStyled.Date>
-              <Button block>
-                Apply now
-                <IconArrowLeft />
-              </Button>
-            </HackathonStyled.Detail>
-          </HackathonStyled>
-        ))}
+        {tabActive !== 'Hottest' && (
+          <Row gap={12}>
+            {[1, 2, 3, 4, 5, 6].map((a, idx) => (
+              <Col md={12} key={a}>
+                <HackathonItemLong />
+              </Col>
+            ))}
+          </Row>
+        )}
       </ContentStyled>
     </WrapStyled>
   )
 }
 
 export default SectionEvent
+
+const HackathonItem = () => {
+  return (
+    <HackathonStyled.Detail>
+      <h3>Hackatron 2023</h3>
+      <p className="desc mb-1">
+        Join the next wave of Hackatron where Web3 devs build to learn.
+      </p>
+
+      <Flex className="mb-1">
+        <ButtonIcon>
+          <IconLink />
+        </ButtonIcon>
+
+        <ButtonIcon>
+          <IconLogoTwitter />
+        </ButtonIcon>
+      </Flex>
+
+      <Flex className="mb-2">
+        <AvatarGroup>
+          <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
+          <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
+          <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
+          <p>+100 participating</p>
+        </AvatarGroup>
+      </Flex>
+
+      <Flex className="mb-2">
+        <Tag>Blockchain</Tag>
+        <Tag>AI/ML</Tag>
+        <Tag>Healthtech</Tag>
+      </Flex>
+      <HackathonStyled.Date className="mb-1">
+        <IconCalendar />
+        <p>Jan 1 - Feb 1, 2023</p>
+      </HackathonStyled.Date>
+      <Button block>
+        Apply now
+        <IconArrowLeft />
+      </Button>
+    </HackathonStyled.Detail>
+  )
+}
+
+const HackathonItemLong = () => {
+  return (
+    <HackathonStyled.Detail long className="mb-2">
+      <Flex className="mb-1" align="center">
+        <h3 style={{ flex: 1 }}>Hackatron 2023</h3>
+        <ButtonIcon>
+          <IconLink />
+        </ButtonIcon>
+
+        <ButtonIcon>
+          <IconLogoTwitter />
+        </ButtonIcon>
+      </Flex>
+
+      <p className="desc mb-1">
+        Join the next wave of Hackatron where Web3 devs build to learn.
+      </p>
+
+      <Flex className="mb-2">
+        <AvatarGroup>
+          <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
+          <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
+          <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
+          <p>+100 participating</p>
+        </AvatarGroup>
+      </Flex>
+
+      <Flex className="mb-2">
+        <Tag>Blockchain</Tag>
+        <Tag>AI/ML</Tag>
+        <Tag>Healthtech</Tag>
+      </Flex>
+      <Row gap={12}>
+        <Col md={12}>
+          <HackathonStyled.Date className="mb-1">
+            <IconCalendar />
+            <p>Jan 1 - Feb 1, 2023</p>
+          </HackathonStyled.Date>
+        </Col>
+        <Col md={12}>
+          <Button block>
+            Apply now
+            <IconArrowLeft />
+          </Button>
+        </Col>
+      </Row>
+    </HackathonStyled.Detail>
+  )
+}
 
 const HackathonStyled: any = styled.div<{ reverse?: boolean }>`
   margin-bottom: 32px;
@@ -138,7 +212,7 @@ HackathonStyled.Date = styled.div`
 HackathonStyled.Intro = styled.div`
   background: ${({ theme }) => theme.mainDark2};
   flex: 1;
-  height: 430px;
+  height: 400px;
   padding: 24px;
   p {
     font-weight: 400;
@@ -155,9 +229,9 @@ HackathonStyled.Intro = styled.div`
     color: ${({ theme }) => theme.blue10};
   }
 `
-HackathonStyled.Detail = styled.div`
+HackathonStyled.Detail = styled.div<{ long?: boolean }>`
   background: ${({ theme }) => theme.white};
-  width: 360px;
+  width: ${({ long }) => (long ? '100%' : '360px')};
   padding: 16px;
   h3 {
     font-weight: 700;

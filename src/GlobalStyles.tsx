@@ -1,5 +1,9 @@
 import styled, { createGlobalStyle } from 'styled-components'
 
+const SPACE = 12
+
+const sizes = [1, 2, 3, 4, 5]
+
 export const GlobalStyles = createGlobalStyle`
 html,
 body {
@@ -22,20 +26,80 @@ img{
 a img{
   vertical-align: bottom;
 }
+${sizes.map(
+  (size) =>
+    `
 
-.mb-2{
-  margin-bottom: 24px;
-}
-.mb-3{
-  margin-bottom: 36px;
-}
-.mb-4{
-  margin-bottom: 48px;
+.mb-${size}{
+  margin-bottom: ${size * SPACE}px;
 }
 
-.mt-2{
-  margin-top: 12px;
+.mt-${size}{
+  margin-top: ${size * SPACE}px;
+} 
+
+
+.ml-${size}{
+  margin-left: ${size * SPACE}px;
 }
+
+.mr-${size}{
+  margin-right: ${size * SPACE}px;
+} 
+
+.mx-${size}{
+  margin-left: ${size * SPACE}px;
+  margin-right: ${size * SPACE}px;
+} 
+
+.my-${size}{
+  margin-top: ${size * SPACE}px;
+  margin-bottom: ${size * SPACE}px;
+} 
+
+
+
+
+
+.pb-${size}{
+  padding-bottom: ${size * SPACE}px;
+}
+
+.pt-${size}{
+  padding-top: ${size * SPACE}px;
+} 
+
+
+.pl-${size}{
+  padding-left: ${size * SPACE}px;
+}
+
+.pr-${size}{
+  padding-right: ${size * SPACE}px;
+} 
+
+.px-${size}{
+  padding-left: ${size * SPACE}px;
+  padding-right: ${size * SPACE}px;
+} 
+
+.py-${size}{
+  padding-top: ${size * SPACE}px;
+  padding-bottom: ${size * SPACE}px;
+} 
+
+
+.w-${size}{
+  width: ${size * SPACE}px;
+}
+
+.h-${size}{
+  height: ${size * SPACE}px;
+}
+
+`,
+)}
+
 
 p, h1, h2, h3, h4,h5,h6{
   margin: 0;
