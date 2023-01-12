@@ -35,7 +35,7 @@ const FormStyled = styled.div`
   background: ${({ theme }) => theme.blue10};
 `
 
-export const EnrollForm = ({ mode }: { mode?: 'column' | 'row' }) => {
+export const EnrollForm = ({ isColumn }: { isColumn?: boolean }) => {
   const {
     register,
     handleSubmit,
@@ -51,106 +51,140 @@ export const EnrollForm = ({ mode }: { mode?: 'column' | 'row' }) => {
   const [memberList, setMemberList] = useState<any[]>([])
 
   const renderTeam = () => (
-    <>
-      <Col md={12} className="mb-2">
-        <Input label="Your team name *" {...register('name')} />
-      </Col>
-      <Col md={12} className="mb-2">
-        <Input label="Your team email *" {...register('email')} />
-      </Col>
-      <Col md={12} className="mb-2">
-        <Input label="Your team phone number *" {...register('phone')} />
-      </Col>
+    <Row>
+      <Col md={isColumn ? 12 : 24}>
+        <Row gap={12}>
+          <Col md={24} className="mb-2">
+            <Checkbox
+              title="I want to start with a team"
+              value={watch('isTeam')}
+              onChange={(e: boolean) => setValue('isTeam', e)}
+            />
+          </Col>
+          <Col md={12} className="mb-2">
+            <Input label="Your team name *" {...register('name')} />
+          </Col>
+          <Col md={12} className="mb-2">
+            <Input label="Your team email *" {...register('email')} />
+          </Col>
+          <Col md={12} className="mb-2">
+            <Input label="Your team phone number *" {...register('phone')} />
+          </Col>
 
-      <Col md={12} className="mb-2">
-        <Input
-          label="What your team is interested"
-          {...register('interested')}
-        />
+          <Col md={12} className="mb-2">
+            <Input
+              label="What your team is interested"
+              {...register('interested')}
+            />
+          </Col>
+          <Col md={24} className="mb-2">
+            <Input
+              type="select"
+              label="Which event do you want to apply"
+              {...register('interested')}
+            />
+          </Col>
+        </Row>
       </Col>
-      <Col md={24} className="mb-2">
-        <h4>Team leader</h4>
+      <Col md={isColumn ? 12 : 24}>
+        <Row gap={12}>
+          <Col md={24} className="mb-1">
+            <h4>Team leader</h4>
+          </Col>
+
+          <Col md={12} className="mb-2">
+            <Input label="Leader’s name *" {...register('leaderName')} />
+          </Col>
+
+          <Col md={12} className="mb-2">
+            <Input label="Leader’s email *" {...register('leaderEmail')} />
+          </Col>
+
+          <Col md={24} className="mb-2 text-center">
+            <Button>
+              Upload CV
+              <IconArrowUp />
+            </Button>
+          </Col>
+          <Col md={24} className="mb-2">
+            <div className="hr" />
+          </Col>
+
+          {memberList.map((member, idx) => {
+            return (
+              <>
+                <Col md={24} className="mb-1">
+                  <h4>Team member {idx + 1}</h4>
+                </Col>
+
+                <Col md={12} className="mb-2">
+                  <Input
+                    label={`Member ${idx + 1}'s name *`}
+                    {...register(`memberName${idx}`)}
+                  />
+                </Col>
+
+                <Col md={12} className="mb-2">
+                  <Input
+                    label={`Member ${idx + 1}'s email *`}
+                    {...register(`memberEmail${idx}`)}
+                  />
+                </Col>
+
+                <Col md={24} className="mb-2 text-center">
+                  <Button>
+                    Upload CV
+                    <IconArrowUp />
+                  </Button>
+                </Col>
+
+                <Col md={24} className="mb-2">
+                  <div className="hr" />
+                </Col>
+              </>
+            )
+          })}
+
+          <Col md={24} className="mb-2 text-center">
+            <Button onClick={() => setMemberList([...memberList, {}])}>
+              Add team member <IconPlus />
+            </Button>
+          </Col>
+
+          <Col md={24} className="mb-2">
+            <Checkbox
+              title={
+                <TermLink>
+                  I agree to the{' '}
+                  <a target="_blank" href="/terms">
+                    Terms & Conditions
+                  </a>{' '}
+                  of AI4VN
+                </TermLink>
+              }
+              value={watch('isAgree')}
+              onChange={(e: boolean) => setValue('isAgree', e)}
+            />
+          </Col>
+          <Col md={24}>
+            <Button type="submit" block>
+              Apply now <IconArrowLeft />
+            </Button>
+          </Col>
+        </Row>
       </Col>
-
-      <Col md={12} className="mb-2">
-        <Input label="Leader’s name *" {...register('leaderName')} />
-      </Col>
-
-      <Col md={12} className="mb-2">
-        <Input label="Leader’s email *" {...register('leaderEmail')} />
-      </Col>
-
-      <Col md={24} className="mb-2 text-center">
-        <Button>
-          Upload CV
-          <IconArrowUp />
-        </Button>
-      </Col>
-      <Col md={24} className="mb-2">
-        <div className="hr" />
-      </Col>
-
-      {memberList.map((member, idx) => {
-        return (
-          <>
-            <Col md={24} className="mb-2">
-              <h4>Team member {idx + 1}</h4>
-            </Col>
-
-            <Col md={12} className="mb-2">
-              <Input
-                label={`Member ${idx + 1}'s name *`}
-                {...register(`memberName${idx}`)}
-              />
-            </Col>
-
-            <Col md={12} className="mb-2">
-              <Input
-                label={`Member ${idx + 1}'s email *`}
-                {...register(`memberEmail${idx}`)}
-              />
-            </Col>
-
-            <Col md={24} className="mb-2 text-center">
-              <Button>
-                Upload CV
-                <IconArrowUp />
-              </Button>
-            </Col>
-
-            <Col md={24} className="mb-2">
-              <div className="hr" />
-            </Col>
-          </>
-        )
-      })}
-
-      <Col md={24} className="mb-2 text-center">
-        <Button onClick={() => setMemberList([...memberList, {}])}>
-          Add team member <IconPlus />
-        </Button>
-      </Col>
-
-      <Col md={24} className="mb-2">
-        <Checkbox
-          title={
-            <TermLink>
-              I agree to the{' '}
-              <a target="_blank" href="/terms">
-                Terms & Conditions
-              </a>{' '}
-              of AI4VN
-            </TermLink>
-          }
-          value={watch('isAgree')}
-          onChange={(e: boolean) => setValue('isAgree', e)}
-        />
-      </Col>
-    </>
+    </Row>
   )
 
   const renderPersonal = () => (
-    <>
+    <Row gap={12}>
+      <Col md={24} className="mb-2">
+        <Checkbox
+          title="I want to start with a team"
+          value={watch('isTeam')}
+          onChange={(e: boolean) => setValue('isTeam', e)}
+        />
+      </Col>
       <Col md={12} className="mb-2">
         <Input label="Your name *" {...register('name', { required: true })} />
       </Col>
@@ -200,7 +234,12 @@ export const EnrollForm = ({ mode }: { mode?: 'column' | 'row' }) => {
           onChange={(e: boolean) => setValue('isAgree', e)}
         />
       </Col>
-    </>
+      <Col md={24}>
+        <Button type="submit" block>
+          Apply now <IconArrowLeft />
+        </Button>
+      </Col>
+    </Row>
   )
 
   return (
@@ -208,25 +247,8 @@ export const EnrollForm = ({ mode }: { mode?: 'column' | 'row' }) => {
       <h3> {watch('isTeam') ? 'Enroll with your team now' : 'Start now'}</h3>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Row gap={12}>
-          <Col md={12}></Col>
-        </Row>
-        <Row gap={12}>
-          <Col md={24} className="mb-2">
-            <Checkbox
-              title="I want to start with a team"
-              value={watch('isTeam')}
-              onChange={(e: boolean) => setValue('isTeam', e)}
-            />
-          </Col>
-          {!watch('isTeam') && renderPersonal()}
-          {watch('isTeam') && renderTeam()}
-          <Col md={24}>
-            <Button type="submit" block>
-              Apply now <IconArrowLeft />
-            </Button>
-          </Col>
-        </Row>
+        {!watch('isTeam') && renderPersonal()}
+        {watch('isTeam') && renderTeam()}
       </form>
     </EnrollStyled>
   )

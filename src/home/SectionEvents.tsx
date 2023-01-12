@@ -211,7 +211,7 @@ const HackathonPopup = ({ onClose }: { onClose: Function }) => {
         </Row>
       )}
 
-      {step === 2 && <EnrollForm />}
+      {step === 2 && <EnrollForm isColumn />}
     </PopupStyled>
   )
 }
