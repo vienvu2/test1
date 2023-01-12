@@ -160,7 +160,8 @@ const HackathonPopup = ({ onClose }: { onClose: Function }) => {
                   <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
                   <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
                   <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
-                  <p className="bold text-dark2">+100 participating</p>
+                  {' '}
+                  <strong className="text-dark2">+100 participating</strong>
                 </AvatarGroup>
               </Col>
             </Row>
@@ -333,6 +334,8 @@ const PrizesStyled = styled.div`
 const PopupStyled: any = styled.div`
   padding: 32px;
   background: ${({ theme }) => theme.blue10};
+  max-height: 90vh;
+  overflow: auto;
 
   h3 {
     font-weight: 700;

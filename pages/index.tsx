@@ -11,6 +11,7 @@ import SectionJudges from '../src/home/SectionJudges'
 import SectionFAQ from '../src/home/SectionFAQ'
 import SectionEnroll from '../src/home/SectionEnroll'
 import SectionProcess from '../src/home/SectionProcess'
+import styled from 'styled-components'
 
 export default function Home() {
   return (
@@ -22,11 +23,21 @@ export default function Home() {
       <SectionProcess />
       <SectionEvents />
       <SectionLeaderBoard />
-      <SectionJudges />
-      <SectionFAQ />
+      <DarkBg>
+        <SectionJudges />
+        <SectionFAQ />
+      </DarkBg>
       <SectionEnroll />
 
       <Footer />
     </Wrap>
   )
 }
+
+const DarkBg = styled.div`
+  background-image: url('/images/faq/bg.png');
+  background-position: center;
+  background-size: 100% 100%;
+  background-color: ${({ theme }) => theme.mainDark2};
+  background-blend-mode: luminosity;
+`

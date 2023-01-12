@@ -62,7 +62,7 @@ const ExpertStyled = styled.div`
 const WrapStyled = styled.div`
   padding-top: 60px;
   padding-bottom: 60px;
-  background: ${({ theme }) => theme.mainDark};
+  // background: ${({ theme }) => theme.mainDark};
 `
 
 const WrapStyledTop = styled.div`

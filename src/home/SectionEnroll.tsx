@@ -50,6 +50,159 @@ export const EnrollForm = ({ mode }: { mode?: 'column' | 'row' }) => {
 
   const [memberList, setMemberList] = useState<any[]>([])
 
+  const renderTeam = () => (
+    <>
+      <Col md={12} className="mb-2">
+        <Input label="Your team name *" {...register('name')} />
+      </Col>
+      <Col md={12} className="mb-2">
+        <Input label="Your team email *" {...register('email')} />
+      </Col>
+      <Col md={12} className="mb-2">
+        <Input label="Your team phone number *" {...register('phone')} />
+      </Col>
+
+      <Col md={12} className="mb-2">
+        <Input
+          label="What your team is interested"
+          {...register('interested')}
+        />
+      </Col>
+      <Col md={24} className="mb-2">
+        <h4>Team leader</h4>
+      </Col>
+
+      <Col md={12} className="mb-2">
+        <Input label="Leader’s name *" {...register('leaderName')} />
+      </Col>
+
+      <Col md={12} className="mb-2">
+        <Input label="Leader’s email *" {...register('leaderEmail')} />
+      </Col>
+
+      <Col md={24} className="mb-2 text-center">
+        <Button>
+          Upload CV
+          <IconArrowUp />
+        </Button>
+      </Col>
+      <Col md={24} className="mb-2">
+        <div className="hr" />
+      </Col>
+
+      {memberList.map((member, idx) => {
+        return (
+          <>
+            <Col md={24} className="mb-2">
+              <h4>Team member {idx + 1}</h4>
+            </Col>
+
+            <Col md={12} className="mb-2">
+              <Input
+                label={`Member ${idx + 1}'s name *`}
+                {...register(`memberName${idx}`)}
+              />
+            </Col>
+
+            <Col md={12} className="mb-2">
+              <Input
+                label={`Member ${idx + 1}'s email *`}
+                {...register(`memberEmail${idx}`)}
+              />
+            </Col>
+
+            <Col md={24} className="mb-2 text-center">
+              <Button>
+                Upload CV
+                <IconArrowUp />
+              </Button>
+            </Col>
+
+            <Col md={24} className="mb-2">
+              <div className="hr" />
+            </Col>
+          </>
+        )
+      })}
+
+      <Col md={24} className="mb-2 text-center">
+        <Button onClick={() => setMemberList([...memberList, {}])}>
+          Add team member <IconPlus />
+        </Button>
+      </Col>
+
+      <Col md={24} className="mb-2">
+        <Checkbox
+          title={
+            <TermLink>
+              I agree to the{' '}
+              <a target="_blank" href="/terms">
+                Terms & Conditions
+              </a>{' '}
+              of AI4VN
+            </TermLink>
+          }
+          value={watch('isAgree')}
+          onChange={(e: boolean) => setValue('isAgree', e)}
+        />
+      </Col>
+    </>
+  )
+
+  const renderPersonal = () => (
+    <>
+      <Col md={12} className="mb-2">
+        <Input label="Your name *" {...register('name', { required: true })} />
+      </Col>
+      <Col md={12} className="mb-2">
+        <Input label="Your name *" {...register('name')} />
+      </Col>
+      <Col md={12} className="mb-2">
+        <Input label="Your phone number *" {...register('phone')} />
+      </Col>
+
+      <Col md={12} className="mb-2">
+        <Input label="You are a/an *" {...register('job')} type="select" />
+      </Col>
+
+      <Col md={12} className="mb-2">
+        <Input
+          label="Your school/company *"
+          {...register('org')}
+          type="select"
+        />
+      </Col>
+
+      <Col md={12} className="mb-2">
+        <Input
+          label="Your major/profession *"
+          type="select"
+          {...register('position')}
+        />
+      </Col>
+
+      <Col md={24} className="mb-2">
+        <Input label="What you are interested" {...register('interested')} />
+      </Col>
+
+      <Col md={24} className="mb-2">
+        <Checkbox
+          title={
+            <TermLink>
+              I agree to the{' '}
+              <a target="_blank" href="/terms">
+                Terms & Conditions
+              </a>{' '}
+              of AI4VN
+            </TermLink>
+          }
+          value={watch('isAgree')}
+          onChange={(e: boolean) => setValue('isAgree', e)}
+        />
+      </Col>
+    </>
+  )
+
   return (
     <EnrollStyled>
       <h3> {watch('isTeam') ? 'Enroll with your team now' : 'Start now'}</h3>
@@ -66,168 +219,8 @@ export const EnrollForm = ({ mode }: { mode?: 'column' | 'row' }) => {
               onChange={(e: boolean) => setValue('isTeam', e)}
             />
           </Col>
-          {!watch('isTeam') && (
-            <>
-              <Col md={12} className="mb-2">
-                <Input
-                  label="Your name *"
-                  {...register('name', { required: true })}
-                />
-              </Col>
-              <Col md={12} className="mb-2">
-                <Input label="Your name *" {...register('name')} />
-              </Col>
-              <Col md={12} className="mb-2">
-                <Input label="Your phone number *" {...register('phone')} />
-              </Col>
-
-              <Col md={12} className="mb-2">
-                <Input
-                  label="You are a/an *"
-                  {...register('job')}
-                  type="select"
-                />
-              </Col>
-
-              <Col md={12} className="mb-2">
-                <Input
-                  label="Your school/company *"
-                  {...register('org')}
-                  type="select"
-                />
-              </Col>
-
-              <Col md={12} className="mb-2">
-                <Input
-                  label="Your major/profession *"
-                  type="select"
-                  {...register('position')}
-                />
-              </Col>
-
-              <Col md={24} className="mb-2">
-                <Input
-                  label="What you are interested"
-                  {...register('interested')}
-                />
-              </Col>
-
-              <Col md={24} className="mb-2">
-                <Checkbox
-                  title={
-                    <TermLink>
-                      I agree to the{' '}
-                      <a target="_blank" href="/terms">
-                        Terms & Conditions
-                      </a>{' '}
-                      of AI4VN
-                    </TermLink>
-                  }
-                  value={watch('isAgree')}
-                  onChange={(e: boolean) => setValue('isAgree', e)}
-                />
-              </Col>
-            </>
-          )}
-
-          {watch('isTeam') && (
-            <>
-              <Col md={12} className="mb-2">
-                <Input label="Your team name *" {...register('name')} />
-              </Col>
-              <Col md={12} className="mb-2">
-                <Input label="Your team email *" {...register('name')} />
-              </Col>
-              <Col md={12} className="mb-2">
-                <Input label="Your team phone number *" {...register('name')} />
-              </Col>
-
-              <Col md={12} className="mb-2">
-                <Input
-                  label="What your team is interested"
-                  {...register('name')}
-                />
-              </Col>
-              <Col md={24} className="mb-2">
-                <h4>Team leader</h4>
-              </Col>
-
-              <Col md={12} className="mb-2">
-                <Input label="Leader’s name *" {...register('name')} />
-              </Col>
-
-              <Col md={12} className="mb-2">
-                <Input label="Leader’s email *" {...register('name')} />
-              </Col>
-
-              <Col md={24} className="mb-2 text-center">
-                <Button>
-                  Upload CV
-                  <IconArrowUp />
-                </Button>
-              </Col>
-              <Col md={24} className="mb-2">
-                <div className="hr" />
-              </Col>
-
-              {memberList.map((member, idx) => {
-                return (
-                  <>
-                    <Col md={24} className="mb-2">
-                      <h4>Team member {idx + 1}</h4>
-                    </Col>
-
-                    <Col md={12} className="mb-2">
-                      <Input
-                        label={`Member ${idx + 1}'s name *`}
-                        {...register('name')}
-                      />
-                    </Col>
-
-                    <Col md={12} className="mb-2">
-                      <Input
-                        label={`Member ${idx + 1}'s email *`}
-                        {...register('name')}
-                      />
-                    </Col>
-
-                    <Col md={24} className="mb-2 text-center">
-                      <Button>
-                        Upload CV
-                        <IconArrowUp />
-                      </Button>
-                    </Col>
-
-                    <Col md={24} className="mb-2">
-                      <div className="hr" />
-                    </Col>
-                  </>
-                )
-              })}
-
-              <Col md={24} className="mb-2 text-center">
-                <Button onClick={() => setMemberList([...memberList, {}])}>
-                  Add team member <IconPlus />
-                </Button>
-              </Col>
-
-              <Col md={24} className="mb-2">
-                <Checkbox
-                  title={
-                    <TermLink>
-                      I agree to the{' '}
-                      <a target="_blank" href="/terms">
-                        Terms & Conditions
-                      </a>{' '}
-                      of AI4VN
-                    </TermLink>
-                  }
-                  value={watch('isAgree')}
-                  onChange={(e: boolean) => setValue('isAgree', e)}
-                />
-              </Col>
-            </>
-          )}
+          {!watch('isTeam') && renderPersonal()}
+          {watch('isTeam') && renderTeam()}
           <Col md={24}>
             <Button type="submit" block>
               Apply now <IconArrowLeft />

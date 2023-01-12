@@ -81,8 +81,7 @@ const SectionFAQ = () => {
         <WrapStyledTop>
           <p>FAQ</p>
           <h2>
-            Frequently asked{' '}
-          <span className={roboto.className}>{text}</span>
+            Frequently asked <span className={roboto.className}>{text}</span>
           </h2>
         </WrapStyledTop>
         <Row>
@@ -178,8 +177,9 @@ QuestionStyled.Index = styled.div`
 
 const WrapStyled = styled.div`
   padding-top: 60px;
-  background: ${({ theme }) => theme.mainDark};
+  // background: ${({ theme }) => theme.mainDark};
   padding-bottom: 60px;
+  position: relative;
 `
 
 const WrapStyledTop = styled.div`
