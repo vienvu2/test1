@@ -4,7 +4,6 @@ import Wrap from '../src/layouts/Wrap'
 
 import React from 'react'
 import SectionBanner from '../src/home/SectionBanner'
-import SectionPartner from '../src/home/SectionPartner'
 import SectionBenefit from '../src/home/SectionBenefit'
 import SectionEvents from '../src/home/SectionEvents'
 import SectionLeaderBoard from '../src/home/SectionLeaderBoard'
@@ -19,7 +18,6 @@ export default function Home() {
       <Header />
 
       <SectionBanner />
-      <SectionPartner />
       <SectionBenefit />
       <SectionProcess />
       <SectionEvents />

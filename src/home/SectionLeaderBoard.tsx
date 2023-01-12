@@ -61,35 +61,46 @@ const SectionLeaderBoard = () => {
   ]
   return (
     <WrapStyled>
-      <WrapStyledTop>
-        <p>Leaderboard</p>
-        <h2>
-          Astonishing{' '}
-          <span className={roboto.className}>{text}</span>
-        </h2>
-      </WrapStyledTop>
+      <Container style={{ position: 'relative', zIndex: 2 }}>
+        <WrapStyledTop>
+          <p>Leaderboard</p>
+          <h2>
+            Astonishing <span className={roboto.className}>{text}</span>
+          </h2>
+        </WrapStyledTop>
 
-      <BoardStyled.Wrap>
-        <Board
-          data={{
-            image: <img src="/images/leaderboard/img-1.svg" />,
-            title: 'Most hackathons won',
-            desc:
-              'Builders who have won most number of hackathons on AI4VN this year',
-            members: members,
-          }}
-        />
-        <BoardStyled.Line />
-        <Board
-          data={{
-            image: <img src="/images/leaderboard/img-2.svg" />,
-            title: 'Most projects build',
-            desc:
-              'Builders who have won most number of hackathons on AI4VN this year',
-            members: members,
-          }}
-        />
-      </BoardStyled.Wrap>
+        <BoardStyled.Wrap>
+          <Board
+            data={{
+              image: <img src="/images/leaderboard/img-1.svg" />,
+              title: 'Most hackathons won',
+              desc:
+                'Builders who have won most number of hackathons on AI4VN this year',
+              members: members,
+            }}
+          />
+          <BoardStyled.Line />
+          <Board
+            data={{
+              image: <img src="/images/leaderboard/img-2.svg" />,
+              title: 'Most projects build',
+              desc:
+                'Builders who have won most number of hackathons on AI4VN this year',
+              members: members,
+            }}
+          />
+        </BoardStyled.Wrap>
+      </Container>
+      <img
+        src="/images/leaderboard/bg.svg"
+        style={{
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          pointerEvents: 'none',
+          zIndex: 1,
+        }}
+      />
     </WrapStyled>
   )
 }
@@ -226,9 +237,11 @@ BoardStyled.Content = styled.div`
   }
 `
 
-const WrapStyled = styled(Container)`
+const WrapStyled = styled.div`
   padding-top: 60px;
   padding-bottom: 60px;
+
+  position: relative;
 `
 
 const WrapStyledTop = styled.div`

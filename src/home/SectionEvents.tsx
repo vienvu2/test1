@@ -34,59 +34,71 @@ const SectionEvent = () => {
   return (
     <>
       <WrapStyled>
-        <WrapStyledTop>
-          <p>Events</p>
-          <h2>
-            Outstanding <span className={roboto.className}>{text}</span>
-          </h2>
-        </WrapStyledTop>
-        <ContentStyled>
-          <ContentStyled.Header>
-            {['Hottest', 'Opening', 'Upcoming', 'Past'].map((a) => (
-              <ContentStyled.HeaderItem
-                key={a}
-                active={a === tabActive}
-                onClick={() => setTabActive(a)}
-              >
-                {a}
-              </ContentStyled.HeaderItem>
-            ))}
-          </ContentStyled.Header>
-          {tabActive === 'Hottest' &&
-            ['2022', '2023'].map((a, idx) => (
-              <HackathonStyled key={a} reverse={idx % 2 === 0}>
-                <HackathonStyled.Intro>
-                  <Row align="flex-end">
-                    <Col md={12}>
-                      <p>Introducing</p>
-                      <h3>Hackatron {a}</h3>
-                      <p>
-                        The best way to learn is to get your hands dirty! Build
-                        on riveting problem statements, while following curated
-                        coursework and brainstorming exercises with industry
-                        experts who know that what it’s like to be new and make
-                        mistakes.
-                      </p>
-                    </Col>
-                    <Col md={12}>
-                      <img src="/images/events/coding.svg" />
-                    </Col>
-                  </Row>
-                </HackathonStyled.Intro>
-                <HackathonItem onApply={() => showDetail(true)} />
-              </HackathonStyled>
-            ))}
-
-          {tabActive !== 'Hottest' && (
-            <Row gap={12}>
-              {[1, 2, 3, 4, 5, 6].map((a, idx) => (
-                <Col md={12} key={a}>
-                  <HackathonItemLong onApply={() => showDetail(true)} />
-                </Col>
+        <Container style={{ position: 'relative', zIndex: 2 }}>
+          <WrapStyledTop>
+            <p>Events</p>
+            <h2>
+              Outstanding <span className={roboto.className}>{text}</span>
+            </h2>
+          </WrapStyledTop>
+          <ContentStyled>
+            <ContentStyled.Header>
+              {['Hottest', 'Opening', 'Upcoming', 'Past'].map((a) => (
+                <ContentStyled.HeaderItem
+                  key={a}
+                  active={a === tabActive}
+                  onClick={() => setTabActive(a)}
+                >
+                  {a}
+                </ContentStyled.HeaderItem>
               ))}
-            </Row>
-          )}
-        </ContentStyled>
+            </ContentStyled.Header>
+            {tabActive === 'Hottest' &&
+              ['2022', '2023'].map((a, idx) => (
+                <HackathonStyled key={a} reverse={idx % 2 === 0}>
+                  <HackathonStyled.Intro>
+                    <Row align="flex-end">
+                      <Col md={12}>
+                        <p>Introducing</p>
+                        <h3>Hackatron {a}</h3>
+                        <p>
+                          The best way to learn is to get your hands dirty!
+                          Build on riveting problem statements, while following
+                          curated coursework and brainstorming exercises with
+                          industry experts who know that what it’s like to be
+                          new and make mistakes.
+                        </p>
+                      </Col>
+                      <Col md={12}>
+                        <img src="/images/events/coding.svg" />
+                      </Col>
+                    </Row>
+                  </HackathonStyled.Intro>
+                  <HackathonItem onApply={() => showDetail(true)} />
+                </HackathonStyled>
+              ))}
+
+            {tabActive !== 'Hottest' && (
+              <Row gap={12}>
+                {[1, 2, 3, 4, 5, 6].map((a, idx) => (
+                  <Col md={12} key={a}>
+                    <HackathonItemLong onApply={() => showDetail(true)} />
+                  </Col>
+                ))}
+              </Row>
+            )}
+          </ContentStyled>
+        </Container>
+        <img
+          src="/images/events/bg.svg"
+          style={{
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            pointerEvents: 'none',
+            zIndex: 1,
+          }}
+        />
       </WrapStyled>
       <Modal size="md" show={detail} onClose={() => showDetail(false)}>
         <HackathonPopup onClose={() => showDetail(false)} />
@@ -449,9 +461,11 @@ ContentStyled.HeaderItem = styled.div<{ active?: boolean }>`
   padding: 4px;
 `
 
-const WrapStyled = styled(Container)`
+const WrapStyled = styled.div`
   padding-top: 60px;
   padding-bottom: 60px;
+
+  position: relative;
 `
 
 const WrapStyledTop = styled.div`

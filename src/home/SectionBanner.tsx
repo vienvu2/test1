@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Col, Container, Row } from '../GlobalStyles'
+import { Button, Col, Container, Flex, Row } from '../GlobalStyles'
 
 import styled from 'styled-components'
 import { roboto } from '../layouts/Wrap'
@@ -84,6 +84,16 @@ const SectionBanner = () => {
           </Col>
         </Row>
       </Container>
+
+      <Container className="py-3">
+        <PartnerStyled>
+          <Flex align="center" justify="space-around">
+            <img src="/images/partners/partner-1.png" height={66} />
+            <img src="/images/partners/partner-2.png" height={66} />
+            <img src="/images/partners/partner-4.png" height={66} />
+          </Flex>
+        </PartnerStyled>
+      </Container>
     </WrapStyled>
   )
 }
@@ -91,6 +101,12 @@ const SectionBanner = () => {
 export default SectionBanner
 
 const BannerStyled: any = styled.div``
+
+const PartnerStyled = styled.div`
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background: ${({ theme }) => theme.mainDark};
+`
 
 BannerStyled.Image = styled.div`
   height: 500px;

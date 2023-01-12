@@ -7,11 +7,11 @@ import { useTextAnimation } from '../hooks/textAnimation'
 import { roboto } from '../layouts/Wrap'
 
 const SectionProcess = () => {
-  const [text] = useTextAnimation('ARTIFICIAL-INTELLIGENCE')
+  const [text] = useTextAnimation('artificial-intelligent')
   const [active, setActive] = useState('01')
   return (
     <WrapStyled>
-      <Container>
+      <Container style={{zIndex: 2, position: 'relative'}}>
         <Row align="center">
           <Col md={16}>
             <WrapStyledTop>
@@ -53,14 +53,18 @@ const SectionProcess = () => {
         </Row>
       </Container>
       <img
-        src="/images/process/bg.svg"
+        src="/images/process/bg.png"
         style={{
           position: 'absolute',
-          opacity: 0.4,
           pointerEvents: 'none',
           bottom: 0,
-          width: '50%',
-          right: 0,
+          width: '100%',
+          height: '100%',
+          left: 0,
+          objectFit: 'cover',
+          objectPosition: 'top',
+          zIndex: 1,
+          mixBlendMode: 'screen',
         }}
       />
     </WrapStyled>

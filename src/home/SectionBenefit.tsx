@@ -10,7 +10,7 @@ const SectionBenefit = () => {
   const [text] = useTextAnimation('AI knowledges')
   return (
     <WrapStyled>
-      <Container style={{zIndex: 2}}>
+      <Container style={{ zIndex: 2 }}>
         <WrapStyledTop>
           <h2>
             AI4VN Hackathon brings to you <br />
@@ -21,7 +21,7 @@ const SectionBenefit = () => {
         <Row>
           <Col md={12}>
             <PostItemStyled>
-              <img src="/images/benefits/img-1.png" />
+              <img src="/images/benefits/img-1.svg" />
               <h3>Searching</h3>
               <p>
                 To search for the most talented young professionals and provide
@@ -31,7 +31,7 @@ const SectionBenefit = () => {
           </Col>
           <Col md={12}>
             <PostItemStyled>
-              <img src="/images/benefits/img-2.png" />
+              <img src="/images/benefits/img-2.svg" />
               <h3>Connecting</h3>
               <p>
                 To become a platform for AI talents to gain international
@@ -46,10 +46,12 @@ const SectionBenefit = () => {
         style={{
           position: 'absolute',
           left: 0,
-          bottom: -600,
-          opacity: 0.4,
+          top: 0,
           pointerEvents: 'none',
           zIndex: 1,
+          height: '100%',
+          width: '100%',
+         
         }}
       />
     </WrapStyled>
@@ -84,7 +86,9 @@ const WrapStyled = styled.div`
   position: relative;
   padding-top: 60px;
   padding-bottom: 60px;
-  background: ${({ theme }) => theme.mainDark};
+  // background: ${({ theme }) => theme.mainDark};
+  background: linear-gradient(283.59deg, #002fa8 -41.01%, #001e57 62.41%);
+
 `
 
 const WrapStyledTop = styled.div`
