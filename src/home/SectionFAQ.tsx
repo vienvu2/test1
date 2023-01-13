@@ -125,7 +125,7 @@ interface ItemProps {
 
 const Item = ({ item, active, setActive }: ItemProps) => {
   return (
-    <QuestionStyled className="mb-3">
+    <QuestionStyled className="mb-3 pb-3">
       <QuestionStyled.Index> {item.index} </QuestionStyled.Index>
       <QuestionStyled.Content>
         <p className="name" onClick={() => setActive()}>
@@ -142,6 +142,8 @@ const Item = ({ item, active, setActive }: ItemProps) => {
 
 const QuestionStyled: any = styled.div`
   display: flex;
+  border-bottom: 1px solid ${({ theme }) => theme.blue20};
+  align-items: flex-start;
 `
 QuestionStyled.Content = styled.div`
   flex: 1;
@@ -152,6 +154,7 @@ QuestionStyled.Content = styled.div`
     color: ${({ theme }) => theme.main};
     margin-bottom: 8px;
     cursor: pointer;
+    padding-top: 4px;
   }
 `
 QuestionStyled.Answer = styled.p<{ active?: boolean }>`

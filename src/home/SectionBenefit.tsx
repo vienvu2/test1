@@ -22,7 +22,7 @@ const SectionBenefit = () => {
           <Col md={12}>
             <PostItemStyled>
               <img src="/images/benefits/img-1.svg" />
-              <h3>Searching</h3>
+              <h3>Talent Incubation</h3>
               <p>
                 To search for the most talented young professionals and provide
                 them opportunity to exchange and learn
@@ -32,7 +32,7 @@ const SectionBenefit = () => {
           <Col md={12}>
             <PostItemStyled>
               <img src="/images/benefits/img-2.svg" />
-              <h3>Connecting</h3>
+              <h3>Opportunities</h3>
               <p>
                 To become a platform for AI talents to gain international
                 exposure and put Vietnam in the global map of AI.
@@ -51,7 +51,6 @@ const SectionBenefit = () => {
           zIndex: 1,
           height: '100%',
           width: '100%',
-         
         }}
       />
     </WrapStyled>

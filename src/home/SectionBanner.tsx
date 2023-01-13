@@ -38,14 +38,14 @@ const SectionBanner = () => {
     },
   ]
 
-  const item = items[active - 1]
+  const item = items[0]
 
-  useEffect(() => {
-    const ref = setInterval(() => {
-      setActive((r) => (r > 2 ? 1 : r + 1))
-    }, 3000)
-    return () => clearInterval(ref)
-  }, [])
+  // useEffect(() => {
+  //   const ref = setInterval(() => {
+  //     setActive((r) => (r > 2 ? 1 : r + 1))
+  //   }, 3000)
+  //   return () => clearInterval(ref)
+  // }, [])
 
   return (
     <WrapStyled>
@@ -59,12 +59,12 @@ const SectionBanner = () => {
             <h2>{item.title}</h2>
             <p>{item.desc}</p>
 
-            <Button>
+            <Button className="mb-2">
               Let’s Start
               <IconArrowLeft />
             </Button>
 
-            <BannerStyled.Nav>
+            {/* <BannerStyled.Nav>
               {[1, 2, 3].map((a) => (
                 <div
                   key={a}
@@ -72,7 +72,7 @@ const SectionBanner = () => {
                   className={active === a ? 'active' : ''}
                 />
               ))}
-            </BannerStyled.Nav>
+            </BannerStyled.Nav> */}
             <BannerStyled.ScrollBtn>
               <IconArrowDown />
               Scroll down
@@ -170,6 +170,6 @@ const WrapStyled = styled.div`
     font-size: 20px;
     line-height: 28px;
     color: ${({ theme }) => theme.white};
-    min-height: 160px;
+    // min-height: 160px;
   }
 `

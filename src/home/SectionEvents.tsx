@@ -22,7 +22,6 @@ import {
   IconLinkWhite,
   IconLogoTwitter,
   IconLogoTwitterWhite,
-  IconTwitter,
 } from '../icons'
 import Modal from '../components/Modal'
 import Checkbox from '../components/Checkbox'

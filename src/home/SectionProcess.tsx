@@ -11,12 +11,12 @@ const SectionProcess = () => {
   const [active, setActive] = useState('01')
   return (
     <WrapStyled>
-      <Container style={{zIndex: 2, position: 'relative'}}>
+      <Container style={{ zIndex: 2, position: 'relative' }}>
         <Row align="center">
           <Col md={16}>
             <WrapStyledTop>
               <h2>
-                Register an Event <br /> about{' '}
+                Register an Event <br /> about
                 <span className={roboto.className}>{text}</span>
               </h2>
             </WrapStyledTop>
