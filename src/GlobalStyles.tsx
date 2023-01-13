@@ -155,7 +155,7 @@ export const ButtonLink = styled.button<{ block?: boolean }>`
 
   cursor: pointer;
   img {
-    vertical-align: bottom;
+    vertical-align: top;
     margin-left: 4px;
     margin-right: 4px;
   }

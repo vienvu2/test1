@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Button, Col, Container, Row } from '../GlobalStyles'
+import { Button, ButtonLink, Col, Container, Row } from '../GlobalStyles'
 
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import Checkbox from '../components/Checkbox'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Input from '../components/Input'
@@ -49,6 +49,7 @@ export const EnrollForm = ({ isColumn }: { isColumn?: boolean }) => {
   }
 
   const [memberList, setMemberList] = useState<any[]>([])
+  const theme: any = useTheme()
 
   const renderTeam = () => (
     <Row>
@@ -96,6 +97,12 @@ export const EnrollForm = ({ isColumn }: { isColumn?: boolean }) => {
               name="interested"
               register={register}
               required
+              type="select"
+              selectList={[
+                { value: 1, label: 'Interested 1' },
+                { value: 2, label: 'Interested 3' },
+                { value: 3, label: 'Interested 4' },
+              ]}
             />
           </Col>
           <Col md={24} className="mb-2">
@@ -151,7 +158,7 @@ export const EnrollForm = ({ isColumn }: { isColumn?: boolean }) => {
               type="file"
               value={watch('leaderCV')}
             />
-            {/*             
+            {/*
              */}
           </Col>
           <Col md={24} className="mb-2">
@@ -186,10 +193,14 @@ export const EnrollForm = ({ isColumn }: { isColumn?: boolean }) => {
                 </Col>
 
                 <Col md={24} className="mb-2 text-center">
-                  <Button>
+                  <ButtonLink
+                    type="button"
+                    className="bold"
+                    style={{ color: theme.mainDark2 }}
+                  >
                     Upload CV
                     <IconArrowUp />
-                  </Button>
+                  </ButtonLink>
                 </Col>
 
                 <Col md={24} className="mb-2">
@@ -200,9 +211,14 @@ export const EnrollForm = ({ isColumn }: { isColumn?: boolean }) => {
           })}
 
           <Col md={24} className="mb-2 text-center">
-            <Button onClick={() => setMemberList([...memberList, {}])}>
+            <ButtonLink
+              onClick={() => setMemberList([...memberList, {}])}
+              className="bold"
+              type="button"
+              style={{ color: theme.mainDark2 }}
+            >
               Add team member <IconPlus />
-            </Button>
+            </ButtonLink>
           </Col>
 
           <Col md={24} className="mb-2">
@@ -274,12 +290,6 @@ export const EnrollForm = ({ isColumn }: { isColumn?: boolean }) => {
           name="job"
           register={register}
           required
-          type="select"
-          selectList={[
-            { value: '1', label: 'Học sinh' },
-            { value: '2', label: 'Frontend' },
-            { value: '3', label: 'Backend' },
-          ]}
         />
       </Col>
 

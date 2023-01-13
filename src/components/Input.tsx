@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { Button } from '../GlobalStyles'
+import styled, { useTheme } from 'styled-components'
+import { Button, ButtonLink } from '../GlobalStyles'
 import { IconArrowUp } from '../icons'
 
 interface IOption {
@@ -28,6 +28,7 @@ const Input = ({
   required,
   value,
 }: Props) => {
+  const theme: any = useTheme()
   return (
     <InputStyled error={!!error}>
       {type === 'select' && (
@@ -43,23 +44,24 @@ const Input = ({
       {type === 'file' && (
         <>
           {!value && (
-            <Button type="button">
+            <ButtonLink
+              type="button"
+              className="bold"
+              style={{ color: theme.mainDark2 }}
+            >
               Upload CV
               <IconArrowUp />
-            </Button>
+            </ButtonLink>
           )}
-          <FileStyled>
-            <input type="file" {...register(name, { required })} />
-          </FileStyled>
         </>
       )}
 
       {type !== 'select' && type !== 'file' && (
         <input {...register(name, { required })} type={type} />
       )}
-      {error?.type == 'required' && <p className="error">Thông tin bắt buộc</p>}
 
-      <label className="active">{label}</label>
+      {type !== 'file' && <label className="active">{label}</label>}
+      {error?.type == 'required' && <p className="error">Thông tin bắt buộc</p>}
     </InputStyled>
   )
 }
@@ -78,6 +80,7 @@ const InputStyled = styled.div<{ error?: boolean }>`
   input {
     display: block;
     width: 100%;
+    min-height: 52px;
     padding: 15px 15px 13px;
     background: ${({ theme }) => theme.blue10};
     border: 1px solid
@@ -86,7 +89,7 @@ const InputStyled = styled.div<{ error?: boolean }>`
     font-weight: 600;
     font-size: 16px;
     line-height: 22px;
-    color: ${({ theme }) => theme.mainDark};
+    color: ${({ theme }) => theme.mainDark2};
 
     &:active,
     &:focus {

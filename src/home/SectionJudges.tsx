@@ -17,11 +17,13 @@ const SectionJudges = () => {
             Amazing <span className={roboto.className}>{text}</span>
           </h2>
         </WrapStyledTop>
-        <Row>
+        <Row gap={12}>
           {[1, 2, 3, 4, 5, 6, 7, 8].map((a) => (
             <Col md={6} key={a}>
-              <ExpertStyled className="mb-3">
-                <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" />
+              <ExpertStyled>
+                <div className="img">
+                  <img src="/images/face-fake.png" />
+                </div>
 
                 <p className="name">Mr. Truong Gia Binh</p>
                 <p className="title">Chairman of the Board FPT Foundation</p>
@@ -37,11 +39,21 @@ const SectionJudges = () => {
 export default SectionJudges
 
 const ExpertStyled = styled.div`
+  margin-bottom: 16px;
+  .img {
+    background-color: ${({ theme }) => theme.blue20};
+    margin-bottom: 8px;
+    width: 288px;
+    height: 260px;
+    &:hover {
+      background-image: url(/images/face-bg.svg);
+    }
+  }
   img {
     width: 288px;
     height: 260px;
-    object-fit: cover;
-    margin-bottom: 8px;
+    object-fit: contain;
+    object-position: bottom;
   }
   p.name {
     font-weight: 700;
