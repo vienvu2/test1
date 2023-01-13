@@ -38,6 +38,5 @@ const DarkBg = styled.div`
   background-image: url('/images/faq/bg.png');
   background-position: center;
   background-size: 100% 100%;
-  background-color: ${({ theme }) => theme.mainDark2};
-  background-blend-mode: luminosity;
+  background-color: ${({ theme }) => theme.mainDark};
 `
