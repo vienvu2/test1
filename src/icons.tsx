@@ -8,9 +8,8 @@ interface IconProps {
 export const IconLink = ({ size = 24, color }: IconProps) => (
   <ImageIcon src="/icons/link.svg" size={size} color={color} />
 )
-
-export const IconTwitter = ({ size = 24, color }: IconProps) => (
-  <ImageIcon src="/icons/link.svg" size={size} color={color} />
+export const IconLinkWhite = ({ size = 24, color }: IconProps) => (
+  <ImageIcon src="/icons/link-white.svg" size={size} color={color} />
 )
 
 export const IconCalendar = ({ size = 24, color }: IconProps) => (
@@ -46,6 +45,10 @@ export const IconLogoInsta = ({ size = 24, color }: IconProps) => (
 
 export const IconLogoTwitter = ({ size = 24, color }: IconProps) => (
   <ImageIcon src="/icons/logo-twitter.svg" size={size} color={color} />
+)
+
+export const IconLogoTwitterWhite = ({ size = 24, color }: IconProps) => (
+  <ImageIcon src="/icons/logo-twitter-white.svg" size={size} color={color} />
 )
 
 export const IconLogoYoutube = ({ size = 24, color }: IconProps) => (

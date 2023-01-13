@@ -180,12 +180,17 @@ export const Button = styled.button<{ block?: boolean }>`
   }
 
   ${({ block }) =>
-    block
-      ? `
+    block &&
+    `
     width: 100%;
     display: block;
-  `
-      : ''}
+  `}
+
+  ${({ disabled }) =>
+    disabled &&
+    `
+      opacity: 0.5;
+        `}
 `
 
 export const ButtonIcon = styled.button<{ dark?: boolean }>`

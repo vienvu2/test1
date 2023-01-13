@@ -62,26 +62,55 @@ export const EnrollForm = ({ isColumn }: { isColumn?: boolean }) => {
             />
           </Col>
           <Col md={12} className="mb-2">
-            <Input label="Your team name *" {...register('name')} />
+            <Input
+              label="Your team name *"
+              error={errors.name}
+              name="name"
+              register={register}
+              required
+            />
           </Col>
           <Col md={12} className="mb-2">
-            <Input label="Your team email *" {...register('email')} />
+            <Input
+              label="Your team email *"
+              error={errors.email}
+              name="email"
+              register={register}
+              required
+            />
           </Col>
           <Col md={12} className="mb-2">
-            <Input label="Your team phone number *" {...register('phone')} />
+            <Input
+              label="Your team phone number *"
+              error={errors.phone}
+              name="phone"
+              register={register}
+              required
+            />
           </Col>
 
           <Col md={12} className="mb-2">
             <Input
               label="What your team is interested"
-              {...register('interested')}
+              error={errors.interested}
+              name="interested"
+              register={register}
+              required
             />
           </Col>
           <Col md={24} className="mb-2">
             <Input
               type="select"
               label="Which event do you want to apply"
-              {...register('interested')}
+              error={errors.event}
+              name="event"
+              register={register}
+              required
+              selectList={[
+                { value: 1, label: 'Event 1' },
+                { value: 2, label: 'Event 3' },
+                { value: 3, label: 'Event 4' },
+              ]}
             />
           </Col>
         </Row>
@@ -93,18 +122,37 @@ export const EnrollForm = ({ isColumn }: { isColumn?: boolean }) => {
           </Col>
 
           <Col md={12} className="mb-2">
-            <Input label="Leader’s name *" {...register('leaderName')} />
+            <Input
+              label="Leader’s name *"
+              error={errors.leaderName}
+              name="leaderName"
+              register={register}
+              required
+            />
           </Col>
 
           <Col md={12} className="mb-2">
-            <Input label="Leader’s email *" {...register('leaderEmail')} />
+            <Input
+              label="Leader’s email *"
+              error={errors.leaderName}
+              name="leaderEmail"
+              register={register}
+              required
+            />
           </Col>
 
           <Col md={24} className="mb-2 text-center">
-            <Button>
-              Upload CV
-              <IconArrowUp />
-            </Button>
+            <Input
+              label="Upload CV"
+              error={errors.leaderCV}
+              name="leaderCV"
+              register={register}
+              required
+              type="file"
+              value={watch('leaderCV')}
+            />
+            {/*             
+             */}
           </Col>
           <Col md={24} className="mb-2">
             <div className="hr" />
@@ -120,14 +168,20 @@ export const EnrollForm = ({ isColumn }: { isColumn?: boolean }) => {
                 <Col md={12} className="mb-2">
                   <Input
                     label={`Member ${idx + 1}'s name *`}
-                    {...register(`memberName${idx}`)}
+                    error={errors['`memberName${idx}`']}
+                    name={`memberName${idx}`}
+                    register={register}
+                    required
                   />
                 </Col>
 
                 <Col md={12} className="mb-2">
                   <Input
                     label={`Member ${idx + 1}'s email *`}
-                    {...register(`memberEmail${idx}`)}
+                    error={errors['`memberEmail${idx}`']}
+                    name={`memberEmail${idx}`}
+                    register={register}
+                    required
                   />
                 </Col>
 
@@ -186,37 +240,89 @@ export const EnrollForm = ({ isColumn }: { isColumn?: boolean }) => {
         />
       </Col>
       <Col md={12} className="mb-2">
-        <Input label="Your name *" {...register('name', { required: true })} />
+        <Input
+          label="Your name *"
+          error={errors.name}
+          name="name"
+          register={register}
+          required
+        />
       </Col>
       <Col md={12} className="mb-2">
-        <Input label="Your name *" {...register('name')} />
+        <Input
+          error={errors.email}
+          label="Your email *"
+          name="email"
+          register={register}
+          required
+        />
       </Col>
       <Col md={12} className="mb-2">
-        <Input label="Your phone number *" {...register('phone')} />
-      </Col>
-
-      <Col md={12} className="mb-2">
-        <Input label="You are a/an *" {...register('job')} type="select" />
+        <Input
+          error={errors.phone}
+          label="Your phone number *"
+          name="phone"
+          register={register}
+          required
+        />
       </Col>
 
       <Col md={12} className="mb-2">
         <Input
-          label="Your school/company *"
-          {...register('org')}
+          error={errors.job}
+          label="You are a/an *"
+          name="job"
+          register={register}
+          required
           type="select"
+          selectList={[
+            { value: '1', label: 'Học sinh' },
+            { value: '2', label: 'Frontend' },
+            { value: '3', label: 'Backend' },
+          ]}
+        />
+      </Col>
+
+      <Col md={12} className="mb-2">
+        <Input
+          error={errors.org}
+          label="Your school/company *"
+          name="org"
+          register={register}
+          required
+          type="select"
+          selectList={[
+            { value: '1', label: 'Bách khoa' },
+            { value: '2', label: 'ĐH KHTN' },
+            { value: '3', label: 'FPT' },
+          ]}
         />
       </Col>
 
       <Col md={12} className="mb-2">
         <Input
           label="Your major/profession *"
+          error={errors.position}
           type="select"
-          {...register('position')}
+          name="position"
+          register={register}
+          selectList={[
+            { value: '1', label: 'Học sinh' },
+            { value: '2', label: 'Thạc sỹ' },
+            { value: '3', label: 'Tiến sỹ' },
+          ]}
+          required
         />
       </Col>
 
       <Col md={24} className="mb-2">
-        <Input label="What you are interested" {...register('interested')} />
+        <Input
+          error={errors.interested}
+          label="What you are interested"
+          name="interested"
+          register={register}
+          required
+        />
       </Col>
 
       <Col md={24} className="mb-2">

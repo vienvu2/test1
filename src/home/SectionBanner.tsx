@@ -42,7 +42,6 @@ const SectionBanner = () => {
 
   useEffect(() => {
     const ref = setInterval(() => {
-      console.log(active)
       setActive((r) => (r > 2 ? 1 : r + 1))
     }, 3000)
     return () => clearInterval(ref)

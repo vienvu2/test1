@@ -19,7 +19,9 @@ import {
   IconArrowLeft,
   IconCalendar,
   IconLink,
+  IconLinkWhite,
   IconLogoTwitter,
+  IconLogoTwitterWhite,
   IconTwitter,
 } from '../icons'
 import Modal from '../components/Modal'
@@ -140,11 +142,11 @@ const HackathonPopup = ({ onClose }: { onClose: Function }) => {
                 </p>
               </div>
               <ButtonIcon dark>
-                <IconLink color="white" />
+                <IconLinkWhite />
               </ButtonIcon>
 
               <ButtonIcon dark>
-                <IconLogoTwitter color="white" />
+                <IconLogoTwitterWhite />
               </ButtonIcon>
             </Flex>
 
@@ -159,8 +161,7 @@ const HackathonPopup = ({ onClose }: { onClose: Function }) => {
                 <AvatarGroup>
                   <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
                   <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
-                  <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
-                  {' '}
+                  <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />{' '}
                   <strong className="text-dark2">+100 participating</strong>
                 </AvatarGroup>
               </Col>
