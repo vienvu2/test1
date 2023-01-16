@@ -12,7 +12,6 @@ import {
 } from '../GlobalStyles'
 
 import styled, { useTheme } from 'styled-components'
-import Link from 'next/link'
 import { useTextAnimation } from '../hooks/textAnimation'
 import { roboto } from '../layouts/Wrap'
 import {
@@ -24,17 +23,16 @@ import {
   IconLogoTwitterWhite,
 } from '../icons'
 import Modal from '../components/Modal'
-import Checkbox from '../components/Checkbox'
 import { EnrollForm } from './SectionEnroll'
 
 const SectionEvent = () => {
-  const [text] = useTextAnimation('hackathons')
+  const [text] = useTextAnimation(['hackathons'])
   const [tabActive, setTabActive] = useState('Hottest')
   const [detail, showDetail] = useState(false)
 
   return (
     <>
-      <WrapStyled>
+      <WrapStyled id="events">
         <Container style={{ position: 'relative', zIndex: 2 }}>
           <WrapStyledTop>
             <p>Events</p>
@@ -53,6 +51,11 @@ const SectionEvent = () => {
                   {a}
                 </ContentStyled.HeaderItem>
               ))}
+              <div style={{ flex: 1 }} />
+              <ContentStyled.MoreBtn href="/events" target="_blank">
+                <img className="circle" src="/images/events/more.svg" />
+                <IconArrowLeft />
+              </ContentStyled.MoreBtn>
             </ContentStyled.Header>
             {tabActive === 'Hottest' &&
               ['2022', '2023'].map((a, idx) => (
@@ -75,7 +78,10 @@ const SectionEvent = () => {
                       </Col>
                     </Row>
                   </HackathonStyled.Intro>
-                  <HackathonItem onApply={() => showDetail(true)} />
+                  <HackathonItem
+                    onApply={() => showDetail(true)}
+                    tabActive={tabActive}
+                  />
                 </HackathonStyled>
               ))}
 
@@ -83,7 +89,10 @@ const SectionEvent = () => {
               <Row gap={12}>
                 {[1, 2, 3, 4, 5, 6].map((a, idx) => (
                   <Col md={12} key={a}>
-                    <HackathonItemLong onApply={() => showDetail(true)} />
+                    <HackathonItemLong
+                      onApply={() => showDetail(true)}
+                      tabActive={tabActive}
+                    />
                   </Col>
                 ))}
               </Row>
@@ -216,7 +225,13 @@ const HackathonPopup = ({ onClose }: { onClose: Function }) => {
   )
 }
 
-const HackathonItem = ({ onApply }: { onApply: Function }) => {
+const HackathonItem = ({
+  onApply,
+  tabActive,
+}: {
+  onApply: Function
+  tabActive: string
+}) => {
   return (
     <HackathonStyled.Detail>
       <h3>Hackatron 2023</h3>
@@ -250,7 +265,7 @@ const HackathonItem = ({ onApply }: { onApply: Function }) => {
       </Flex>
       <HackathonStyled.Date className="mb-1">
         <IconCalendar />
-        <p>Jan 1 - Feb 1, 2023</p>
+        <p> {tabActive == 'Past' ? 'End' : 'Jan 1 - Feb 1, 2023'} </p>
       </HackathonStyled.Date>
       <Button block onClick={() => onApply()}>
         Apply now
@@ -260,7 +275,13 @@ const HackathonItem = ({ onApply }: { onApply: Function }) => {
   )
 }
 
-const HackathonItemLong = ({ onApply }: { onApply: Function }) => {
+const HackathonItemLong = ({
+  onApply,
+  tabActive,
+}: {
+  onApply: Function
+  tabActive: string
+}) => {
   return (
     <HackathonStyled.Detail long className="mb-2">
       <Flex className="mb-2" align="center">
@@ -277,15 +298,18 @@ const HackathonItemLong = ({ onApply }: { onApply: Function }) => {
       <p className="desc mb-1">
         Join the next wave of Hackatron where Web3 devs build to learn.
       </p>
-
-      <Flex className="mb-2">
-        <AvatarGroup>
-          <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
-          <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
-          <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
-          <p>+100 participating</p>
-        </AvatarGroup>
-      </Flex>
+      {tabActive !== 'Upcoming' ? (
+        <Flex className="mb-2">
+          <AvatarGroup>
+            <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
+            <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
+            <img src="https://znews-photo.zingcdn.me/w660/Uploaded/gtnjj3/2023_01_08/tp_9_8247.jpg" />
+            <p>+100 participating</p>
+          </AvatarGroup>
+        </Flex>
+      ) : (
+        <div className="h-4" />
+      )}
 
       <Flex className="mb-2">
         <Tag>Blockchain</Tag>
@@ -296,7 +320,7 @@ const HackathonItemLong = ({ onApply }: { onApply: Function }) => {
         <Col md={12}>
           <HackathonStyled.Date className="mb-1">
             <IconCalendar />
-            <p>Jan 1 - Feb 1, 2023</p>
+            <p> {tabActive == 'Past' ? 'End' : 'Jan 1 - Feb 1, 2023'} </p>
           </HackathonStyled.Date>
         </Col>
         <Col md={12}>
@@ -447,8 +471,37 @@ const ContentStyled: any = styled.div`
   padding: 32px;
   background: ${({ theme }) => theme.blue10};
 `
+
+ContentStyled.MoreBtn = styled.a`
+  cursor: pointer;
+  position: relative;
+  text-align: center;
+  width: 120px;
+  .circle {
+    position: absolute;
+    top: -48px;
+    left: 0px;
+  }
+  &:hover {
+    .circle {
+      animation-name: rotate;
+      animation-duration: 10s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+  }
+  @keyframes rotate {
+    from {
+      transform: rotate(-360deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+`
 ContentStyled.Header = styled.div`
   display: flex;
+
   gap: 32px;
   margin-bottom: 32px;
 `

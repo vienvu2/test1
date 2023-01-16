@@ -7,7 +7,12 @@ import { useTextAnimation } from '../hooks/textAnimation'
 import { roboto } from '../layouts/Wrap'
 
 const SectionProcess = () => {
-  const [text] = useTextAnimation('artificial-intelligent')
+  const [text] = useTextAnimation([
+    'artificial-intelligent',
+    'machine-learning',
+    'computer-vision',
+    'deep-learning',
+  ])
   const [active, setActive] = useState('01')
   return (
     <WrapStyled>
@@ -20,14 +25,14 @@ const SectionProcess = () => {
                 <span className={roboto.className}>{text}</span>
               </h2>
             </WrapStyledTop>
-            <ItemStyled active={active == '01'} onClick={() => setActive('01')}>
+            <ItemStyled active={active == '01'} onMouseOver={() => setActive('01')}>
               <ItemStyled.Index>01</ItemStyled.Index>
               <ItemStyled.Content>
                 <h3>Prepare the documents including CV and IDs</h3>
               </ItemStyled.Content>
             </ItemStyled>
 
-            <ItemStyled active={active == '02'} onClick={() => setActive('02')}>
+            <ItemStyled active={active == '02'} onMouseOver={() => setActive('02')}>
               <ItemStyled.Index>02</ItemStyled.Index>
               <ItemStyled.Content>
                 <h3>
@@ -36,7 +41,7 @@ const SectionProcess = () => {
               </ItemStyled.Content>
             </ItemStyled>
 
-            <ItemStyled active={active == '03'} onClick={() => setActive('03')}>
+            <ItemStyled active={active == '03'} onMouseOver={() => setActive('03')}>
               <ItemStyled.Index>03</ItemStyled.Index>
               <ItemStyled.Content>
                 <h3>Follow instruction to receive data and join challenges.</h3>

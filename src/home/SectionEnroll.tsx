@@ -290,6 +290,12 @@ export const EnrollForm = ({ isColumn }: { isColumn?: boolean }) => {
           name="job"
           register={register}
           required
+          type="select"
+          selectList={[
+            { value: '1', label: 'Học sinh' },
+            { value: '2', label: 'Sinh viên' },
+            { value: '3', label: 'Đi làm' },
+          ]}
         />
       </Col>
 
@@ -318,8 +324,8 @@ export const EnrollForm = ({ isColumn }: { isColumn?: boolean }) => {
           register={register}
           selectList={[
             { value: '1', label: 'Học sinh' },
-            { value: '2', label: 'Thạc sỹ' },
-            { value: '3', label: 'Tiến sỹ' },
+            { value: '2', label: 'Thạc sĩ' },
+            { value: '3', label: 'Tiến sĩ' },
           ]}
           required
         />
