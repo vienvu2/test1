@@ -4,10 +4,6 @@ export const useTextAnimation = (texts: string[]) => {
   const [position, setPosition] = useState(0)
   const textList: string[] = []
 
-  // for (let i = 0; i < 30; i++) {
-  //   textList.push(texts[0])
-  // }
-
   texts.map((text, index) => {
     const _text = `<${text}>`
     const length = _text.length
@@ -23,8 +19,6 @@ export const useTextAnimation = (texts: string[]) => {
       textList.push(_text.slice(0, length - i) || '')
     }
   })
-
-  console.log(textList)
 
   useEffect(() => {
     var timer = setInterval(() => {

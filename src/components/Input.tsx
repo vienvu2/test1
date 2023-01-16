@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import styled, { useTheme } from 'styled-components'
 import { Button, ButtonLink } from '../GlobalStyles'
 import { IconArrowUp } from '../icons'
@@ -15,7 +16,7 @@ interface Props {
   register: Function
   name: string
   required?: boolean
-  value?: any
+  watch: Function
 }
 
 const Input = ({
@@ -26,9 +27,15 @@ const Input = ({
   register,
   name,
   required,
-  value,
+  watch,
 }: Props) => {
   const theme: any = useTheme()
+  const [isFocus, setFocus] = useState(false)
+
+  const value = watch(name)
+
+  console.log(value)
+
   return (
     <InputStyled error={!!error}>
       {type === 'select' && (
@@ -43,25 +50,56 @@ const Input = ({
       )}
       {type === 'file' && (
         <>
-          {!value && (
-            <ButtonLink
-              type="button"
-              className="bold"
-              style={{ color: theme.mainDark2 }}
-            >
-              Upload CV
-              <IconArrowUp />
-            </ButtonLink>
+          {value ? (
+            <FileStyled>{value[0]?.name}</FileStyled>
+          ) : (
+            <>
+              <input
+                type="file"
+                {...register(name, {
+                  required,
+                })}
+              />
+              <ButtonLink
+                type="button"
+                className="bold"
+                style={{ color: theme.mainDark2 }}
+              >
+                Upload CV
+                <IconArrowUp />
+              </ButtonLink>
+            </>
           )}
         </>
       )}
-
       {type !== 'select' && type !== 'file' && (
-        <input {...register(name, { required })} type={type} />
+        <input
+          {...register(name, {
+            required,
+            pattern:
+              type === 'email'
+                ? {
+                    value: /\S+@\S+\.\S+/,
+                    message: 'Invalid email',
+                  }
+                : undefined,
+          })}
+          onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(false)}
+        />
       )}
 
-      {type !== 'file' && <label className="active">{label}</label>}
-      {error?.type == 'required' && <p className="error">Thông tin bắt buộc</p>}
+      {type !== 'file' && (
+        <label
+          className={isFocus || type === 'select' || value ? 'active' : ''}
+        >
+          {label}
+        </label>
+      )}
+      {error?.type == 'required' && (
+        <p className="error">Required information</p>
+      )}
+      {error?.type == 'pattern' && <p className="error">{error.message}</p>}
     </InputStyled>
   )
 }
@@ -98,18 +136,22 @@ const InputStyled = styled.div<{ error?: boolean }>`
   }
 
   label {
+    transition: all 0.2s ease-in-out;
     position: absolute;
     top: 15px;
     left: 11px;
     padding: 0 4px;
     font-weight: 600;
     font-size: 16px;
+    pointer-events: none;
+    opacity: 0.4;
+    color: ${({ theme, error }) => (error ? '#eb4e4e' : theme.mainDark2)};
 
     &.active {
       top: -8px;
+      opacity: 1;
       font-size: 14px;
       background: ${({ theme }) => theme.blue10};
-      color: ${({ theme, error }) => (error ? '#eb4e4e' : theme.mainDark2)};
     }
   }
 

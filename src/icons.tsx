@@ -19,6 +19,10 @@ export const IconCalendar = ({ size = 24, color }: IconProps) => (
 export const IconArrowLeft = ({ size = 24, color }: IconProps) => (
   <ImageIcon src="/icons/arrow-left.svg" size={size} color={color} />
 )
+
+export const IconArrowLeftWhite = ({ size = 24, color }: IconProps) => (
+  <ImageIcon src="/icons/arrow-left-white.svg" size={size} color={color} />
+)
 export const IconArrowUp = ({ size = 24, color }: IconProps) => (
   <ImageIcon src="/icons/arrow-up.svg" size={size} color={color} />
 )
@@ -53,6 +57,16 @@ export const IconLogoTwitterWhite = ({ size = 24, color }: IconProps) => (
 
 export const IconLogoYoutube = ({ size = 24, color }: IconProps) => (
   <ImageIcon src="/icons/logo-youtube.svg" size={size} color={color} />
+)
+
+
+export const IconDelete = ({ size = 24, color }: IconProps) => (
+  <ImageIcon src="/icons/delete.svg" size={size} color={color} />
+)
+
+
+export const IconReload = ({ size = 24, color }: IconProps) => (
+  <ImageIcon src="/icons/reload.svg" size={size} color={color} />
 )
 
 const ImageIcon = styled.img<{ size: number; color?: string }>`
