@@ -38,12 +38,12 @@ const SectionBanner = () => {
     },
   ]
 
-  const item = items[0]
+  const item = items[active - 1]
 
   useEffect(() => {
     const ref = setInterval(() => {
       setActive((r) => (r > 2 ? 1 : r + 1))
-    }, 3000)
+    }, 5000)
     return () => clearInterval(ref)
   }, [])
 
