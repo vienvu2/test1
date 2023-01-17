@@ -186,11 +186,12 @@ export const Button = styled.button<{ block?: boolean }>`
     display: block;
   `}
 
-  ${({ disabled }) =>
+  ${({ disabled, theme }) =>
     disabled &&
     `
-      opacity: 0.5;
-        `}
+    background: #AAC6D6;
+    color:  ${theme.white};
+  `}
 `
 
 export const ButtonIcon = styled.button<{ dark?: boolean }>`

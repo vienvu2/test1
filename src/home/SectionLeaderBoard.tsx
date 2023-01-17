@@ -8,7 +8,7 @@ import Link from 'next/link'
 import { IconArrowLeft } from '../icons'
 
 const SectionLeaderBoard = () => {
-  const [text] = useTextAnimation('builders of the year')
+  const [text] = useTextAnimation(['builders of the year'])
 
   const members = [
     {
@@ -202,7 +202,7 @@ BoardStyled.Line = styled.div`
   background: ${({ theme }) => theme.blue40};
 `
 BoardStyled.Wrap = styled.div`
-  background: ${({ theme }) => theme.blue30};
+  background: ${({ theme }) => theme.blue20};
   padding: 40px;
   display: flex;
 `

@@ -7,9 +7,9 @@ import { useTextAnimation } from '../hooks/textAnimation'
 import { roboto } from '../layouts/Wrap'
 
 const SectionBenefit = () => {
-  const [text] = useTextAnimation('AI knowledges')
+  const [text] = useTextAnimation(['AI knowledges', 'AI network'])
   return (
-    <WrapStyled>
+    <WrapStyled id="benefit">
       <Container style={{ zIndex: 2 }}>
         <WrapStyledTop>
           <h2>

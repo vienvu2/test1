@@ -40,12 +40,12 @@ const SectionBanner = () => {
 
   const item = items[0]
 
-  // useEffect(() => {
-  //   const ref = setInterval(() => {
-  //     setActive((r) => (r > 2 ? 1 : r + 1))
-  //   }, 3000)
-  //   return () => clearInterval(ref)
-  // }, [])
+  useEffect(() => {
+    const ref = setInterval(() => {
+      setActive((r) => (r > 2 ? 1 : r + 1))
+    }, 3000)
+    return () => clearInterval(ref)
+  }, [])
 
   return (
     <WrapStyled>
@@ -59,7 +59,24 @@ const SectionBanner = () => {
             <h2>{item.title}</h2>
             <p>{item.desc}</p>
 
-            <Button className="mb-2">
+            <Button
+              className="mb-2"
+              onClick={() => {
+                if (document) {
+                  var element = document.getElementById('events')
+                  var headerOffset = 60
+                  var elementPosition =
+                    element?.getBoundingClientRect().top || 0
+                  var offsetPosition =
+                    elementPosition + window.pageYOffset - headerOffset
+
+                  window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth',
+                  })
+                }
+              }}
+            >
               Let’s Start
               <IconArrowLeft />
             </Button>
@@ -73,7 +90,23 @@ const SectionBanner = () => {
                 />
               ))}
             </BannerStyled.Nav> */}
-            <BannerStyled.ScrollBtn>
+            <BannerStyled.ScrollBtn
+              onClick={() => {
+                if (document) {
+                  var element = document.getElementById('benefit')
+                  var headerOffset = 60
+                  var elementPosition =
+                    element?.getBoundingClientRect().top || 0
+                  var offsetPosition =
+                    elementPosition + window.pageYOffset - headerOffset
+
+                  window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth',
+                  })
+                }
+              }}
+            >
               <IconArrowDown />
               Scroll down
             </BannerStyled.ScrollBtn>
@@ -88,8 +121,8 @@ const SectionBanner = () => {
         <PartnerStyled>
           <Flex align="center" justify="space-around">
             <img src="/images/partners/partner-1.png" height={66} />
-            <img src="/images/partners/partner-2.png" height={66} />
-            <img src="/images/partners/partner-4.png" height={66} />
+            <img src="/images/partners/partner-5.png" height={66} />
+            <img src="/images/partners/partner-6.png" height={66} />
           </Flex>
         </PartnerStyled>
       </Container>

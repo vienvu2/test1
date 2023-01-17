@@ -7,7 +7,7 @@ import { roboto } from '../layouts/Wrap'
 import Link from 'next/link'
 
 const SectionJudges = () => {
-  const [text] = useTextAnimation('experts')
+  const [text] = useTextAnimation(['experts'])
   return (
     <WrapStyled>
       <Container>

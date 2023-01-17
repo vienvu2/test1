@@ -8,7 +8,7 @@ import Link from 'next/link'
 import { IconChevronDown, IconChevronUp } from '../icons'
 
 const SectionFAQ = () => {
-  const [text] = useTextAnimation('questions')
+  const [text] = useTextAnimation(['questions'])
   const questions = [
     {
       index: '01',
