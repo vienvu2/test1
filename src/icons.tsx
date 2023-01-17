@@ -59,14 +59,16 @@ export const IconLogoYoutube = ({ size = 24, color }: IconProps) => (
   <ImageIcon src="/icons/logo-youtube.svg" size={size} color={color} />
 )
 
-
 export const IconDelete = ({ size = 24, color }: IconProps) => (
   <ImageIcon src="/icons/delete.svg" size={size} color={color} />
 )
 
-
 export const IconReload = ({ size = 24, color }: IconProps) => (
   <ImageIcon src="/icons/reload.svg" size={size} color={color} />
+)
+
+export const IconTypeImage = ({ size = 24, color }: IconProps) => (
+  <ImageIcon src="/icons/type-image.svg" size={size} color={color} />
 )
 
 const ImageIcon = styled.img<{ size: number; color?: string }>`

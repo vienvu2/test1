@@ -24,9 +24,16 @@ import {
 } from '../icons'
 import Modal from '../components/Modal'
 import { EnrollForm } from './SectionEnroll'
+const TextAnimation = () => {
+  const [text] = useTextAnimation(['hackathons'])
+  return (
+    <h2>
+      Outstanding <span className={roboto.className}>{text}</span>
+    </h2>
+  )
+}
 
 const SectionEvent = () => {
-  const [text] = useTextAnimation(['hackathons'])
   const [tabActive, setTabActive] = useState('Hottest')
   const [detail, showDetail] = useState(false)
 
@@ -36,9 +43,7 @@ const SectionEvent = () => {
         <Container style={{ position: 'relative', zIndex: 2 }}>
           <WrapStyledTop>
             <p>Events</p>
-            <h2>
-              Outstanding <span className={roboto.className}>{text}</span>
-            </h2>
+            <TextAnimation />
           </WrapStyledTop>
           <ContentStyled>
             <ContentStyled.Header>
@@ -121,6 +126,7 @@ export default SectionEvent
 
 const HackathonPopup = ({ onClose }: { onClose: Function }) => {
   const [step, setStep] = useState(1)
+  console.log('step 00000')
   return (
     <PopupStyled>
       <PopupStyled.Header>
@@ -220,7 +226,7 @@ const HackathonPopup = ({ onClose }: { onClose: Function }) => {
         </Row>
       )}
 
-      {step === 2 && <EnrollForm isColumn />}
+      {step === 2 && <EnrollForm isColumn prefix="popup_" />}
     </PopupStyled>
   )
 }

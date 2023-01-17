@@ -48,22 +48,36 @@ const FormStyled = styled.div`
   background: ${({ theme }) => theme.blue10};
 `
 
-export const EnrollForm = ({ isColumn }: { isColumn?: boolean }) => {
+export const EnrollForm = ({
+  isColumn,
+  prefix = '',
+}: {
+  isColumn?: boolean
+  prefix?: string
+}) => {
   const [isTeam, setTeam] = useState(false)
   return (
     <EnrollStyled>
       <h3> {isTeam ? 'Enroll with your team now' : 'Start now'}</h3>
 
       {isTeam ? (
-        <FormTeam isColumn={isColumn} onChange={() => setTeam(false)} />
+        <FormTeam
+          prefix={prefix}
+          isColumn={isColumn}
+          onChange={() => setTeam(false)}
+        />
       ) : (
-        <FormPersonal isColumn={isColumn} onChange={() => setTeam(true)} />
+        <FormPersonal
+          prefix={prefix}
+          isColumn={isColumn}
+          onChange={() => setTeam(true)}
+        />
       )}
     </EnrollStyled>
   )
 }
 
-const FormTeam = ({ isColumn, onChange }: any) => {
+const FormTeam = ({ isColumn, onChange, prefix }: any) => {
   const {
     register,
     handleSubmit,
@@ -199,6 +213,10 @@ const FormTeam = ({ isColumn, onChange }: any) => {
                 register={register}
                 required
                 type="file"
+                prefix={prefix}
+                onClear={() => {
+                  setValue(`leaderCV`, '')
+                }}
               />
             </Col>
             <Col md={24} className="mb-2">
@@ -243,14 +261,27 @@ const FormTeam = ({ isColumn, onChange }: any) => {
                   </Col>
 
                   <Col md={24} className="mb-2 text-center">
-                    <ButtonLink
+                    <Input
+                      label="Upload CV"
+                      error={errors['`memberCV${idx}`']}
+                      name="memberCV"
+                      watch={watch}
+                      register={register}
+                      required
+                      type="file"
+                      prefix={prefix}
+                      onClear={() => {
+                        setValue(`memberCV${idx}`, '')
+                      }}
+                    />
+                    {/* <ButtonLink
                       type="button"
                       className="bold"
                       style={{ color: theme.mainDark2 }}
                     >
                       Upload CV
                       <IconArrowUp />
-                    </ButtonLink>
+                    </ButtonLink> */}
                   </Col>
 
                   <Col md={24} className="mb-2">
@@ -308,7 +339,7 @@ const FormTeam = ({ isColumn, onChange }: any) => {
   )
 }
 
-const FormPersonal = ({ isColumn, onChange }: any) => {
+const FormPersonal = ({ isColumn, onChange, prefix }: any) => {
   const {
     register,
     handleSubmit,

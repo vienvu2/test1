@@ -15,15 +15,13 @@ const Modal = ({ children, size, show, onClose }: Props) => {
   return (
     <ModalStyled
       onClick={(e: Event) => {
-        e.preventDefault()
         if (e.target === e.currentTarget) {
+          e.preventDefault()
           onClose()
         }
       }}
     >
-      <ModalStyled.Content size>
-        {children}
-      </ModalStyled.Content>
+      <ModalStyled.Content size>{children}</ModalStyled.Content>
     </ModalStyled>
   )
 }
@@ -51,5 +49,4 @@ ModalStyled.Content = styled.div<{ size?: 'md' | 'lg' | 'sm' }>`
 
 ModalStyled.Close = styled.div`
   text-align: right;
-
 `

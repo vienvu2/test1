@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styled, { useTheme } from 'styled-components'
 import { Button, ButtonLink } from '../GlobalStyles'
-import { IconArrowUp } from '../icons'
+import { IconArrowUp, IconDelete, IconReload, IconTypeImage } from '../icons'
 
 interface IOption {
   value: string | number
@@ -17,6 +17,8 @@ interface Props {
   name: string
   required?: boolean
   watch: Function
+  onClear?: Function
+  prefix?: string
 }
 
 const Input = ({
@@ -28,13 +30,12 @@ const Input = ({
   name,
   required,
   watch,
+  prefix,
+  onClear,
 }: Props) => {
   const theme: any = useTheme()
   const [isFocus, setFocus] = useState(false)
-
   const value = watch(name)
-
-  console.log(value)
 
   return (
     <InputStyled error={!!error}>
@@ -50,19 +51,51 @@ const Input = ({
       )}
       {type === 'file' && (
         <>
-          {value ? (
-            <FileStyled>{value[0]?.name}</FileStyled>
+          <input
+            type="file"
+            accepts=".doc,.pdf,.png,.jpg"
+            {...register(name, {
+              required,
+            })}
+            id={prefix + 'file_' + name}
+            style={{ opacity: 0 , display: 'none'}}
+          />
+          {value && value[0] ? (
+            <FileStyled>
+              <IconTypeImage />
+              <div style={{ flex: 1 }}>
+                <p>
+                  {value[0]?.name}
+                  <span className="px-1">•</span>
+                  <span>Uploaded</span>
+                </p>
+                <p className="left"> {value[0]?.size} kB</p>
+              </div>
+              <div
+                onClick={() => {
+                  document.getElementById(prefix + 'file_' + name)?.click()
+                }}
+              >
+                <IconReload />
+              </div>
+              <div
+                onClick={() => {
+                  if (onClear) {
+                    onClear(null)
+                  }
+                }}
+              >
+                <IconDelete />
+              </div>
+            </FileStyled>
           ) : (
             <>
-              <input
-                type="file"
-                {...register(name, {
-                  required,
-                })}
-              />
               <ButtonLink
                 type="button"
                 className="bold"
+                onClick={() => {
+                  document.getElementById(prefix + 'file_' + name)?.click()
+                }}
                 style={{ color: theme.mainDark2 }}
               >
                 Upload CV
@@ -109,6 +142,24 @@ padding: 8px;
 background ${({ theme }) => theme.blue10};
 border: 1px dashed  ${({ theme }) => theme.blue60};
 border-radius: 8px;
+
+display: flex;
+gap: 10px;
+p {
+  text-align: left;
+
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 18px;
+  color: ${({ theme }) => theme.mainDark2};
+  span,
+  &.size{
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    color: ${({ theme }) => theme.blue60};
+  }
+}
 
 `
 
