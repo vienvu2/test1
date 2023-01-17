@@ -230,7 +230,10 @@ const FormTeam = ({ isColumn, onChange, prefix }: any) => {
                     <Flex>
                       <h4 style={{ flex: 1 }}>Team member {idx + 1}</h4>
                       <div
-                        onClick={() => setMemberList(memberList.slice(idx, 1))}
+                        onClick={() => {
+                          memberList.splice(idx, 1)
+                          setMemberList([...memberList])
+                        }}
                       >
                         <IconDelete />
                       </div>
