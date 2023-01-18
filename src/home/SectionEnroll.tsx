@@ -48,7 +48,7 @@ const FormStyled = styled.div`
 
 export const EnrollForm = ({ prefix = '' }: { prefix?: string }) => {
   const [isTeam, setTeam] = useState(false)
-  const [isSuccess, setSuccess] = useState(true)
+  const [isSuccess, setSuccess] = useState(false)
   return (
     <EnrollStyled>
       <h3 className="title">Enroll now</h3>
