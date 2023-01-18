@@ -30,7 +30,7 @@ const CheckboxStyled = styled.div`
 
   cursor: pointer;
   span {
-    font-weight: 600;
+    font-weight: 400;
     font-size: 16px;
     line-height: 22px;
     color: ${({ theme }) => theme.black};

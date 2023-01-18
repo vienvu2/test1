@@ -1,7 +1,14 @@
 import { useState } from 'react'
 import styled, { useTheme } from 'styled-components'
 import { Button, ButtonLink } from '../GlobalStyles'
-import { IconArrowUp, IconDelete, IconReload, IconTypeImage } from '../icons'
+import {
+  IconArrowUp,
+  IconDelete,
+  IconDraft,
+  IconReload,
+  IconTypeImage,
+  IconUpload,
+} from '../icons'
 
 interface IOption {
   value: string | number
@@ -58,26 +65,14 @@ const Input = ({
               required,
             })}
             id={prefix + 'file_' + name}
-            style={{ opacity: 0 , display: 'none'}}
+            style={{ opacity: 0, display: 'none' }}
           />
           {value && value[0] ? (
             <FileStyled>
-              <IconTypeImage />
-              <div style={{ flex: 1 }}>
-                <p>
-                  {value[0]?.name}
-                  <span className="px-1">•</span>
-                  <span>Uploaded</span>
-                </p>
-                <p className="left"> {value[0]?.size} kB</p>
-              </div>
-              <div
-                onClick={() => {
-                  document.getElementById(prefix + 'file_' + name)?.click()
-                }}
-              >
-                <IconReload />
-              </div>
+              <IconDraft />
+              <p style={{ flex: 1 }}>
+                {value[0]?.name} ( {value[0]?.size} kB)
+              </p>
               <div
                 onClick={() => {
                   if (onClear) {
@@ -89,19 +84,19 @@ const Input = ({
               </div>
             </FileStyled>
           ) : (
-            <>
-              <ButtonLink
-                type="button"
-                className="bold"
-                onClick={() => {
-                  document.getElementById(prefix + 'file_' + name)?.click()
-                }}
-                style={{ color: theme.mainDark2 }}
-              >
-                Upload CV
-                <IconArrowUp />
-              </ButtonLink>
-            </>
+            <FileStyled.Upload>
+              <IconUpload />
+              <p>
+                Drop CV here or{' '}
+                <a
+                  onClick={() => {
+                    document.getElementById(prefix + 'file_' + name)?.click()
+                  }}
+                >
+                  Browser
+                </a>
+              </p>
+            </FileStyled.Upload>
           )}
         </>
       )}
@@ -126,7 +121,7 @@ const Input = ({
         <label
           className={isFocus || type === 'select' || value ? 'active' : ''}
         >
-          {label}
+          {label} {required && <span style={{ color: 'red' }}>*</span>}
         </label>
       )}
       {error?.type == 'required' && (
@@ -137,30 +132,35 @@ const Input = ({
   )
 }
 
-const FileStyled = styled.div`
-padding: 8px;
-background ${({ theme }) => theme.blue10};
-border: 1px dashed  ${({ theme }) => theme.blue60};
-border-radius: 8px;
-
-display: flex;
-gap: 10px;
-p {
-  text-align: left;
-
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 18px;
-  color: ${({ theme }) => theme.mainDark2};
-  span,
-  &.size{
+const FileStyled: any = styled.div`
+  padding: 8px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  p {
     font-weight: 400;
-    font-size: 12px;
-    line-height: 18px;
-    color: ${({ theme }) => theme.blue60};
+    font-size: 16px;
+    line-height: 22px;
+    color: #161616;
+    text-align: left;
   }
-}
+`
 
+FileStyled.Upload = styled.div`
+  background: ${({ theme }) => theme.background};
+  border: 1px dashed ${({ theme }) => theme.gray20};
+  padding: 16px;
+  text-align: center;
+  p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #414141;
+    a {
+      color: ${({ theme }) => theme.mainDark};
+      cursor: pointer;
+    }
+  }
 `
 
 const InputStyled = styled.div<{ error?: boolean }>`
@@ -171,18 +171,21 @@ const InputStyled = styled.div<{ error?: boolean }>`
     width: 100%;
     min-height: 52px;
     padding: 15px 15px 13px;
-    background: ${({ theme }) => theme.blue10};
+    background: ${({ theme }) => theme.white};
     border: 1px solid
-      ${({ theme, error }) => (error ? '#eb4e4e' : theme.blue60)};
+      ${({ theme, error }) => (error ? '#eb4e4e' : theme.gray20)};
 
-    font-weight: 600;
+    font-weight: 400;
     font-size: 16px;
     line-height: 22px;
-    color: ${({ theme }) => theme.mainDark2};
+    color: ${({ theme }) => theme.mainDark};
 
     &:active,
     &:focus {
       outline: none;
+    }
+    &:focus {
+      border-color: ${({ theme }) => theme.main};
     }
   }
 
@@ -192,17 +195,17 @@ const InputStyled = styled.div<{ error?: boolean }>`
     top: 15px;
     left: 11px;
     padding: 0 4px;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 16px;
     pointer-events: none;
     opacity: 0.4;
-    color: ${({ theme, error }) => (error ? '#eb4e4e' : theme.mainDark2)};
+    color: ${({ theme, error }) => (error ? '#eb4e4e' : theme.gray20)};
 
     &.active {
       top: -8px;
       opacity: 1;
       font-size: 14px;
-      background: ${({ theme }) => theme.blue10};
+      background: ${({ theme }) => theme.white};
     }
   }
 
