@@ -17,6 +17,7 @@ import {
   IconUserPlus,
   IconInfo,
 } from '../icons'
+import Modal from '../components/Modal'
 const SectionEnroll = () => {
   return (
     <WrapStyled>
@@ -46,7 +47,8 @@ const FormStyled = styled.div`
 `
 
 export const EnrollForm = ({ prefix = '' }: { prefix?: string }) => {
-  const [isTeam, setTeam] = useState(true)
+  const [isTeam, setTeam] = useState(false)
+  const [isSuccess, setSuccess] = useState(true)
   return (
     <EnrollStyled>
       <h3 className="title">Enroll now</h3>
@@ -61,27 +63,40 @@ export const EnrollForm = ({ prefix = '' }: { prefix?: string }) => {
       </EnrollStyled.Tabs>
 
       {isTeam ? (
-        <FormTeam prefix={prefix} onChange={() => setTeam(false)} />
+        <FormTeam prefix={prefix} onSuccess={() => setSuccess(true)} />
       ) : (
-        <FormPersonal prefix={prefix} onChange={() => setTeam(true)} />
+        <FormPersonal prefix={prefix} onSuccess={() => setSuccess(true)} />
       )}
+
+      <Modal size="xs" onClose={() => setSuccess(false)} show={isSuccess}>
+        <SuccessStyled>
+          <img src="/images/success.svg" />
+          <h2>Apply successfully</h2>
+          <p>A confirmation email is sent to your email</p>
+          <Button type="submit" onClick={() => setSuccess(false)}>
+            Agree <IconArrowLeft />
+          </Button>
+        </SuccessStyled>
+      </Modal>
     </EnrollStyled>
   )
 }
 
-const FormTeam = ({ prefix }: any) => {
+const FormTeam = ({ prefix, onSuccess }: any) => {
   const {
     register,
     handleSubmit,
     watch,
     setValue,
     getValues,
+    reset,
     formState: { errors, isValid },
   } = useForm({
     reValidateMode: 'onChange',
   })
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log('data', data)
+    onSuccess()
+    reset()
   }
 
   const [memberList, setMemberList] = useState<any[]>([])
@@ -363,17 +378,18 @@ const FormTeam = ({ prefix }: any) => {
   )
 }
 
-const FormPersonal = ({ prefix }: any) => {
+const FormPersonal = ({ prefix, onSuccess }: any) => {
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     setValue,
-    getValues,
     formState: { errors, isDirty, isValid },
   } = useForm()
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log('data', data)
+    onSuccess()
+    reset()
   }
 
   return (
@@ -631,4 +647,24 @@ EnrollStyled.Tab = styled.div<{ active: boolean }>`
     border-bottom: 1.5px solid ${theme.mainDark2};
 
   `}
+`
+
+const SuccessStyled = styled.div`
+  background: ${({ theme }) => theme.white};
+  padding: 32px;
+  text-align: center;
+  h2 {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    margin-bottom: 8px;
+    color: ${({ theme }) => theme.black};
+  }
+  p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    margin-bottom: 32px;
+    color: ${({ theme }) => theme.gray50};
+  }
 `

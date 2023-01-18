@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 interface Props {
   children: ReactNode | ReactNode[]
-  size: 'md' | 'lg' | 'sm'
+  size: 'md' | 'lg' | 'sm' | 'xs'
   onClose: Function
   show: boolean
 }
@@ -28,6 +28,7 @@ const Modal = ({ children, size, show, onClose }: Props) => {
 
 export default Modal
 const WIDTHS: any = {
+  xs: '400px',
   sm: '600px',
   md: '900px',
   lg: '1224px',
@@ -46,7 +47,7 @@ const ModalStyled: any = styled.div`
   align-items: center;
   justify-content: center;
 `
-ModalStyled.Content = styled.div<{ size?: 'md' | 'lg' | 'sm' }>`
+ModalStyled.Content = styled.div<{ size?: 'md' | 'lg' | 'sm' | 'xs' }>`
   width: ${({ size }) => WIDTHS[size || 'md']};
   max-height: 100vh;
 `
