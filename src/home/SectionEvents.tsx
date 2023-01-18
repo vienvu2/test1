@@ -38,6 +38,8 @@ const SectionEvent = () => {
   const [tabActive, setTabActive] = useState('Hottest')
   const [detail, showDetail] = useState(false)
 
+  const [step, setStep] = useState(1)
+
   return (
     <>
       <WrapStyled id="events">
@@ -106,8 +108,16 @@ const SectionEvent = () => {
           </ContentStyled>
         </Container>
       </WrapStyled>
-      <Modal size="md" show={detail} onClose={() => showDetail(false)}>
-        <HackathonPopup onClose={() => showDetail(false)} />
+      <Modal
+        size={step == 1 ? 'lg' : 'sm'}
+        show={detail}
+        onClose={() => showDetail(false)}
+      >
+        <HackathonPopup
+          step={step}
+          setStep={setStep}
+          onClose={() => showDetail(false)}
+        />
       </Modal>
     </>
   )
@@ -115,9 +125,15 @@ const SectionEvent = () => {
 
 export default SectionEvent
 
-const HackathonPopup = ({ onClose }: { onClose: Function }) => {
-  const [step, setStep] = useState(1)
-  console.log('step 00000')
+const HackathonPopup = ({
+  onClose,
+  step,
+  setStep,
+}: {
+  onClose: Function
+  setStep: Function
+  step: number
+}) => {
   return (
     <PopupStyled>
       <PopupStyled.Header>
@@ -222,7 +238,7 @@ const HackathonPopup = ({ onClose }: { onClose: Function }) => {
         </Row>
       )}
 
-      {step === 2 && <EnrollForm isColumn prefix="popup_" />}
+      {step === 2 && <EnrollForm prefix="popup_" />}
     </PopupStyled>
   )
 }

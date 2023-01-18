@@ -95,6 +95,10 @@ export const IconDraft = ({ size = 24 }: IconProps) => (
   <ImageIcon src="/icons/draft.svg" size={size} />
 )
 
+export const IconInfo = ({ size = 24 }: IconProps) => (
+  <ImageIcon src="/icons/info.svg" size={size} />
+)
+
 const ImageIcon = styled.img<{ size: number; color?: string }>`
   ${({ color }) =>
     color &&

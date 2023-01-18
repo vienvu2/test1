@@ -15,6 +15,7 @@ import {
   IconChevDown,
   IconChevRight,
   IconUserPlus,
+  IconInfo,
 } from '../icons'
 const SectionEnroll = () => {
   return (
@@ -86,10 +87,20 @@ const FormTeam = ({ prefix }: any) => {
   const [memberList, setMemberList] = useState<any[]>([])
   const theme: any = useTheme()
 
-  const [showObj, setShow] = useState<any>({ isSummary: true })
+  const [showObj, setShow] = useState<any>({
+    isSummary: true,
+    isLeader: true,
+    isMember0: true,
+    isMember1: true,
+  })
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Row>
+      <Row
+        style={{
+          maxHeight: prefix ? 'calc(80vh - 250px)' : 'auto',
+          overflow: 'auto',
+        }}
+      >
         <Col md={24} className="mb-1">
           <EnrollStyled.Header
             onClick={() =>
@@ -167,16 +178,28 @@ const FormTeam = ({ prefix }: any) => {
           </>
         )}
         <Col md={24} className="mb-1">
+          <EnrollStyled.Warn>
+            <IconInfo />
+            You need to upload the CV of each team. Maximum 2 member teams.
+          </EnrollStyled.Warn>
+        </Col>
+        <Col md={24} className="mb-2">
           <EnrollStyled.Header
             onClick={() => setShow({ ...showObj, isLeader: !showObj.isLeader })}
           >
             {showObj.isLeader ? <IconChevDown /> : <IconChevRight />}
             Team leader
+            <div style={{ flex: 1 }} />
+            {memberList.length >= 2 && (
+              <span className="blue">
+                Reach the limit of 2/2 team members !
+              </span>
+            )}
           </EnrollStyled.Header>
         </Col>
         {showObj.isLeader && (
           <>
-            <Col md={12} className="mb-2">
+            <Col md={12} className="mb-1">
               <Input
                 watch={watch}
                 label="Leader’s name"
@@ -187,7 +210,7 @@ const FormTeam = ({ prefix }: any) => {
               />
             </Col>
 
-            <Col md={12} className="mb-2">
+            <Col md={12} className="mb-1">
               <Input
                 watch={watch}
                 label="Leader’s email"
@@ -220,7 +243,7 @@ const FormTeam = ({ prefix }: any) => {
         {memberList.map((member, idx) => {
           return (
             <>
-              <Col md={24} className="mb-1">
+              <Col md={24} className="mb-2">
                 <EnrollStyled.Header
                   onClick={() =>
                     setShow({
@@ -235,14 +258,26 @@ const FormTeam = ({ prefix }: any) => {
                     <IconChevRight />
                   )}
                   Team member {idx + 1}
+                  <div style={{ flex: 1 }} />
+                  <div
+                    style={{ display: 'flex', alignItems: 'center', gap: 6 }}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      setMemberList(memberList.filter((a, id) => id != idx))
+                    }}
+                  >
+                    <span>Remove member</span>
+                    <IconDelete />
+                  </div>
                 </EnrollStyled.Header>
               </Col>
 
               {showObj['isMember' + idx] && (
                 <>
-                  <Col md={12} className="mb-2">
+                  <Col md={12} className="mb-1">
                     <Input
-                      label={`Member ${idx + 1}'s name *`}
+                      label={`Member ${idx + 1}'s name`}
                       watch={watch}
                       error={errors['`memberName${idx}`']}
                       name={`memberName${idx}`}
@@ -251,9 +286,9 @@ const FormTeam = ({ prefix }: any) => {
                     />
                   </Col>
 
-                  <Col md={12} className="mb-2">
+                  <Col md={12} className="mb-1">
                     <Input
-                      label={`Member ${idx + 1}'s email *`}
+                      label={`Member ${idx + 1}'s email`}
                       error={errors['`memberEmail${idx}`']}
                       watch={watch}
                       type="email"
@@ -263,11 +298,11 @@ const FormTeam = ({ prefix }: any) => {
                     />
                   </Col>
 
-                  <Col md={24} className="mb-2 text-center">
+                  <Col md={24} className="mb-1 ">
                     <Input
                       label="Upload CV"
-                      error={errors['`memberCV${idx}`']}
-                      name="memberCV"
+                      error={errors[`memberCV${idx}`]}
+                      name={`memberCV${idx}`}
                       watch={watch}
                       register={register}
                       required
@@ -311,6 +346,8 @@ const FormTeam = ({ prefix }: any) => {
             onChange={(e: boolean) => setValue('isAgree', e)}
           />
         </Col>
+      </Row>
+      <Row>
         <Col md={24}>
           <Button type="submit" block disabled={!watch('isAgree') || !isValid}>
             Apply now{' '}
@@ -537,6 +574,28 @@ EnrollStyled.Header = styled.h5`
   cursor: pointer;
 
   text-transform: uppercase;
+  span {
+    color: #eb4e4e;
+    font-weight: 400;
+    text-transform: initial;
+
+    &.blue {
+      color: ${({ theme }) => theme.main};
+    }
+  }
+`
+
+EnrollStyled.Warn = styled.div`
+  background: ${({ theme }) => theme.blue10};
+  padding: 10px;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: ${({ theme }) => theme.mainDark};
+  display: flex;
+  align-items: center;
+  gap: 6px;
 `
 
 EnrollStyled.Tabs = styled.div`

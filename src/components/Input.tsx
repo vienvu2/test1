@@ -71,7 +71,8 @@ const Input = ({
             <FileStyled>
               <IconDraft />
               <p style={{ flex: 1 }}>
-                {value[0]?.name} ( {value[0]?.size} kB)
+                {value[0]?.name} (
+                {Math.floor(value[0]?.size / (1024 * 102)) / 10} MB)
               </p>
               <div
                 onClick={() => {
