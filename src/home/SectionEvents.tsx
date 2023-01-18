@@ -67,8 +67,10 @@ const SectionEvent = () => {
             </ContentStyled.Header>
             {tabActive === 'Hottest' &&
               ['2022', '2023'].map((a, idx) => (
-                <HackathonStyled key={a} reverse={idx % 2 === 0}>
-                  <HackathonStyled.Intro>
+                <HackathonStyled key={a} reverse={idx % 2 === 1}>
+                  <HackathonStyled.Intro
+                    isYellow={idx % 2 === 1 ? '#F2B10A' : ''}
+                  >
                     <Row align="flex-end">
                       <Col md={12}>
                         <p>Introducing</p>
@@ -458,16 +460,15 @@ HackathonStyled.Date = styled.div`
   }
 `
 
-HackathonStyled.Intro = styled.div<{ background?: string }>`
-  background: ${({ theme, background }) =>
-    theme[background || ''] || background || theme.main};
+HackathonStyled.Intro = styled.div<{ isYellow?: boolean }>`
+  background: ${({ theme, isYellow }) => (isYellow ? '#F2B10A' : theme.main)};
   flex: 1;
   height: 400px;
   padding: 24px;
   p {
     font-size: 16px;
     line-height: 22px;
-    color: ${({ theme }) => theme.white};
+    color: ${({ theme, isYellow }) => (isYellow ? '#4C3F2A' : theme.white)};
     margin: 0;
   }
   h3 {
@@ -475,7 +476,7 @@ HackathonStyled.Intro = styled.div<{ background?: string }>`
     font-weight: 700;
     font-size: 40px;
     line-height: 50px;
-    color: ${({ theme }) => theme.blue10};
+    color: ${({ theme, isYellow }) => (isYellow ? '#4C3F2A' : theme.blue10)};
   }
 `
 HackathonStyled.Detail = styled.div<{ long?: boolean }>`
