@@ -21,8 +21,10 @@ export default function Home() {
       <SectionBanner />
       <SectionBenefit />
       <SectionProcess />
+      <EventBg>
       <SectionEvents />
       <SectionLeaderBoard />
+      </EventBg>
       <DarkBg>
         <SectionJudges />
         <SectionFAQ />
@@ -39,4 +41,11 @@ const DarkBg = styled.div`
   background-position: center;
   background-size: 100% 100%;
   background-color: ${({ theme }) => theme.mainDark};
+`
+
+
+const EventBg = styled.div`
+  background-image: url('/images/events/bg.svg');
+  background-position: center;
+  background-size: 100% 100%;
 `

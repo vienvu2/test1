@@ -199,10 +199,10 @@ BoardStyled.Avatar = styled.div`
 BoardStyled.Line = styled.div`
   width: 1px;
   margin: 0 30px;
-  background: ${({ theme }) => theme.blue40};
+  background: ${({ theme }) => theme.blue20};
 `
 BoardStyled.Wrap = styled.div`
-  background: ${({ theme }) => theme.blue20};
+  background: ${({ theme }) => theme.white};
   padding: 40px;
   display: flex;
 `

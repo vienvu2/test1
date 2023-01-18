@@ -16,6 +16,7 @@ import { useTextAnimation } from '../hooks/textAnimation'
 import { roboto } from '../layouts/Wrap'
 import {
   IconArrowLeft,
+  IconArrowLeftWhite,
   IconCalendar,
   IconLink,
   IconLinkWhite,
@@ -36,6 +37,8 @@ const TextAnimation = () => {
 const SectionEvent = () => {
   const [tabActive, setTabActive] = useState('Hottest')
   const [detail, showDetail] = useState(false)
+
+  const [step, setStep] = useState(1)
 
   return (
     <>
@@ -104,19 +107,17 @@ const SectionEvent = () => {
             )}
           </ContentStyled>
         </Container>
-        <img
-          src="/images/events/bg.svg"
-          style={{
-            position: 'absolute',
-            right: 0,
-            top: 0,
-            pointerEvents: 'none',
-            zIndex: 1,
-          }}
-        />
       </WrapStyled>
-      <Modal size="md" show={detail} onClose={() => showDetail(false)}>
-        <HackathonPopup onClose={() => showDetail(false)} />
+      <Modal
+        size={step == 1 ? 'lg' : 'sm'}
+        show={detail}
+        onClose={() => showDetail(false)}
+      >
+        <HackathonPopup
+          step={step}
+          setStep={setStep}
+          onClose={() => showDetail(false)}
+        />
       </Modal>
     </>
   )
@@ -124,9 +125,15 @@ const SectionEvent = () => {
 
 export default SectionEvent
 
-const HackathonPopup = ({ onClose }: { onClose: Function }) => {
-  const [step, setStep] = useState(1)
-  console.log('step 00000')
+const HackathonPopup = ({
+  onClose,
+  step,
+  setStep,
+}: {
+  onClose: Function
+  setStep: Function
+  step: number
+}) => {
   return (
     <PopupStyled>
       <PopupStyled.Header>
@@ -218,15 +225,20 @@ const HackathonPopup = ({ onClose }: { onClose: Function }) => {
               <p className="price">15.000.000 VND</p>
             </PrizesStyled>
 
-            <Button block onClick={() => setStep(2)}>
+            <Button
+              block
+              onClick={() => setStep(2)}
+              color="white"
+              background="mainDark2"
+            >
               Apply this hackathon
-              <IconArrowLeft />
+              <IconArrowLeftWhite />
             </Button>
           </Col>
         </Row>
       )}
 
-      {step === 2 && <EnrollForm isColumn prefix="popup_" />}
+      {step === 2 && <EnrollForm prefix="popup_" />}
     </PopupStyled>
   )
 }
@@ -273,9 +285,14 @@ const HackathonItem = ({
         <IconCalendar />
         <p> {tabActive == 'Past' ? 'End' : 'Jan 1 - Feb 1, 2023'} </p>
       </HackathonStyled.Date>
-      <Button block onClick={() => onApply()}>
+      <Button
+        block
+        onClick={() => onApply()}
+        background="mainDark2"
+        color="white"
+      >
         Apply now
-        <IconArrowLeft />
+        <IconArrowLeftWhite />
       </Button>
     </HackathonStyled.Detail>
   )
@@ -330,9 +347,14 @@ const HackathonItemLong = ({
           </HackathonStyled.Date>
         </Col>
         <Col md={12}>
-          <Button block onClick={() => onApply()}>
+          <Button
+            block
+            onClick={() => onApply()}
+            background="mainDark2"
+            color="white"
+          >
             Apply now
-            <IconArrowLeft />
+            <IconArrowLeftWhite />
           </Button>
         </Col>
       </Row>
@@ -363,7 +385,7 @@ const PrizesStyled = styled.div`
 
 const PopupStyled: any = styled.div`
   padding: 32px;
-  background: ${({ theme }) => theme.blue10};
+  background: ${({ theme }) => theme.white};
   max-height: 90vh;
   overflow: auto;
 
@@ -436,8 +458,9 @@ HackathonStyled.Date = styled.div`
   }
 `
 
-HackathonStyled.Intro = styled.div`
-  background: ${({ theme }) => theme.mainDark2};
+HackathonStyled.Intro = styled.div<{ background?: string }>`
+  background: ${({ theme, background }) =>
+    theme[background || ''] || background || theme.main};
   flex: 1;
   height: 400px;
   padding: 24px;
@@ -456,7 +479,7 @@ HackathonStyled.Intro = styled.div`
   }
 `
 HackathonStyled.Detail = styled.div<{ long?: boolean }>`
-  background: ${({ theme }) => theme.white};
+  background: ${({ long }) => (long ? 'rgba(217, 241, 255, 0.3)' : '#FBFCFF')};
   width: ${({ long }) => (long ? '100%' : '360px')};
   padding: 16px;
   h3 {
@@ -475,7 +498,7 @@ HackathonStyled.Detail = styled.div<{ long?: boolean }>`
 
 const ContentStyled: any = styled.div`
   padding: 32px;
-  background: ${({ theme }) => theme.blue10};
+  background: ${({ theme }) => theme.white};
 `
 
 ContentStyled.MoreBtn = styled.a`

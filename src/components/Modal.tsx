@@ -21,12 +21,17 @@ const Modal = ({ children, size, show, onClose }: Props) => {
         }
       }}
     >
-      <ModalStyled.Content size>{children}</ModalStyled.Content>
+      <ModalStyled.Content size={size}>{children}</ModalStyled.Content>
     </ModalStyled>
   )
 }
 
 export default Modal
+const WIDTHS: any = {
+  sm: '600px',
+  md: '900px',
+  lg: '1224px',
+}
 
 const ModalStyled: any = styled.div`
   position: fixed;
@@ -42,9 +47,8 @@ const ModalStyled: any = styled.div`
   justify-content: center;
 `
 ModalStyled.Content = styled.div<{ size?: 'md' | 'lg' | 'sm' }>`
-  width: 1224px;
+  width: ${({ size }) => WIDTHS[size || 'md']};
   max-height: 100vh;
-  bac
 `
 
 ModalStyled.Close = styled.div`
