@@ -160,13 +160,17 @@ export const ButtonLink = styled.button<{ block?: boolean }>`
     margin-right: 4px;
   }
 `
-export const Button = styled.button<{ block?: boolean }>`
+export const Button = styled.button<{
+  block?: boolean
+  color?: string
+  background?: string
+}>`
   padding: 12px 24px;
 
   height: 48px;
-  background: ${({ theme }) => theme.main};
+  background: ${({ theme, background }) => theme[background || ''] || background || theme.main};
   border: 0;
-  color: ${({ theme }) => theme.mainDark2};
+  color: ${({ theme, color }) => theme[color || ''] || color || theme.mainDark2};
 
   font-weight: 600;
   font-size: 16px;
