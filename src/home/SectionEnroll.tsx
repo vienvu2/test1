@@ -19,6 +19,7 @@ import {
 } from '../icons'
 import Modal from '../components/Modal'
 const SectionEnroll = () => {
+  const [isSuccess, setSuccess] = useState(false)
   return (
     <WrapStyled>
       <Container>
@@ -28,11 +29,12 @@ const SectionEnroll = () => {
           </Col>
           <Col md={12}>
             <FormStyled>
-              <EnrollForm />
+              <EnrollForm onSuccess={() => setSuccess(true)} />
             </FormStyled>
           </Col>
         </Row>
       </Container>
+      <ModalSuccess isSuccess={isSuccess} setSuccess={setSuccess} />
     </WrapStyled>
   )
 }
@@ -48,9 +50,14 @@ const FormStyled = styled.div`
   z-index: 3;
 `
 
-export const EnrollForm = ({ prefix = '' }: { prefix?: string }) => {
+export const EnrollForm = ({
+  prefix = '',
+  onSuccess,
+}: {
+  prefix?: string
+  onSuccess: Function
+}) => {
   const [isTeam, setTeam] = useState(false)
-  const [isSuccess, setSuccess] = useState(false)
   return (
     <EnrollStyled>
       <h3 className="title">Enroll now</h3>
@@ -65,22 +72,32 @@ export const EnrollForm = ({ prefix = '' }: { prefix?: string }) => {
       </EnrollStyled.Tabs>
 
       {isTeam ? (
-        <FormTeam prefix={prefix} onSuccess={() => setSuccess(true)} />
+        <FormTeam prefix={prefix} onSuccess={() => onSuccess()} />
       ) : (
-        <FormPersonal prefix={prefix} onSuccess={() => setSuccess(true)} />
+        <FormPersonal prefix={prefix} onSuccess={() => onSuccess()} />
       )}
-
-      <Modal size="xs" onClose={() => setSuccess(false)} show={isSuccess}>
-        <SuccessStyled>
-          <img src="/images/success.svg" />
-          <h2>Apply successfully</h2>
-          <p>A confirmation email is sent to your email</p>
-          <Button type="submit" onClick={() => setSuccess(false)}>
-            Agree <IconArrowLeft />
-          </Button>
-        </SuccessStyled>
-      </Modal>
     </EnrollStyled>
+  )
+}
+
+export const ModalSuccess = ({
+  isSuccess,
+  setSuccess,
+}: {
+  isSuccess?: boolean
+  setSuccess: Function
+}) => {
+  return (
+    <Modal size="xs" onClose={() => setSuccess(false)} show={!!isSuccess}>
+      <SuccessStyled>
+        <img src="/images/success.svg" />
+        <h2>Apply successfully</h2>
+        <p>A confirmation email is sent to your email</p>
+        <Button type="submit" onClick={() => setSuccess(false)}>
+          Agree <IconArrowLeft />
+        </Button>
+      </SuccessStyled>
+    </Modal>
   )
 }
 
@@ -139,7 +156,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                 register={register}
                 watch={watch}
                 required
-                placeholder="Placeholder"
+                placeholder="Enter ..."
               />
             </Col>
             <Col md={12} className="mb-2">
@@ -149,7 +166,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                 name="email"
                 type="email"
                 register={register}
-                placeholder="Placeholder"
+                placeholder="Enter ..."
                 watch={watch}
                 required
               />
@@ -160,7 +177,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                 error={errors.phone}
                 name="phone"
                 register={register}
-                placeholder="Placeholder"
+                placeholder="Enter ..."
                 watch={watch}
                 required
               />
@@ -172,7 +189,8 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                 error={errors.interested}
                 name="interested"
                 register={register}
-                placeholder="Placeholder"
+                placeholder="Select ..."
+                setValue={setValue}
                 watch={watch}
                 type="select"
                 selectList={[
@@ -188,8 +206,9 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                 watch={watch}
                 label="Which event do you want to apply"
                 error={errors.event}
+                setValue={setValue}
                 name="event"
-                placeholder="Placeholder"
+                placeholder="Select ..."
                 register={register}
                 selectList={[
                   { value: 1, label: 'Event 1' },
@@ -200,6 +219,10 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
             </Col>
           </>
         )}
+
+        <Col md={24} className="mb-2">
+          <Divider />
+        </Col>
         <Col md={24} className="mb-1">
           <EnrollStyled.Warn>
             <IconInfo />
@@ -227,7 +250,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                 watch={watch}
                 label="Leader’s name"
                 error={errors.leaderName}
-                placeholder="Placeholder"
+                placeholder="Enter ..."
                 name="leaderName"
                 register={register}
                 required
@@ -240,7 +263,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                 label="Leader’s email"
                 error={errors.leaderName}
                 type="email"
-                placeholder="Placeholder"
+                placeholder="Enter ..."
                 name="leaderEmail"
                 register={register}
                 required
@@ -253,7 +276,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                 error={errors.leaderCV}
                 name="leaderCV"
                 watch={watch}
-                placeholder="Placeholder"
+                placeholder="Enter ..."
                 register={register}
                 required
                 type="file"
@@ -304,7 +327,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                   <Col md={12} className="mb-1">
                     <Input
                       label={`Member ${idx + 1}'s name`}
-                      placeholder="Placeholder"
+                      placeholder="Enter ..."
                       watch={watch}
                       error={errors['`memberName${idx}`']}
                       name={`memberName${idx}`}
@@ -317,7 +340,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                     <Input
                       label={`Member ${idx + 1}'s email`}
                       error={errors['`memberEmail${idx}`']}
-                      placeholder="Placeholder"
+                      placeholder="Enter ..."
                       watch={watch}
                       type="email"
                       name={`memberEmail${idx}`}
@@ -331,7 +354,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                       label="Upload CV"
                       error={errors[`memberCV${idx}`]}
                       name={`memberCV${idx}`}
-                      placeholder="Placeholder"
+                      placeholder="Enter ..."
                       watch={watch}
                       register={register}
                       required
@@ -412,7 +435,7 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
         <Col md={12} className="mb-2">
           <Input
             label="Your name"
-            placeholder="Placeholder"
+            placeholder="Enter ..."
             error={errors.name}
             name="name"
             watch={watch}
@@ -425,7 +448,7 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
             error={errors.email}
             label="Your email"
             name="email"
-            placeholder="Placeholder"
+            placeholder="Enter ..."
             type="email"
             watch={watch}
             register={register}
@@ -435,7 +458,7 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
         <Col md={12} className="mb-2">
           <Input
             error={errors.phone}
-            placeholder="Placeholder"
+            placeholder="Enter ..."
             label="Your phone number"
             watch={watch}
             name="phone"
@@ -449,11 +472,12 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
             error={errors.job}
             label="You are a/an"
             name="job"
-            placeholder="Placeholder"
+            placeholder="Select ..."
             watch={watch}
             register={register}
             required
             type="select"
+            setValue={setValue}
             selectList={[
               { value: '1', label: 'Học sinh' },
               { value: '2', label: 'Sinh viên' },
@@ -465,11 +489,12 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
         <Col md={12} className="mb-2">
           <Input
             error={errors.org}
-            placeholder="Placeholder"
+            placeholder="Select ..."
             label="Your school/company"
             name="org"
             register={register}
             watch={watch}
+            setValue={setValue}
             required
             type="select"
             selectList={[
@@ -484,10 +509,11 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
           <Input
             label="Your major/profession"
             error={errors.position}
-            placeholder="Placeholder"
+            placeholder="Select ..."
             watch={watch}
             type="select"
             name="position"
+            setValue={setValue}
             register={register}
             selectList={[
               { value: '1', label: 'Học sinh' },
@@ -504,7 +530,7 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
             label="Your team is interested in"
             name="interested"
             watch={watch}
-            placeholder="Placeholder"
+            placeholder="Enter ..."
             register={register}
             selectList={[
               { value: 1, label: 'interested 1' },
@@ -519,9 +545,10 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
             type="select"
             watch={watch}
             label="Which event do you want to apply"
+            setValue={setValue}
             error={errors.event}
             name="event"
-            placeholder="Placeholder"
+            placeholder="Select ..."
             register={register}
             selectList={[
               { value: 1, label: 'Event 1' },
@@ -562,6 +589,12 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
 }
 
 export default SectionEnroll
+
+const Divider = styled.div`
+  width: 100%;
+  border-top: 1px dashed #061c4b;
+  opacity: 0.1;
+`
 
 const TermLink = styled.span`
   a {

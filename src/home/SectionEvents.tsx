@@ -24,7 +24,7 @@ import {
   IconLogoTwitterWhite,
 } from '../icons'
 import Modal from '../components/Modal'
-import { EnrollForm } from './SectionEnroll'
+import { EnrollForm, ModalSuccess } from './SectionEnroll'
 const TextAnimation = () => {
   const [text] = useTextAnimation(['hackathons'])
   return (
@@ -39,6 +39,7 @@ const SectionEvent = () => {
   const [detail, showDetail] = useState(false)
 
   const [step, setStep] = useState(1)
+  const [isSuccess, setSuccess] = useState(false)
 
   return (
     <>
@@ -119,8 +120,13 @@ const SectionEvent = () => {
           step={step}
           setStep={setStep}
           onClose={() => showDetail(false)}
+          onSuccess={() => {
+            setSuccess(true)
+            showDetail(false)
+          }}
         />
       </Modal>
+      <ModalSuccess setSuccess={setSuccess} isSuccess={isSuccess} />
     </>
   )
 }
@@ -131,8 +137,10 @@ const HackathonPopup = ({
   onClose,
   step,
   setStep,
+  onSuccess,
 }: {
   onClose: Function
+  onSuccess: Function
   setStep: Function
   step: number
 }) => {
@@ -240,7 +248,7 @@ const HackathonPopup = ({
         </Row>
       )}
 
-      {step === 2 && <EnrollForm prefix="popup_" />}
+      {step === 2 && <EnrollForm prefix="popup_" onSuccess={onSuccess} />}
     </PopupStyled>
   )
 }

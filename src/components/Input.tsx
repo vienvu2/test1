@@ -11,7 +11,7 @@ import {
 } from '../icons'
 import Select from './Select'
 
-interface IOption {
+export interface IOption {
   value: string | number
   label: string
 }
@@ -26,6 +26,7 @@ interface Props {
   required?: boolean
   watch: Function
   onClear?: Function
+  setValue?: Function
   prefix?: string
   placeholder: string
 }
@@ -42,26 +43,22 @@ const Input = ({
   prefix,
   onClear,
   placeholder,
+  setValue,
 }: Props) => {
-  const theme: any = useTheme()
   const [isFocus, setFocus] = useState(false)
   const value = watch(name)
 
   return (
     <InputStyled error={!!error}>
       {type === 'select' && (
-        <>
-          <select {...register(name, { required })}>
-            {selectList &&
-              selectList.map((option: any) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-          </select>
-
-          <Select selectList={selectList} value={value} />
-        </>
+        <Select
+          selectList={selectList}
+          value={value}
+          placeholder={placeholder}
+          onChange={(e: any) => {
+            if (setValue) setValue(name, e)
+          }}
+        />
       )}
       {type === 'file' && (
         <>
@@ -194,6 +191,10 @@ const InputStyled = styled.div<{ error?: boolean }>`
     &:active,
     &:focus {
       outline: none;
+    }
+
+    &::placeholder {
+      color: #a7a7a7;
     }
     &:focus {
       border-color: ${({ theme }) => theme.main};
