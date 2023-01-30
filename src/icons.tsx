@@ -39,6 +39,10 @@ export const IconChevronDown = ({ size = 24 }: IconProps) => (
   <ImageIcon src="/icons/chevron-down.svg" size={size} />
 )
 
+export const IconChevronGrayDown = ({ size = 24 }: IconProps) => (
+  <ImageIcon src="/icons/chevron-down-gray.svg" size={size} />
+)
+
 export const IconPlus = ({ size = 24 }: IconProps) => (
   <ImageIcon src="/icons/plus.svg" size={size} />
 )
@@ -100,10 +104,11 @@ export const IconInfo = ({ size = 24 }: IconProps) => (
 )
 
 const ImageIcon = styled.img<{ size: number; color?: string }>`
-  ${({ color }) =>
-    color &&
+  ${({ color, size }) =>
     `
       fill: ${color};
+      height: ${size}px;
+      width:${size}px;
   
   `}
 `

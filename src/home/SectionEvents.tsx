@@ -259,7 +259,7 @@ const HackathonItem = ({
         Join the next wave of Hackatron where Web3 devs build to learn.
       </p>
 
-      <Flex className="mb-1">
+      <Flex className="mb-2">
         <ButtonIcon>
           <IconLink />
         </ButtonIcon>
@@ -278,7 +278,7 @@ const HackathonItem = ({
         </AvatarGroup>
       </Flex>
 
-      <Flex className="mb-2">
+      <Flex className="mb-4">
         <Tag>Blockchain</Tag>
         <Tag>AI/ML</Tag>
         <Tag>Healthtech</Tag>
@@ -482,7 +482,7 @@ HackathonStyled.Intro = styled.div<{ isYellow?: boolean }>`
 HackathonStyled.Detail = styled.div<{ long?: boolean }>`
   background: ${({ long }) => (long ? 'rgba(217, 241, 255, 0.3)' : '#FBFCFF')};
   width: ${({ long }) => (long ? '100%' : '360px')};
-  padding: 16px;
+  padding: ${({ long }) => (long ? '16px' : '0')};
   h3 {
     font-weight: 700;
     font-size: 32px;
@@ -507,6 +507,7 @@ ContentStyled.MoreBtn = styled.a`
   position: relative;
   text-align: center;
   width: 120px;
+  top: -45px;
   .circle {
     position: absolute;
     top: -48px;

@@ -44,6 +44,8 @@ interface IFormInput {
 const FormStyled = styled.div`
   padding: 32px;
   background: ${({ theme }) => theme.white};
+  position: relative;
+  z-index: 3;
 `
 
 export const EnrollForm = ({ prefix = '' }: { prefix?: string }) => {
@@ -115,6 +117,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
           maxHeight: prefix ? 'calc(80vh - 250px)' : 'auto',
           overflow: 'auto',
         }}
+        gap={12}
       >
         <Col md={24} className="mb-1">
           <EnrollStyled.Header
@@ -136,6 +139,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                 register={register}
                 watch={watch}
                 required
+                placeholder="Placeholder"
               />
             </Col>
             <Col md={12} className="mb-2">
@@ -145,6 +149,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                 name="email"
                 type="email"
                 register={register}
+                placeholder="Placeholder"
                 watch={watch}
                 required
               />
@@ -155,6 +160,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                 error={errors.phone}
                 name="phone"
                 register={register}
+                placeholder="Placeholder"
                 watch={watch}
                 required
               />
@@ -166,6 +172,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                 error={errors.interested}
                 name="interested"
                 register={register}
+                placeholder="Placeholder"
                 watch={watch}
                 type="select"
                 selectList={[
@@ -182,6 +189,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                 label="Which event do you want to apply"
                 error={errors.event}
                 name="event"
+                placeholder="Placeholder"
                 register={register}
                 selectList={[
                   { value: 1, label: 'Event 1' },
@@ -219,6 +227,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                 watch={watch}
                 label="Leader’s name"
                 error={errors.leaderName}
+                placeholder="Placeholder"
                 name="leaderName"
                 register={register}
                 required
@@ -231,6 +240,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                 label="Leader’s email"
                 error={errors.leaderName}
                 type="email"
+                placeholder="Placeholder"
                 name="leaderEmail"
                 register={register}
                 required
@@ -243,6 +253,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                 error={errors.leaderCV}
                 name="leaderCV"
                 watch={watch}
+                placeholder="Placeholder"
                 register={register}
                 required
                 type="file"
@@ -293,6 +304,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                   <Col md={12} className="mb-1">
                     <Input
                       label={`Member ${idx + 1}'s name`}
+                      placeholder="Placeholder"
                       watch={watch}
                       error={errors['`memberName${idx}`']}
                       name={`memberName${idx}`}
@@ -305,6 +317,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                     <Input
                       label={`Member ${idx + 1}'s email`}
                       error={errors['`memberEmail${idx}`']}
+                      placeholder="Placeholder"
                       watch={watch}
                       type="email"
                       name={`memberEmail${idx}`}
@@ -318,6 +331,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                       label="Upload CV"
                       error={errors[`memberCV${idx}`]}
                       name={`memberCV${idx}`}
+                      placeholder="Placeholder"
                       watch={watch}
                       register={register}
                       required
@@ -398,6 +412,7 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
         <Col md={12} className="mb-2">
           <Input
             label="Your name"
+            placeholder="Placeholder"
             error={errors.name}
             name="name"
             watch={watch}
@@ -410,6 +425,7 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
             error={errors.email}
             label="Your email"
             name="email"
+            placeholder="Placeholder"
             type="email"
             watch={watch}
             register={register}
@@ -419,6 +435,7 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
         <Col md={12} className="mb-2">
           <Input
             error={errors.phone}
+            placeholder="Placeholder"
             label="Your phone number"
             watch={watch}
             name="phone"
@@ -432,6 +449,7 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
             error={errors.job}
             label="You are a/an"
             name="job"
+            placeholder="Placeholder"
             watch={watch}
             register={register}
             required
@@ -447,6 +465,7 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
         <Col md={12} className="mb-2">
           <Input
             error={errors.org}
+            placeholder="Placeholder"
             label="Your school/company"
             name="org"
             register={register}
@@ -465,6 +484,7 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
           <Input
             label="Your major/profession"
             error={errors.position}
+            placeholder="Placeholder"
             watch={watch}
             type="select"
             name="position"
@@ -484,6 +504,7 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
             label="Your team is interested in"
             name="interested"
             watch={watch}
+            placeholder="Placeholder"
             register={register}
             selectList={[
               { value: 1, label: 'interested 1' },
@@ -500,6 +521,7 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
             label="Which event do you want to apply"
             error={errors.event}
             name="event"
+            placeholder="Placeholder"
             register={register}
             selectList={[
               { value: 1, label: 'Event 1' },

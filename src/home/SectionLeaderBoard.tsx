@@ -197,9 +197,10 @@ BoardStyled.Avatar = styled.div`
   }
 `
 BoardStyled.Line = styled.div`
-  width: 1px;
+  width: 0px;
   margin: 0 30px;
-  background: ${({ theme }) => theme.blue20};
+  border-right: 1px dashed  ${({ theme }) => theme.mainDark};
+  opacity: 0.1;
 `
 BoardStyled.Wrap = styled.div`
   background: ${({ theme }) => theme.white};

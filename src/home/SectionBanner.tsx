@@ -60,7 +60,6 @@ const SectionBanner = () => {
             <p>{item.desc}</p>
 
             <Button
-              className="mb-2"
               onClick={() => {
                 if (document) {
                   var element = document.getElementById('events')
@@ -81,7 +80,7 @@ const SectionBanner = () => {
               <IconArrowLeft />
             </Button>
 
-            {/* <BannerStyled.Nav>
+            <BannerStyled.Nav>
               {[1, 2, 3].map((a) => (
                 <div
                   key={a}
@@ -89,7 +88,7 @@ const SectionBanner = () => {
                   className={active === a ? 'active' : ''}
                 />
               ))}
-            </BannerStyled.Nav> */}
+            </BannerStyled.Nav>
             <BannerStyled.ScrollBtn
               onClick={() => {
                 if (document) {

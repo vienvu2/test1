@@ -9,6 +9,7 @@ import {
   IconTypeImage,
   IconUpload,
 } from '../icons'
+import Select from './Select'
 
 interface IOption {
   value: string | number
@@ -26,6 +27,7 @@ interface Props {
   watch: Function
   onClear?: Function
   prefix?: string
+  placeholder: string
 }
 
 const Input = ({
@@ -39,6 +41,7 @@ const Input = ({
   watch,
   prefix,
   onClear,
+  placeholder,
 }: Props) => {
   const theme: any = useTheme()
   const [isFocus, setFocus] = useState(false)
@@ -47,14 +50,18 @@ const Input = ({
   return (
     <InputStyled error={!!error}>
       {type === 'select' && (
-        <select {...register(name, { required })}>
-          {selectList &&
-            selectList.map((option: any) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-        </select>
+        <>
+          <select {...register(name, { required })}>
+            {selectList &&
+              selectList.map((option: any) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+          </select>
+
+          <Select selectList={selectList} value={value} />
+        </>
       )}
       {type === 'file' && (
         <>
@@ -64,6 +71,7 @@ const Input = ({
             {...register(name, {
               required,
             })}
+            placeholder={placeholder}
             id={prefix + 'file_' + name}
             style={{ opacity: 0, display: 'none' }}
           />
@@ -115,12 +123,15 @@ const Input = ({
           })}
           onFocus={() => setFocus(true)}
           onBlur={() => setFocus(false)}
+          placeholder={placeholder}
         />
       )}
 
       {type !== 'file' && (
         <label
-          className={isFocus || type === 'select' || value ? 'active' : ''}
+          className={
+            isFocus || placeholder || type === 'select' || value ? 'active' : ''
+          }
         >
           {label} {required && <span style={{ color: 'red' }}>*</span>}
         </label>
@@ -173,8 +184,7 @@ const InputStyled = styled.div<{ error?: boolean }>`
     min-height: 52px;
     padding: 15px 15px 13px;
     background: ${({ theme }) => theme.white};
-    border: 1px solid
-      ${({ theme, error }) => (error ? '#eb4e4e' : theme.gray20)};
+    border: 1px solid ${({ theme, error }) => (error ? '#eb4e4e' : '#C5C5C5')};
 
     font-weight: 400;
     font-size: 16px;
@@ -187,6 +197,10 @@ const InputStyled = styled.div<{ error?: boolean }>`
     }
     &:focus {
       border-color: ${({ theme }) => theme.main};
+      &::placeholder {
+        color: ${({ theme }) => theme.mainDark2};
+        font-weight: 600;
+      }
     }
   }
 
