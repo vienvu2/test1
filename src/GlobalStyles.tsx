@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components'
+import { inter } from './layouts/Wrap'
 
 const SPACE = 12
 
@@ -103,6 +104,10 @@ ${sizes.map(
 )}
 
 
+.pointer{
+  cursor: pointer;
+}
+
 p, h1, h2, h3, h4,h5,h6{
   margin: 0;
 }
@@ -143,17 +148,18 @@ export const Container = styled.div`
 
 export const ButtonLink = styled.button<{ block?: boolean }>`
   padding: 12px 24px;
+  font-weight: 400;
 
   height: 48px;
   background: transparent;
   border: 0;
   color: ${({ theme }) => theme.main};
 
-  font-weight: 500;
   font-size: 16px;
   line-height: 22px;
 
   cursor: pointer;
+  ${inter.style}
   img {
     vertical-align: top;
     margin-left: 4px;
@@ -166,11 +172,14 @@ export const Button = styled.button<{
   background?: string
 }>`
   padding: 12px 24px;
+  ${inter.style}
 
   height: 48px;
-  background: ${({ theme, background }) => theme[background || ''] || background || theme.main};
+  background: ${({ theme, background }) =>
+    theme[background || ''] || background || theme.main};
   border: 0;
-  color: ${({ theme, color }) => theme[color || ''] || color || theme.mainDark2};
+  color: ${({ theme, color }) =>
+    theme[color || ''] || color || theme.mainDark2};
 
   font-weight: 600;
   font-size: 16px;

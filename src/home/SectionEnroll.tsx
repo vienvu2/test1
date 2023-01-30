@@ -281,6 +281,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                 required
                 type="file"
                 prefix={prefix}
+                setValue={setValue}
                 onClear={() => {
                   setValue(`leaderCV`, '')
                 }}
@@ -359,6 +360,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                       register={register}
                       required
                       type="file"
+                      setValue={setValue}
                       prefix={prefix}
                       onClear={() => {
                         setValue(`memberCV${idx}`, '')

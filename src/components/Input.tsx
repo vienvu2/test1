@@ -46,7 +46,19 @@ const Input = ({
   setValue,
 }: Props) => {
   const [isFocus, setFocus] = useState(false)
+  const [isDrag, setDrag] = useState(false)
   const value = watch(name)
+
+  const handleDrag = (e: any) => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    if (e.type === 'dragenter' || e.type === 'dragover') {
+      setDrag(true)
+    } else if (e.type === 'dragleave') {
+      setDrag(false)
+    }
+  }
 
   return (
     <InputStyled error={!!error}>
@@ -85,12 +97,26 @@ const Input = ({
                     onClear(null)
                   }
                 }}
+                className="pointer"
               >
                 <IconDelete />
               </div>
             </FileStyled>
           ) : (
-            <FileStyled.Upload>
+            <FileStyled.Upload
+              onDragEnter={handleDrag}
+              onDragLeave={handleDrag}
+              onDragOver={handleDrag}
+              isDrag={isDrag}
+              onDrop={(e: any) => {
+                if (setValue) {
+                  setValue(name, e.dataTransfer.files)
+                }
+                e.preventDefault()
+                e.stopPropagation()
+                setDrag(false)
+              }}
+            >
               <IconUpload />
               <p>
                 Drop CV here or{' '}
@@ -101,6 +127,9 @@ const Input = ({
                 >
                   Browser
                 </a>
+              </p>
+              <p className="small">
+                CV file is in .pdf format, the size is not over 10MB
               </p>
             </FileStyled.Upload>
           )}
@@ -155,10 +184,11 @@ const FileStyled: any = styled.div`
   }
 `
 
-FileStyled.Upload = styled.div`
+FileStyled.Upload = styled.div<{ isDrag: boolean }>`
   background: ${({ theme }) => theme.background};
   border: 1px dashed ${({ theme }) => theme.gray20};
-  padding: 16px;
+  border-width: ${({ isDrag }) => (isDrag ? 3 : 1)}px;
+  padding: 14px;
   text-align: center;
   p {
     font-weight: 400;
@@ -168,6 +198,10 @@ FileStyled.Upload = styled.div`
     a {
       color: ${({ theme }) => theme.mainDark};
       cursor: pointer;
+    }
+    &.small {
+      color: #6d6d6d;
+      font-size: 12px;
     }
   }
 `
