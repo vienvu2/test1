@@ -16,6 +16,8 @@ import {
   IconChevRight,
   IconUserPlus,
   IconInfo,
+  IconGroupActive,
+  IconPersonalActive,
 } from '../icons'
 import Modal from '../components/Modal'
 const SectionEnroll = () => {
@@ -63,11 +65,10 @@ export const EnrollForm = ({
       <h3 className="title">Enroll now</h3>
       <EnrollStyled.Tabs>
         <EnrollStyled.Tab active={!isTeam} onClick={() => setTeam(false)}>
-          <IconPersonal /> I{"'"}m personal
+          {isTeam ? <IconPersonal /> : <IconPersonalActive />} I{"'"}m personal
         </EnrollStyled.Tab>
         <EnrollStyled.Tab active={isTeam} onClick={() => setTeam(true)}>
-          <IconGroup />
-          We are team
+          {isTeam ? <IconGroupActive /> : <IconGroup />} We are team
         </EnrollStyled.Tab>
       </EnrollStyled.Tabs>
 
@@ -111,7 +112,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
     reset,
     formState: { errors, isValid },
   } = useForm({
-    reValidateMode: 'onChange',
+    reValidateMode: 'onBlur',
   })
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     onSuccess()
@@ -425,7 +426,9 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
     reset,
     setValue,
     formState: { errors, isDirty, isValid },
-  } = useForm()
+  } = useForm({
+    reValidateMode: 'onBlur',
+  })
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     onSuccess()
     reset()
@@ -532,8 +535,10 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
             label="Your team is interested in"
             name="interested"
             watch={watch}
-            placeholder="Enter ..."
+            placeholder="Select ..."
             register={register}
+            setValue={setValue}
+            type="select"
             selectList={[
               { value: 1, label: 'interested 1' },
               { value: 2, label: 'interested 3' },
@@ -691,6 +696,7 @@ EnrollStyled.Tab = styled.div<{ active: boolean }>`
   gap: 8px;
   align-items: center;
   justify-content: center;
+  border-bottom: 1.5px solid transparent;
   cursor: pointer;
 
   ${({ active, theme }) =>

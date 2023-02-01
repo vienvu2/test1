@@ -76,7 +76,7 @@ const Input = ({
         <>
           <input
             type="file"
-            accepts=".doc,.pdf,.png,.jpg"
+            accept="application/pdf"
             {...register(name, {
               required,
             })}
@@ -198,6 +198,7 @@ FileStyled.Upload = styled.div<{ isDrag: boolean }>`
     a {
       color: ${({ theme }) => theme.mainDark};
       cursor: pointer;
+      font-weight: 500;
     }
     &.small {
       color: #6d6d6d;
@@ -234,7 +235,7 @@ const InputStyled = styled.div<{ error?: boolean }>`
       border-color: ${({ theme }) => theme.main};
       &::placeholder {
         color: ${({ theme }) => theme.mainDark2};
-        font-weight: 600;
+        font-weight: 500;
       }
     }
   }

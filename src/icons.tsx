@@ -81,6 +81,15 @@ export const IconPersonal = ({ size = 24 }: IconProps) => (
   <ImageIcon src="/icons/personal.svg" size={size} />
 )
 
+
+export const IconGroupActive = ({ size = 24 }: IconProps) => (
+  <ImageIcon src="/icons/group-active.svg" size={size} />
+)
+export const IconPersonalActive = ({ size = 24 }: IconProps) => (
+  <ImageIcon src="/icons/personal-active.svg" size={size} />
+)
+
+
 export const IconChevDown = ({ size = 24 }: IconProps) => (
   <ImageIcon src="/icons/chev-down.svg" size={size} />
 )

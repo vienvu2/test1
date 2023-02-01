@@ -9,11 +9,12 @@ interface Props {
 }
 
 const Modal = ({ children, size, show, onClose }: Props) => {
-  if (!show) {
-    return <div />
-  }
+  // if (!show) {
+  //   return <div />
+  // }
   return (
     <ModalStyled
+      show={show}
       onClick={(e: Event) => {
         if (e.target === e.currentTarget) {
           e.preventDefault()
@@ -34,7 +35,7 @@ const WIDTHS: any = {
   lg: '1224px',
 }
 
-const ModalStyled: any = styled.div`
+const ModalStyled: any = styled.div<{ show: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -43,9 +44,21 @@ const ModalStyled: any = styled.div`
   z-index: 1000;
 
   background: #0006;
-  display: flex;
   align-items: center;
   justify-content: center;
+
+  transition: all 0.4s linear;
+  opacity: 0;
+  display: flex;
+  pointer-events: none;
+
+  ${({ show }) =>
+    show &&
+    `
+  opacity: 1;
+  pointer-events: unset;
+  
+  `}
 `
 ModalStyled.Content = styled.div<{ size?: 'md' | 'lg' | 'sm' | 'xs' }>`
   width: ${({ size }) => WIDTHS[size || 'md']};

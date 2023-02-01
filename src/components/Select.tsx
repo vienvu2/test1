@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
+import useOutside from '../hooks/clickOutsite'
 import { IconChevDown, IconChevronDown, IconChevronGrayDown } from '../icons'
 import { IOption } from './Input'
 
@@ -21,10 +22,18 @@ const Select = ({
   ...props
 }: Props) => {
   const [isOpen, setOpen] = useState(false)
+
+  const ref = useRef(null)
+
+  useOutside(ref, () => {
+    setOpen(false)
+  })
+
   return (
     <SelectStyled>
       <SelectStyled.Value
         active={!!value}
+        isOpen={isOpen}
         onClick={() => {
           setOpen(true)
         }}
@@ -33,13 +42,7 @@ const Select = ({
         <IconChevronGrayDown size={24} />
       </SelectStyled.Value>
 
-      <SelectStyled.Dropdown
-        active={isOpen}
-        tabIndex={name}
-        onBlur={() => {
-          setOpen(false)
-        }}
-      >
+      <SelectStyled.Dropdown active={isOpen} ref={ref}>
         {selectList?.map((a) => (
           <SelectStyled.Item
             className={a.value == value ? 'active' : ''}
@@ -66,20 +69,25 @@ SelectStyled.Dropdown = styled.div<{ active: boolean }>`
   width: 100%;
   border: 1px solid ${({ theme }) => theme.main};
   z-index: 2;
+  top: 52px;
   display: ${({ active }) => (active ? 'block' : 'none')};
+  max-height: 300px;
+  overflow: auto;
 `
-SelectStyled.Value = styled.div<{ active: boolean }>`
+SelectStyled.Value = styled.div<{ active: boolean; isOpen: boolean }>`
   background: ${({ theme }) => theme.white};
   height: 48px;
-  padding: 13px 5px 15px 13px;
-  border: 1px solid #c5c5c5;
+  padding: 15px 5px 15px 13px;
+  border: 1px solid ${({ isOpen, theme }) => (isOpen ? theme.main : '#c5c5c5')};
 
   display: flex;
   align-items: center;
   width: 100%;
   justify-content: space-between;
 
-  color: ${({ active }) => (active ? '#061C4B' : '#a7a7a7')};
+  color: ${({ active, isOpen, theme }) =>
+    active ? '#061C4B' : isOpen ? theme.mainDark2 : '#a7a7a7'};
+  font-weight: ${({ isOpen }) => (isOpen ? '500' : '400')};
 `
 SelectStyled.Item = styled.div<{ active: boolean }>`
   padding: 13px 15px;

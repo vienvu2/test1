@@ -22,7 +22,8 @@ const SectionJudges = () => {
             <Col md={6} key={a}>
               <ExpertStyled>
                 <div className="img">
-                  <img src="/images/face-fake.png" />
+                  <img className="bg" src="/images/face-bg.svg" />
+                  <img className="face" src="/images/face-fake.png" />
                 </div>
 
                 <p className="name">Mr. Truong Gia Binh</p>
@@ -41,12 +42,25 @@ export default SectionJudges
 const ExpertStyled = styled.div`
   margin-bottom: 16px;
   .img {
+    position: relative;
     background-color: ${({ theme }) => theme.blue20};
     margin-bottom: 8px;
     width: 288px;
     height: 260px;
+
+    .bg {
+      position: absolute;
+      transition: all 0.4s linear;
+      opacity: 0;
+    }
     &:hover {
-      background-image: url(/images/face-bg.svg);
+      .bg {
+        transition: all 0.4s linear;
+        opacity: 1;
+      }
+    }
+    .face {
+      position: relative;
     }
   }
   img {

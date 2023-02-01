@@ -14,7 +14,7 @@ const SectionBanner = () => {
       title: 'AI4VN Hackathon',
       desc:
         'The AI Hackathon Platform for all AI engineers, organized by FPT AI in collaboration with the Ministry of Science and Technology.',
-      link: '/',
+      link: 'benefit',
       image: (
         <img
           src="/images/banner/banner-1.png"
@@ -26,14 +26,14 @@ const SectionBanner = () => {
       title: 'Hackatron 2023',
       desc:
         'The best way to learn is to get your hands dirty! Build on riveting problem statements, while following curated coursework and brainstorming exercises with industry experts who know that what it’s like to be new and make mistakes.',
-      link: '/',
+      link: 'events',
       image: <img src="/images/banner/banner-2.svg" />,
     },
     {
       title: 'HackZon 2.0',
       desc:
         'The best way to learn is to get your hands dirty! Build on riveting problem statements, while following curated coursework and brainstorming exercises with industry experts who know that what it’s like to be new and make mistakes.',
-      link: '/',
+      link: 'events',
       image: <img src="/images/banner/banner-3.svg" />,
     },
   ]
@@ -62,6 +62,7 @@ const SectionBanner = () => {
             <Button
               onClick={() => {
                 if (document) {
+                  console.log(item.link);
                   var element = document.getElementById('events')
                   var headerOffset = 60
                   var elementPosition =
@@ -92,7 +93,7 @@ const SectionBanner = () => {
             <BannerStyled.ScrollBtn
               onClick={() => {
                 if (document) {
-                  var element = document.getElementById('benefit')
+                  var element = document.getElementById(item.link)
                   var headerOffset = 60
                   var elementPosition =
                     element?.getBoundingClientRect().top || 0
