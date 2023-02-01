@@ -177,6 +177,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                 label="Your team phone number"
                 error={errors.phone}
                 name="phone"
+                type="phone"
                 register={register}
                 placeholder="Enter ..."
                 watch={watch}
@@ -467,6 +468,7 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
             label="Your phone number"
             watch={watch}
             name="phone"
+            type="phone"
             register={register}
             required
           />

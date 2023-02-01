@@ -60,6 +60,20 @@ const Input = ({
     }
   }
 
+  let pattern = undefined
+
+  if (type == 'email') {
+    pattern = {
+      value: /\S+@\S+\.\S+/,
+      message: 'Invalid email',
+    }
+  }
+  if (type == 'phone') {
+    pattern = {
+      value: /(84|0[3|5|7|8|9])+([0-9]{8})\b/g,
+      message: 'Invalid phone number',
+    }
+  }
   return (
     <InputStyled error={!!error}>
       {type === 'select' && (
@@ -139,13 +153,7 @@ const Input = ({
         <input
           {...register(name, {
             required,
-            pattern:
-              type === 'email'
-                ? {
-                    value: /\S+@\S+\.\S+/,
-                    message: 'Invalid email',
-                  }
-                : undefined,
+            pattern: pattern,
           })}
           onFocus={() => setFocus(true)}
           onBlur={() => setFocus(false)}
