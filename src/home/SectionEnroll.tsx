@@ -262,7 +262,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
               <Input
                 watch={watch}
                 label="Leader’s email"
-                error={errors.leaderName}
+                error={errors.leaderEmail}
                 type="email"
                 placeholder="Enter ..."
                 name="leaderEmail"
@@ -331,7 +331,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                       label={`Member ${idx + 1}'s name`}
                       placeholder="Enter ..."
                       watch={watch}
-                      error={errors['`memberName${idx}`']}
+                      error={errors[`memberName${idx}`]}
                       name={`memberName${idx}`}
                       register={register}
                       required
@@ -341,7 +341,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
                   <Col md={12} className="mb-1">
                     <Input
                       label={`Member ${idx + 1}'s email`}
-                      error={errors['`memberEmail${idx}`']}
+                      error={errors[`memberEmail${idx}`]}
                       placeholder="Enter ..."
                       watch={watch}
                       type="email"
