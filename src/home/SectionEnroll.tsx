@@ -112,7 +112,7 @@ const FormTeam = ({ prefix, onSuccess }: any) => {
     reset,
     formState: { errors, isValid },
   } = useForm({
-    reValidateMode: 'onBlur',
+    mode: 'onChange',
   })
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     onSuccess()
@@ -427,7 +427,7 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
     setValue,
     formState: { errors, isDirty, isValid },
   } = useForm({
-    reValidateMode: 'onBlur',
+    mode: 'onChange',
   })
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     onSuccess()
