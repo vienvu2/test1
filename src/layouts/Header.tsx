@@ -84,7 +84,7 @@ const Header = () => {
             </HeaderStyled.Menu>
 
             <HeaderStyled.Right>
-              <ButtonLink>Sign in</ButtonLink>
+              <ButtonLink style={{ fontWeight: '600' }}>Sign in</ButtonLink>
               <Button>
                 Register
                 <IconArrowLeft />
