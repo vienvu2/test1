@@ -426,6 +426,7 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
     watch,
     reset,
     setValue,
+    setError,
     formState: { errors, isDirty, isValid },
   } = useForm({
     mode: 'onChange',
@@ -564,6 +565,25 @@ const FormPersonal = ({ prefix, onSuccess }: any) => {
               { value: 2, label: 'Event 3' },
               { value: 3, label: 'Event 4' },
             ]}
+          />
+        </Col>
+
+        <Col md={24} className="mb-2 text-center">
+          <Input
+            label="Upload CV"
+            error={errors.cv}
+            name="cv"
+            watch={watch}
+            placeholder="Enter ..."
+            register={register}
+            required
+            setError={setError}
+            type="file"
+            prefix={prefix}
+            setValue={setValue}
+            onClear={() => {
+              setValue(`cv`, '')
+            }}
           />
         </Col>
 

@@ -4,7 +4,14 @@ import { Button, Col, Container, Flex, Row } from '../GlobalStyles'
 import styled from 'styled-components'
 import { roboto } from '../layouts/Wrap'
 import { useTextAnimation } from '../hooks/textAnimation'
-import { IconArrowDown, IconArrowLeft, IconChevronDown } from '../icons'
+import {
+  IconArrowDown,
+  IconArrowLeft,
+  IconBannerLeft,
+  IconBannerRight,
+  IconChevRight,
+  IconChevronDown,
+} from '../icons'
 
 const SectionBanner = () => {
   const [active, setActive] = useState(1)
@@ -38,7 +45,7 @@ const SectionBanner = () => {
     },
   ]
 
-  const item = items[active - 1]
+  const item = items[active - 1] || {}
 
   useEffect(() => {
     const ref = setInterval(() => {
@@ -54,67 +61,88 @@ const SectionBanner = () => {
         style={{ position: 'absolute', right: 100, top: 0, opacity: 0.4 }}
       />
       <Container>
-        <Row>
-          <Col md={12} style={{ paddingTop: 100 }}>
-            <h2>{item.title}</h2>
-            <p>{item.desc}</p>
+        <BannerWrap>
+          <button
+            className="btn-left"
+            onClick={() => setActive(active === 1 ? 3 : active - 1)}
+          >
+            <IconBannerLeft />
+          </button>
+          <Row>
+            <Col md={12} style={{ paddingTop: 100 }}>
+              <h2>{item.title}</h2>
+              <p>{item.desc}</p>
 
-            <Button
-              onClick={() => {
-                if (document) {
-                  console.log(item.link);
-                  var element = document.getElementById('events')
-                  var headerOffset = 60
-                  var elementPosition =
-                    element?.getBoundingClientRect().top || 0
-                  var offsetPosition =
-                    elementPosition + window.pageYOffset - headerOffset
+              <Button
+                onClick={() => {
+                  if (document) {
+                    var element = document.getElementById('events')
+                    var headerOffset = 60
+                    var elementPosition =
+                      element?.getBoundingClientRect().top || 0
+                    var offsetPosition =
+                      elementPosition + window.pageYOffset - headerOffset
 
-                  window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth',
-                  })
-                }
-              }}
-            >
-              Let’s Start
-              <IconArrowLeft />
-            </Button>
+                    window.scrollTo({
+                      top: offsetPosition,
+                      behavior: 'smooth',
+                    })
+                  }
+                }}
+              >
+                Let’s Start
+                <IconArrowLeft />
+              </Button>
 
-            <BannerStyled.Nav>
-              {[1, 2, 3].map((a) => (
-                <div
-                  key={a}
-                  onClick={() => setActive(a)}
-                  className={active === a ? 'active' : ''}
-                />
-              ))}
-            </BannerStyled.Nav>
-            <BannerStyled.ScrollBtn
-              onClick={() => {
-                if (document) {
-                  var element = document.getElementById(item.link)
-                  var headerOffset = 60
-                  var elementPosition =
-                    element?.getBoundingClientRect().top || 0
-                  var offsetPosition =
-                    elementPosition + window.pageYOffset - headerOffset
+              <BannerStyled.Nav>
+                {[1, 2, 3].map((a) => (
+                  <div
+                    key={a}
+                    onClick={() => setActive(a)}
+                    className={active === a ? 'active' : ''}
+                  />
+                ))}
+              </BannerStyled.Nav>
+              <BannerStyled.ScrollBtn
+                onClick={() => {
+                  if (document) {
+                    var element = document.getElementById(item.link)
+                    var headerOffset = 60
+                    var elementPosition =
+                      element?.getBoundingClientRect().top || 0
+                    var offsetPosition =
+                      elementPosition + window.pageYOffset - headerOffset
 
-                  window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth',
-                  })
-                }
-              }}
-            >
-              <IconArrowDown />
-              Scroll down
-            </BannerStyled.ScrollBtn>
-          </Col>
-          <Col md={12}>
-            <BannerStyled.Image>{item.image}</BannerStyled.Image>
-          </Col>
-        </Row>
+                    window.scrollTo({
+                      top: offsetPosition,
+                      behavior: 'smooth',
+                    })
+                  }
+                }}
+              >
+                <IconArrowDown />
+                Scroll down
+              </BannerStyled.ScrollBtn>
+            </Col>
+            <Col md={12} style={{ position: 'relative' }}>
+              <BannerStyled.Image show={active === 1}>
+                {items[0].image}
+              </BannerStyled.Image>
+              <BannerStyled.Image show={active === 2}>
+                {items[1].image}
+              </BannerStyled.Image>
+              <BannerStyled.Image show={active === 3}>
+                {items[2].image}
+              </BannerStyled.Image>
+            </Col>
+          </Row>
+          <button
+            className="btn-right"
+            onClick={() => setActive(active === 3 ? 1 : active + 1)}
+          >
+            <IconBannerRight />
+          </button>
+        </BannerWrap>
       </Container>
 
       <Container className="py-3">
@@ -134,15 +162,39 @@ export default SectionBanner
 
 const BannerStyled: any = styled.div``
 
+const BannerWrap: any = styled.div`
+  position: relative;
+  .btn-left,
+  .btn-right {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    &:hover {
+      background: #fff1;
+    }
+  }
+  .btn-left {
+    left: -100px;
+  }
+  .btn-right {
+    right: -100px;
+  }
+`
+
 const PartnerStyled = styled.div`
   padding-top: 60px;
   padding-bottom: 60px;
   background: ${({ theme }) => theme.mainDark};
 `
 
-BannerStyled.Image = styled.div`
+BannerStyled.Image = styled.div<{ show: boolean }>`
   height: 500px;
-  position: relative;
+  opacity: ${({ show }) => (show ? 1 : 0)};
+  transition: all 0.3s linear;
+  position: absolute;
+  width: 100%;
   img {
     position: absolute;
     top: 0;
@@ -203,6 +255,6 @@ const WrapStyled = styled.div`
     font-size: 20px;
     line-height: 28px;
     color: ${({ theme }) => theme.white};
-    // min-height: 160px;
+    min-height: 160px;
   }
 `

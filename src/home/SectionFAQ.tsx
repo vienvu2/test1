@@ -74,7 +74,7 @@ const SectionFAQ = () => {
     },
   ]
 
-  const [active, setActive] = useState<any>({ '01': true })
+  const [active, setActive] = useState('')
   return (
     <WrapStyled>
       <Container>
@@ -89,10 +89,14 @@ const SectionFAQ = () => {
             {questions.slice(0, 5).map((item) => (
               <Item
                 item={item}
-                setActive={() =>
-                  setActive({ ...active, [item.index]: !active[item.index] })
-                }
-                active={active[item.index]}
+                setActive={() => {
+                  if (active === item.index) {
+                    setActive('')
+                  } else {
+                    setActive(item.index)
+                  }
+                }}
+                active={active === item.index}
                 key={item.index}
               />
             ))}
@@ -101,10 +105,14 @@ const SectionFAQ = () => {
             {questions.slice(5, 10).map((item) => (
               <Item
                 item={item}
-                setActive={() =>
-                  setActive({ ...active, [item.index]: !active[item.index] })
-                }
-                active={active[item.index]}
+                setActive={() => {
+                  if (active === item.index) {
+                    setActive('')
+                  } else {
+                    setActive(item.index)
+                  }
+                }}
+                active={active === item.index}
                 key={item.index}
               />
             ))}
@@ -120,7 +128,7 @@ export default SectionFAQ
 interface ItemProps {
   item: any
   setActive: Function
-  active: string
+  active: boolean
 }
 
 const Item = ({ item, active, setActive }: ItemProps) => {
@@ -165,7 +173,7 @@ QuestionStyled.Answer = styled.p<{ active?: boolean }>`
 
   max-height: ${({ active }) => (active ? 80 : 0)}px;
   overflow: hidden;
-  transition: all 0.6s ease-in-out;
+  transition: all 0.1s ease-in-out;
 `
 
 QuestionStyled.Index = styled.div`
@@ -180,9 +188,9 @@ QuestionStyled.Index = styled.div`
 
 const WrapStyled = styled.div`
   padding-top: 60px;
-  // background: ${({ theme }) => theme.mainDark};
   padding-bottom: 60px;
   position: relative;
+  min-height: 1000px;
 `
 
 const WrapStyledTop = styled.div`

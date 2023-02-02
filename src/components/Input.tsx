@@ -27,6 +27,7 @@ interface Props {
   watch: Function
   onClear?: Function
   setValue?: Function
+  setError?: Function
   prefix?: string
   placeholder: string
 }
@@ -43,6 +44,7 @@ const Input = ({
   prefix,
   onClear,
   placeholder,
+  setError,
   setValue,
 }: Props) => {
   const [isFocus, setFocus] = useState(false)
@@ -74,6 +76,7 @@ const Input = ({
       message: 'Invalid phone number',
     }
   }
+
   return (
     <InputStyled error={!!error}>
       {type === 'select' && (
@@ -103,7 +106,7 @@ const Input = ({
               <IconDraft />
               <p style={{ flex: 1 }}>
                 {value[0]?.name} (
-                {Math.floor(value[0]?.size / (1024 * 102)) / 10} MB)
+                {Math.floor(value[0]?.size / (1024 * 10)) / 10} MB)
               </p>
               <div
                 onClick={() => {

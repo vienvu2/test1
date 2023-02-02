@@ -112,6 +112,16 @@ export const IconInfo = ({ size = 24 }: IconProps) => (
   <ImageIcon src="/icons/info.svg" size={size} />
 )
 
+
+export const IconBannerLeft = ({ size = 48 }: IconProps) => (
+  <ImageIcon src="/icons/banner-left.svg" size={size} />
+)
+
+export const IconBannerRight = ({ size = 48 }: IconProps) => (
+  <ImageIcon src="/icons/banner-right.svg" size={size} />
+)
+
+
 const ImageIcon = styled.img<{ size: number; color?: string }>`
   ${({ color, size }) =>
     `
