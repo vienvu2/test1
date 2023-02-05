@@ -2,6 +2,7 @@ import Head from 'next/head'
 
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import styled from 'styled-components'
 import { Button, ButtonLink, Container } from '../GlobalStyles'
 import { IconArrowLeft } from '../icons'
@@ -55,6 +56,9 @@ HeaderStyled.Right = styled.div`
 
 const Header = () => {
   const router = useRouter()
+  useEffect(() => {
+    const token = localStorage.getItem('TOKEN')
+  }, [])
   return (
     <>
       <Head>
@@ -84,11 +88,15 @@ const Header = () => {
             </HeaderStyled.Menu>
 
             <HeaderStyled.Right>
-              <ButtonLink style={{ fontWeight: '600' }}>Sign in</ButtonLink>
-              <Button>
-                Register
-                <IconArrowLeft />
-              </Button>
+              <Link href="/sign-in">
+                <ButtonLink style={{ fontWeight: '600' }}>Sign in</ButtonLink>
+              </Link>
+              <Link href="/register">
+                <Button>
+                  Register
+                  <IconArrowLeft />
+                </Button>
+              </Link>
             </HeaderStyled.Right>
           </HeaderStyled.Inner>
         </Container>

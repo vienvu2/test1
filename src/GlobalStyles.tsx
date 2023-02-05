@@ -282,3 +282,74 @@ export const AvatarGroup = styled.div`
     color: ${({ theme }) => theme.gray60};
   }
 `
+
+export const AuthStyled = styled.div`
+  height: 100vh;
+  display: flex;
+
+  .left {
+    height: 100vh;
+    flex: 1;
+    background-image: url('/images/login-banner.jpg');
+    background-position: bottom;
+    background-size: cover;
+    padding: 60px;
+
+    a {
+      font-style: normal;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 30px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      color: #42bbff;
+    }
+  }
+  .right {
+    height: 100vh;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .form {
+    width: 350px;
+    h3 {
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 40px;
+      text-align: center;
+
+      color: #0e0e0e;
+      margin-bottom: 40px;
+    }
+    p.footer {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: #6d6d6d;
+      a {
+        font-weight: 600;
+        color: #42bbff;
+      }
+    }
+    .term {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: #061c4b;
+      a {
+        font-weight: 600;
+      }
+    }
+    .validations {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 18px;
+      color: #6d6d6d;
+    }
+  }
+`

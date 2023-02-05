@@ -158,6 +158,7 @@ const Input = ({
             required,
             pattern: pattern,
           })}
+          type={type || 'text'}
           onFocus={() => setFocus(true)}
           onBlur={() => setFocus(false)}
           placeholder={placeholder}
