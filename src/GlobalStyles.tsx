@@ -350,6 +350,11 @@ export const AuthStyled = styled.div`
       font-size: 12px;
       line-height: 18px;
       color: #6d6d6d;
+      p {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
     }
   }
 `

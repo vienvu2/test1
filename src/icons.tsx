@@ -81,14 +81,12 @@ export const IconPersonal = ({ size = 24 }: IconProps) => (
   <ImageIcon src="/icons/personal.svg" size={size} />
 )
 
-
 export const IconGroupActive = ({ size = 24 }: IconProps) => (
   <ImageIcon src="/icons/group-active.svg" size={size} />
 )
 export const IconPersonalActive = ({ size = 24 }: IconProps) => (
   <ImageIcon src="/icons/personal-active.svg" size={size} />
 )
-
 
 export const IconChevDown = ({ size = 24 }: IconProps) => (
   <ImageIcon src="/icons/chev-down.svg" size={size} />
@@ -112,7 +110,6 @@ export const IconInfo = ({ size = 24 }: IconProps) => (
   <ImageIcon src="/icons/info.svg" size={size} />
 )
 
-
 export const IconBannerLeft = ({ size = 48 }: IconProps) => (
   <ImageIcon src="/icons/banner-left.svg" size={size} />
 )
@@ -121,6 +118,15 @@ export const IconBannerRight = ({ size = 48 }: IconProps) => (
   <ImageIcon src="/icons/banner-right.svg" size={size} />
 )
 
+export const IconCancel = ({ size = 48 }: IconProps) => (
+  <ImageIcon src="/icons/cancel.svg" size={size} />
+)
+export const IconDot = ({ size = 48 }: IconProps) => (
+  <ImageIcon src="/icons/dot.svg" size={size} />
+)
+export const IconCheckCirce = ({ size = 48 }: IconProps) => (
+  <ImageIcon src="/icons/check-circle.svg" size={size} />
+)
 
 const ImageIcon = styled.img<{ size: number; color?: string }>`
   ${({ color, size }) =>

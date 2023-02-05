@@ -4,15 +4,18 @@ import Input from '../src/components/Input'
 import { useForm } from 'react-hook-form'
 import Wrap from '../src/layouts/Wrap'
 import Header from '../src/layouts/Header'
-import { AuthStyled, Button } from '../src/GlobalStyles'
+import { AuthStyled, Button, Flex, Row } from '../src/GlobalStyles'
 import { IconChevRight } from '../src/icons'
 import Link from 'next/link'
 import { api } from '../src/api'
 import { useRouter } from 'next/router'
+import Checkbox from '../src/components/Checkbox'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 interface ILoginForm {
   identifier: string
   password: string
+  isRemember: boolean
 }
 
 export default function LoginPage() {
@@ -20,6 +23,8 @@ export default function LoginPage() {
     register,
     watch,
     handleSubmit,
+    setError,
+    setValue,
     formState: { errors },
   } = useForm<ILoginForm>({
     mode: 'onChange',
@@ -31,12 +36,20 @@ export default function LoginPage() {
     api
       .post('/auth/local', values)
       .then((res) => {
-        localStorage.setItem('TOKEN', res.jwt)
+        if (values.isRemember) {
+          localStorage.setItem('TOKEN', res.jwt)
+        }
         router.replace('/')
       })
       .catch((e) => {
-        console.log(e)
-        // handel error
+        setError('identifier', {
+          type: 'pattern',
+          message: e.response.data.error?.message,
+        })
+        setError('password', {
+          type: 'pattern',
+          message: e.response.data.error?.message,
+        })
       })
   }
   return (
@@ -76,6 +89,30 @@ export default function LoginPage() {
                   required
                 />
               </div>
+
+              <div className="mb-2">
+                <Flex>
+                  <Checkbox
+                    onChange={() => {
+                      setValue('isRemember', !watch('isRemember'))
+                    }}
+                    value={watch('isRemember')}
+                    title="Remember me"
+                  />
+                  <div style={{ flex: 1 }} />
+                  <Link href="/forgot-password">Forgot password?</Link>
+                </Flex>
+              </div>
+              <div className="mb-2">
+                <ReCAPTCHA
+                  sitekey="6LcrTg4cAAAAALDiDWau-BFeDFoUQoIoNSTLxZLz"
+                  size="normal"
+                  onChange={(value) => {
+                    console.log(value)
+                  }}
+                />
+              </div>
+
               <div className="mb-3">
                 <Button type="submit" block>
                   Sign in
