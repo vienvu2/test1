@@ -164,6 +164,7 @@ const BannerStyled: any = styled.div``
 
 const BannerWrap: any = styled.div`
   position: relative;
+  padding-bottom: 100px;
   .btn-left,
   .btn-right {
     border: 0;
@@ -231,7 +232,7 @@ BannerStyled.ScrollBtn = styled.div`
 
 const WrapStyled = styled.div`
   padding-top: 60px;
-  padding-bottom: 60px;
+  padding-bottom: 0px;
   background: ${({ theme }) => theme.mainDark};
 
   h2 {
