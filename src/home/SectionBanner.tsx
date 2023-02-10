@@ -150,7 +150,7 @@ const SectionBanner = () => {
           <Flex align="center" justify="space-around">
             <img src="/images/partners/partner-1.png" height={66} />
             <img src="/images/partners/partner-5.png" height={66} />
-            <img src="/images/partners/partner-6.png" height={66} />
+            <img src="/images/partners/partner-6.png" height={90} />
           </Flex>
         </PartnerStyled>
       </Container>
@@ -160,7 +160,11 @@ const SectionBanner = () => {
 
 export default SectionBanner
 
-const BannerStyled: any = styled.div``
+const BannerStyled: any = styled.div<{big?: boolean}>`
+  img{
+
+  }
+`
 
 const BannerWrap: any = styled.div`
   position: relative;
