@@ -150,7 +150,7 @@ const SectionBanner = () => {
           <Flex align="center" justify="space-around">
             <img src="/images/partners/partner-1.png" height={66} />
             <img src="/images/partners/partner-5.png" height={66} />
-            <img src="/images/partners/partner-6.png" height={90} />
+            <img src="/images/partners/partner-6.svg" />
           </Flex>
         </PartnerStyled>
       </Container>
