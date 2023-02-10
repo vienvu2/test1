@@ -168,7 +168,7 @@ const BannerStyled: any = styled.div<{big?: boolean}>`
 
 const BannerWrap: any = styled.div`
   position: relative;
-  padding-bottom: 100px;
+  padding-bottom: 120px;
   .btn-left,
   .btn-right {
     border: 0;
